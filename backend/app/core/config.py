@@ -60,7 +60,8 @@ class Settings(BaseSettings):
         "http://localhost:3001",
         "http://localhost:3002",
         "http://localhost:3003",
-        "https://physical-ai-robotics.panaversity.org"
+        "https://physical-ai-robotics.panaversity.org",
+        "https://physical-ai-robotics-textbook-8tzi59hee-zakiabashirs-projects.vercel.app"
     ]
 
     # Rate Limiting
