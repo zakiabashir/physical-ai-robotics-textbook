@@ -1,5 +1,5 @@
 {
-  "/ur/blog-742": {
+  "/blog-fcc": {
     "__comp": "a6aa9e1f",
     "__context": {
       "plugin": "36994c47"
@@ -16,16 +16,16 @@
         "content": "a1769088"
       }
     ],
-    "__props": "196a56e8"
+    "__props": "c15d9823"
   },
-  "/ur/blog/archive-1c5": {
+  "/blog/archive-182": {
     "__comp": "9e4087bc",
     "__context": {
       "plugin": "36994c47"
     },
-    "__props": "5d2802f8"
+    "__props": "f81c1134"
   },
-  "/ur/blog/authors-186": {
+  "/blog/authors-0b7": {
     "__comp": "621db11d",
     "__context": {
       "data": {
@@ -34,9 +34,9 @@
       "plugin": "36994c47"
     },
     "sidebar": "814f3328",
-    "__props": "d0c69140"
+    "__props": "ef8b811a"
   },
-  "/ur/blog/future-of-humanoid-robots-a62": {
+  "/blog/future-of-humanoid-robots-0ab": {
     "__comp": "ccc49370",
     "__context": {
       "data": {
@@ -47,7 +47,7 @@
     "sidebar": "814f3328",
     "content": "2e735962"
   },
-  "/ur/blog/getting-started-with-ros2-428": {
+  "/blog/getting-started-with-ros2-a5b": {
     "__comp": "ccc49370",
     "__context": {
       "data": {
@@ -58,15 +58,15 @@
     "sidebar": "814f3328",
     "content": "aa29bc9b"
   },
-  "/ur/blog/tags-14b": {
+  "/blog/tags-287": {
     "__comp": "01a85c17",
     "__context": {
       "plugin": "36994c47"
     },
     "sidebar": "814f3328",
-    "__props": "dacbf14b"
+    "__props": "3a2db09e"
   },
-  "/ur/blog/tags/ai-3f4": {
+  "/blog/tags/ai-7e9": {
     "__comp": "6875c492",
     "__context": {
       "plugin": "36994c47"
@@ -77,9 +77,9 @@
         "content": "cdcd1065"
       }
     ],
-    "__props": "834b88ff"
+    "__props": "65a6d713"
   },
-  "/ur/blog/tags/announcement-3d6": {
+  "/blog/tags/announcement-05c": {
     "__comp": "6875c492",
     "__context": {
       "plugin": "36994c47"
@@ -90,9 +90,9 @@
         "content": "a1769088"
       }
     ],
-    "__props": "38873ac3"
+    "__props": "9d86e7fa"
   },
-  "/ur/blog/tags/beginner-d52": {
+  "/blog/tags/beginner-1c9": {
     "__comp": "6875c492",
     "__context": {
       "plugin": "36994c47"
@@ -103,9 +103,9 @@
         "content": "3471d989"
       }
     ],
-    "__props": "8f4054ae"
+    "__props": "8e4df3f0"
   },
-  "/ur/blog/tags/future-d3c": {
+  "/blog/tags/future-83f": {
     "__comp": "6875c492",
     "__context": {
       "plugin": "36994c47"
@@ -116,9 +116,9 @@
         "content": "cdcd1065"
       }
     ],
-    "__props": "9cb8a080"
+    "__props": "86faba0d"
   },
-  "/ur/blog/tags/humanoid-robots-97c": {
+  "/blog/tags/humanoid-robots-257": {
     "__comp": "6875c492",
     "__context": {
       "plugin": "36994c47"
@@ -129,9 +129,9 @@
         "content": "cdcd1065"
       }
     ],
-    "__props": "3e4bcb44"
+    "__props": "63632d31"
   },
-  "/ur/blog/tags/physical-ai-e1e": {
+  "/blog/tags/physical-ai-275": {
     "__comp": "6875c492",
     "__context": {
       "plugin": "36994c47"
@@ -142,9 +142,9 @@
         "content": "a1769088"
       }
     ],
-    "__props": "cb9d8e7d"
+    "__props": "60d2d3a9"
   },
-  "/ur/blog/tags/robotics-f37": {
+  "/blog/tags/robotics-7f5": {
     "__comp": "6875c492",
     "__context": {
       "plugin": "36994c47"
@@ -158,9 +158,9 @@
         "content": "a1769088"
       }
     ],
-    "__props": "db639f67"
+    "__props": "7537a2fe"
   },
-  "/ur/blog/tags/ros-2-9b0": {
+  "/blog/tags/ros-2-be4": {
     "__comp": "6875c492",
     "__context": {
       "plugin": "36994c47"
@@ -171,9 +171,9 @@
         "content": "3471d989"
       }
     ],
-    "__props": "152619e2"
+    "__props": "87d0f360"
   },
-  "/ur/blog/tags/society-65c": {
+  "/blog/tags/society-bb3": {
     "__comp": "6875c492",
     "__context": {
       "plugin": "36994c47"
@@ -184,9 +184,9 @@
         "content": "cdcd1065"
       }
     ],
-    "__props": "9edaab78"
+    "__props": "8993e34e"
   },
-  "/ur/blog/tags/tutorial-51e": {
+  "/blog/tags/tutorial-c13": {
     "__comp": "6875c492",
     "__context": {
       "plugin": "36994c47"
@@ -197,9 +197,9 @@
         "content": "3471d989"
       }
     ],
-    "__props": "b64d41d7"
+    "__props": "0ca22e55"
   },
-  "/ur/blog/welcome-to-physical-ai-241": {
+  "/blog/welcome-to-physical-ai-161": {
     "__comp": "ccc49370",
     "__context": {
       "data": {
@@ -210,87 +210,87 @@
     "sidebar": "814f3328",
     "content": "e019bb33"
   },
-  "/ur/RAGMonitor-392": {
+  "/RAGMonitor-fe6": {
     "__comp": "538cf5ba",
     "__context": {
       "plugin": "a7456010"
     },
     "config": "5e9f5e1a"
   },
-  "/ur/docs-964": {
+  "/docs-d19": {
     "__comp": "5e95c892",
     "__context": {
       "plugin": "aba21aa0"
     }
   },
-  "/ur/docs-0bf": {
+  "/docs-924": {
     "__comp": "a7bd4aaa",
-    "__props": "04f2558c"
+    "__props": "0058b4c6"
   },
-  "/ur/docs-643": {
+  "/docs-401": {
     "__comp": "a94703ab"
   },
-  "/ur/docs/chapter-1/lesson-1-ff1": {
+  "/docs/chapter-1/lesson-1-31f": {
     "__comp": "17896441",
     "content": "97c7abd0"
   },
-  "/ur/docs/chapter-1/lesson-1-example-592": {
+  "/docs/chapter-1/lesson-1-example-308": {
     "__comp": "17896441",
     "content": "c3c74100"
   },
-  "/ur/docs/chapter-1/lesson-2-304": {
+  "/docs/chapter-1/lesson-2-40c": {
     "__comp": "17896441",
     "content": "a597e563"
   },
-  "/ur/docs/chapter-1/lesson-3-d15": {
+  "/docs/chapter-1/lesson-3-a56": {
     "__comp": "17896441",
     "content": "f9194cab"
   },
-  "/ur/docs/chapter-2/lesson-1-7ea": {
+  "/docs/chapter-2/lesson-1-0a1": {
     "__comp": "17896441",
     "content": "1ae66389"
   },
-  "/ur/docs/chapter-2/lesson-2-aa0": {
+  "/docs/chapter-2/lesson-2-506": {
     "__comp": "17896441",
     "content": "228901ad"
   },
-  "/ur/docs/chapter-2/lesson-3-70c": {
+  "/docs/chapter-2/lesson-3-4c5": {
     "__comp": "17896441",
     "content": "c9b40538"
   },
-  "/ur/docs/chapter-3/lesson-1-f92": {
+  "/docs/chapter-3/lesson-1-dc4": {
     "__comp": "17896441",
     "content": "6b387374"
   },
-  "/ur/docs/chapter-3/lesson-2-5e9": {
+  "/docs/chapter-3/lesson-2-def": {
     "__comp": "17896441",
     "content": "96453287"
   },
-  "/ur/docs/chapter-3/lesson-3-bbe": {
+  "/docs/chapter-3/lesson-3-13f": {
     "__comp": "17896441",
     "content": "9da868de"
   },
-  "/ur/docs/chapter-4/lesson-1-65c": {
+  "/docs/chapter-4/lesson-1-5f9": {
     "__comp": "17896441",
     "content": "4694a1cc"
   },
-  "/ur/docs/chapter-4/lesson-2-985": {
+  "/docs/chapter-4/lesson-2-768": {
     "__comp": "17896441",
     "content": "6738c817"
   },
-  "/ur/docs/chapter-4/lesson-3-ac9": {
+  "/docs/chapter-4/lesson-3-7f3": {
     "__comp": "17896441",
     "content": "355b7ef0"
   },
-  "/ur/docs/chapter-4/lesson-4-ba7": {
+  "/docs/chapter-4/lesson-4-f64": {
     "__comp": "17896441",
     "content": "42a2c5ee"
   },
-  "/ur/docs/introduction-a5b": {
+  "/docs/introduction-f7d": {
     "__comp": "17896441",
     "content": "a09c2993"
   },
-  "/ur/-3b1": {
+  "/-2e1": {
     "__comp": "c4f5d8e4",
     "__context": {
       "plugin": "a7456010"
