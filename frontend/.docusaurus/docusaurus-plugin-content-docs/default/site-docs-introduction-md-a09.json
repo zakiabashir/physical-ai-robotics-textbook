@@ -5,7 +5,7 @@
   "source": "@site/docs/introduction.md",
   "sourceDirName": ".",
   "slug": "/introduction",
-  "permalink": "/docs/introduction",
+  "permalink": "/ur/docs/introduction",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/introduction.md",
@@ -20,6 +20,6 @@
   "sidebar": "tutorialSidebar",
   "next": {
     "title": "Lesson 1.1: What is Physical AI?",
-    "permalink": "/docs/chapter-1/lesson-1"
+    "permalink": "/ur/docs/chapter-1/lesson-1"
   }
 }

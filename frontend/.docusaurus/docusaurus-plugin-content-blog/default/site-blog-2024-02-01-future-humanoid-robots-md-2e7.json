@@ -1,5 +1,5 @@
 {
-  "permalink": "/blog/future-of-humanoid-robots",
+  "permalink": "/ur/blog/future-of-humanoid-robots",
   "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/blog/2024-02-01-future-humanoid-robots.md",
   "source": "@site/blog/2024-02-01-future-humanoid-robots.md",
   "title": "The Future of Humanoid Robots in Society",
@@ -9,22 +9,22 @@
     {
       "inline": true,
       "label": "humanoid-robots",
-      "permalink": "/blog/tags/humanoid-robots"
+      "permalink": "/ur/blog/tags/humanoid-robots"
     },
     {
       "inline": true,
       "label": "future",
-      "permalink": "/blog/tags/future"
+      "permalink": "/ur/blog/tags/future"
     },
     {
       "inline": true,
       "label": "ai",
-      "permalink": "/blog/tags/ai"
+      "permalink": "/ur/blog/tags/ai"
     },
     {
       "inline": true,
       "label": "society",
-      "permalink": "/blog/tags/society"
+      "permalink": "/ur/blog/tags/society"
     }
   ],
   "readingTime": 2.9,
@@ -34,7 +34,7 @@
       "name": "Zakia Bashir",
       "title": "Content Creator",
       "url": "https://github.com/zakia",
-      "imageURL": "/img/logo.svg",
+      "imageURL": "/ur/img/logo.svg",
       "key": "zakia-bashir",
       "page": null
     }
@@ -55,6 +55,6 @@
   "unlisted": false,
   "nextItem": {
     "title": "Getting Started with ROS 2 for Robotics",
-    "permalink": "/blog/getting-started-with-ros2"
+    "permalink": "/ur/blog/getting-started-with-ros2"
   }
 }

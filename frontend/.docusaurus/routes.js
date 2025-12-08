@@ -3,193 +3,193 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
-    path: '/blog',
-    component: ComponentCreator('/blog', 'fcc'),
+    path: '/ur/blog',
+    component: ComponentCreator('/ur/blog', '742'),
     exact: true
   },
   {
-    path: '/blog/archive',
-    component: ComponentCreator('/blog/archive', '182'),
+    path: '/ur/blog/archive',
+    component: ComponentCreator('/ur/blog/archive', '1c5'),
     exact: true
   },
   {
-    path: '/blog/authors',
-    component: ComponentCreator('/blog/authors', '0b7'),
+    path: '/ur/blog/authors',
+    component: ComponentCreator('/ur/blog/authors', '186'),
     exact: true
   },
   {
-    path: '/blog/future-of-humanoid-robots',
-    component: ComponentCreator('/blog/future-of-humanoid-robots', '0ab'),
+    path: '/ur/blog/future-of-humanoid-robots',
+    component: ComponentCreator('/ur/blog/future-of-humanoid-robots', 'a62'),
     exact: true
   },
   {
-    path: '/blog/getting-started-with-ros2',
-    component: ComponentCreator('/blog/getting-started-with-ros2', 'a5b'),
+    path: '/ur/blog/getting-started-with-ros2',
+    component: ComponentCreator('/ur/blog/getting-started-with-ros2', '428'),
     exact: true
   },
   {
-    path: '/blog/tags',
-    component: ComponentCreator('/blog/tags', '287'),
+    path: '/ur/blog/tags',
+    component: ComponentCreator('/ur/blog/tags', '14b'),
     exact: true
   },
   {
-    path: '/blog/tags/ai',
-    component: ComponentCreator('/blog/tags/ai', '7e9'),
+    path: '/ur/blog/tags/ai',
+    component: ComponentCreator('/ur/blog/tags/ai', '3f4'),
     exact: true
   },
   {
-    path: '/blog/tags/announcement',
-    component: ComponentCreator('/blog/tags/announcement', '05c'),
+    path: '/ur/blog/tags/announcement',
+    component: ComponentCreator('/ur/blog/tags/announcement', '3d6'),
     exact: true
   },
   {
-    path: '/blog/tags/beginner',
-    component: ComponentCreator('/blog/tags/beginner', '1c9'),
+    path: '/ur/blog/tags/beginner',
+    component: ComponentCreator('/ur/blog/tags/beginner', 'd52'),
     exact: true
   },
   {
-    path: '/blog/tags/future',
-    component: ComponentCreator('/blog/tags/future', '83f'),
+    path: '/ur/blog/tags/future',
+    component: ComponentCreator('/ur/blog/tags/future', 'd3c'),
     exact: true
   },
   {
-    path: '/blog/tags/humanoid-robots',
-    component: ComponentCreator('/blog/tags/humanoid-robots', '257'),
+    path: '/ur/blog/tags/humanoid-robots',
+    component: ComponentCreator('/ur/blog/tags/humanoid-robots', '97c'),
     exact: true
   },
   {
-    path: '/blog/tags/physical-ai',
-    component: ComponentCreator('/blog/tags/physical-ai', '275'),
+    path: '/ur/blog/tags/physical-ai',
+    component: ComponentCreator('/ur/blog/tags/physical-ai', 'e1e'),
     exact: true
   },
   {
-    path: '/blog/tags/robotics',
-    component: ComponentCreator('/blog/tags/robotics', '7f5'),
+    path: '/ur/blog/tags/robotics',
+    component: ComponentCreator('/ur/blog/tags/robotics', 'f37'),
     exact: true
   },
   {
-    path: '/blog/tags/ros-2',
-    component: ComponentCreator('/blog/tags/ros-2', 'be4'),
+    path: '/ur/blog/tags/ros-2',
+    component: ComponentCreator('/ur/blog/tags/ros-2', '9b0'),
     exact: true
   },
   {
-    path: '/blog/tags/society',
-    component: ComponentCreator('/blog/tags/society', 'bb3'),
+    path: '/ur/blog/tags/society',
+    component: ComponentCreator('/ur/blog/tags/society', '65c'),
     exact: true
   },
   {
-    path: '/blog/tags/tutorial',
-    component: ComponentCreator('/blog/tags/tutorial', 'c13'),
+    path: '/ur/blog/tags/tutorial',
+    component: ComponentCreator('/ur/blog/tags/tutorial', '51e'),
     exact: true
   },
   {
-    path: '/blog/welcome-to-physical-ai',
-    component: ComponentCreator('/blog/welcome-to-physical-ai', '161'),
+    path: '/ur/blog/welcome-to-physical-ai',
+    component: ComponentCreator('/ur/blog/welcome-to-physical-ai', '241'),
     exact: true
   },
   {
-    path: '/RAGMonitor',
-    component: ComponentCreator('/RAGMonitor', 'fe6'),
+    path: '/ur/RAGMonitor',
+    component: ComponentCreator('/ur/RAGMonitor', '392'),
     exact: true
   },
   {
-    path: '/docs',
-    component: ComponentCreator('/docs', 'd19'),
+    path: '/ur/docs',
+    component: ComponentCreator('/ur/docs', '964'),
     routes: [
       {
-        path: '/docs',
-        component: ComponentCreator('/docs', '924'),
+        path: '/ur/docs',
+        component: ComponentCreator('/ur/docs', '0bf'),
         routes: [
           {
-            path: '/docs',
-            component: ComponentCreator('/docs', '401'),
+            path: '/ur/docs',
+            component: ComponentCreator('/ur/docs', '643'),
             routes: [
               {
-                path: '/docs/chapter-1/lesson-1',
-                component: ComponentCreator('/docs/chapter-1/lesson-1', '31f'),
+                path: '/ur/docs/chapter-1/lesson-1',
+                component: ComponentCreator('/ur/docs/chapter-1/lesson-1', 'ff1'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-1/lesson-1-example',
-                component: ComponentCreator('/docs/chapter-1/lesson-1-example', '308'),
+                path: '/ur/docs/chapter-1/lesson-1-example',
+                component: ComponentCreator('/ur/docs/chapter-1/lesson-1-example', '592'),
                 exact: true
               },
               {
-                path: '/docs/chapter-1/lesson-2',
-                component: ComponentCreator('/docs/chapter-1/lesson-2', '40c'),
+                path: '/ur/docs/chapter-1/lesson-2',
+                component: ComponentCreator('/ur/docs/chapter-1/lesson-2', '304'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-1/lesson-3',
-                component: ComponentCreator('/docs/chapter-1/lesson-3', 'a56'),
+                path: '/ur/docs/chapter-1/lesson-3',
+                component: ComponentCreator('/ur/docs/chapter-1/lesson-3', 'd15'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-2/lesson-1',
-                component: ComponentCreator('/docs/chapter-2/lesson-1', '0a1'),
+                path: '/ur/docs/chapter-2/lesson-1',
+                component: ComponentCreator('/ur/docs/chapter-2/lesson-1', '7ea'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-2/lesson-2',
-                component: ComponentCreator('/docs/chapter-2/lesson-2', '506'),
+                path: '/ur/docs/chapter-2/lesson-2',
+                component: ComponentCreator('/ur/docs/chapter-2/lesson-2', 'aa0'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-2/lesson-3',
-                component: ComponentCreator('/docs/chapter-2/lesson-3', '4c5'),
+                path: '/ur/docs/chapter-2/lesson-3',
+                component: ComponentCreator('/ur/docs/chapter-2/lesson-3', '70c'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-3/lesson-1',
-                component: ComponentCreator('/docs/chapter-3/lesson-1', 'dc4'),
+                path: '/ur/docs/chapter-3/lesson-1',
+                component: ComponentCreator('/ur/docs/chapter-3/lesson-1', 'f92'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-3/lesson-2',
-                component: ComponentCreator('/docs/chapter-3/lesson-2', 'def'),
+                path: '/ur/docs/chapter-3/lesson-2',
+                component: ComponentCreator('/ur/docs/chapter-3/lesson-2', '5e9'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-3/lesson-3',
-                component: ComponentCreator('/docs/chapter-3/lesson-3', '13f'),
+                path: '/ur/docs/chapter-3/lesson-3',
+                component: ComponentCreator('/ur/docs/chapter-3/lesson-3', 'bbe'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-4/lesson-1',
-                component: ComponentCreator('/docs/chapter-4/lesson-1', '5f9'),
+                path: '/ur/docs/chapter-4/lesson-1',
+                component: ComponentCreator('/ur/docs/chapter-4/lesson-1', '65c'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-4/lesson-2',
-                component: ComponentCreator('/docs/chapter-4/lesson-2', '768'),
+                path: '/ur/docs/chapter-4/lesson-2',
+                component: ComponentCreator('/ur/docs/chapter-4/lesson-2', '985'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-4/lesson-3',
-                component: ComponentCreator('/docs/chapter-4/lesson-3', '7f3'),
+                path: '/ur/docs/chapter-4/lesson-3',
+                component: ComponentCreator('/ur/docs/chapter-4/lesson-3', 'ac9'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/chapter-4/lesson-4',
-                component: ComponentCreator('/docs/chapter-4/lesson-4', 'f64'),
+                path: '/ur/docs/chapter-4/lesson-4',
+                component: ComponentCreator('/ur/docs/chapter-4/lesson-4', 'ba7'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               },
               {
-                path: '/docs/introduction',
-                component: ComponentCreator('/docs/introduction', 'f7d'),
+                path: '/ur/docs/introduction',
+                component: ComponentCreator('/ur/docs/introduction', 'a5b'),
                 exact: true,
                 sidebar: "tutorialSidebar"
               }
@@ -200,8 +200,8 @@ export default [
     ]
   },
   {
-    path: '/',
-    component: ComponentCreator('/', '2e1'),
+    path: '/ur/',
+    component: ComponentCreator('/ur/', '3b1'),
     exact: true
   },
   {
