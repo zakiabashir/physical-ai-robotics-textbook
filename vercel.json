@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "root": "frontend",
   "buildCommand": "npm run build:vercel",
   "outputDirectory": "build",
   "framework": "docusaurus",
