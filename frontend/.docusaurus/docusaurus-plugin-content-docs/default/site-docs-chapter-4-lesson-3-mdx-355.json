@@ -1,0 +1,29 @@
+{
+  "id": "chapter-4/lesson-3",
+  "title": "Lesson 4.3: Balance and Manipulation",
+  "description": "Integrating upper body manipulation with bipedal balance control",
+  "source": "@site/docs/chapter-4/lesson-3.mdx",
+  "sourceDirName": "chapter-4",
+  "slug": "/chapter-4/lesson-3",
+  "permalink": "/ur/docs/chapter-4/lesson-3",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-4/lesson-3.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "title": "Lesson 4.3: Balance and Manipulation",
+    "description": "Integrating upper body manipulation with bipedal balance control",
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Lesson 4.2: Biped Locomotion",
+    "permalink": "/ur/docs/chapter-4/lesson-2"
+  },
+  "next": {
+    "title": "Lesson 4.4: Capstone Project - Autonomous Humanoid Robot",
+    "permalink": "/ur/docs/chapter-4/lesson-4"
+  }
+}

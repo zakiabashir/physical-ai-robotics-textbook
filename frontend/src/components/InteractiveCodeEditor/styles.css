@@ -1,0 +1,139 @@
+.interactive-code-editor {
+  margin: 20px 0;
+}
+
+.editor-header {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.editor-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.editor-container {
+  position: relative;
+}
+
+.editor-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.output-container {
+  margin-top: 15px;
+  border-top: 1px solid #e8e8e8;
+  padding-top: 15px;
+}
+
+.output-header {
+  margin-bottom: 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.output-content {
+  background: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 0;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 60px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Dark theme adjustments */
+[data-theme='dark'] .output-content {
+  background: #1e1e1e;
+  border-color: #434343;
+  color: #d4d4d4;
+}
+
+[data-theme='dark'] .editor-controls {
+  background: rgba(30, 30, 30, 0.9);
+}
+
+[data-theme='dark'] .output-header {
+  border-bottom-color: #434343;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .interactive-code-editor {
+    margin: 10px 0;
+  }
+
+  .editor-controls {
+    position: static;
+    margin-top: 10px;
+    background: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .output-container {
+    margin-top: 10px;
+  }
+}
+
+/* Animation for editor */
+.editor-card {
+  transition: all 0.3s ease;
+}
+
+.editor-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Code execution animation */
+.output-content {
+  position: relative;
+}
+
+.output-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: #1890ff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.output-content.has-output::before {
+  opacity: 1;
+}
+
+/* Button styling */
+.editor-controls .ant-btn {
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.editor-controls .ant-btn-primary {
+  background: #1890ff;
+  border-color: #1890ff;
+}
+
+.editor-controls .ant-btn-primary:hover {
+  background: #40a9ff;
+  border-color: #40a9ff;
+}

@@ -1,0 +1,119 @@
+/* Chat Widget RAG Enhancement Styles */
+
+.chat-sources {
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  border-left: 3px solid #1890ff;
+}
+
+.chat-sources h4 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: #1890ff;
+  font-weight: 600;
+}
+
+.chat-sources ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+.chat-sources li {
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.source-link {
+  margin-left: 8px;
+  text-decoration: none;
+  color: #1890ff;
+}
+
+.source-link:hover {
+  text-decoration: underline;
+}
+
+.source-score {
+  font-size: 11px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.related-concepts {
+  margin-top: 10px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+}
+
+.related-concepts h4 {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  color: #52c41a;
+  font-weight: 600;
+}
+
+.concept-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.concept-tag {
+  padding: 3px 8px;
+  background: #f0f9ff;
+  color: #1890ff;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid #bae7ff;
+}
+
+.concept-tag:hover {
+  background: #e6f7ff;
+  cursor: default;
+}
+
+/* Enhanced typing indicator for RAG */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  gap: 4px;
+}
+
+.typing-indicator::before {
+  content: "🔍 Searching textbook...";
+  font-size: 13px;
+  color: #666;
+  margin-right: 8px;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: #1890ff;
+  border-radius: 50%;
+  animation: typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}

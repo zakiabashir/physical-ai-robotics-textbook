@@ -1,0 +1,29 @@
+{
+  "id": "chapter-3/lesson-3",
+  "title": "Lesson 3.3: Conversational Robots",
+  "description": "Building robots that can dialogue, learn, and interact naturally with humans",
+  "source": "@site/docs/chapter-3/lesson-3.mdx",
+  "sourceDirName": "chapter-3",
+  "slug": "/chapter-3/lesson-3",
+  "permalink": "/ur/docs/chapter-3/lesson-3",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-3/lesson-3.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "title": "Lesson 3.3: Conversational Robots",
+    "description": "Building robots that can dialogue, learn, and interact naturally with humans",
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Lesson 3.2: Vision-Language-Action (VLA) Systems",
+    "permalink": "/ur/docs/chapter-3/lesson-2"
+  },
+  "next": {
+    "title": "Lesson 4.1: Humanoid Robot Kinematics",
+    "permalink": "/ur/docs/chapter-4/lesson-1"
+  }
+}

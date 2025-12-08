@@ -1,0 +1,102 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/ur/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/ur/docs",
+          "mainDocId": "introduction",
+          "docs": [
+            {
+              "id": "chapter-1/lesson-1",
+              "path": "/ur/docs/chapter-1/lesson-1",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-1/lesson-1-example",
+              "path": "/ur/docs/chapter-1/lesson-1-example"
+            },
+            {
+              "id": "chapter-1/lesson-2",
+              "path": "/ur/docs/chapter-1/lesson-2",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-1/lesson-3",
+              "path": "/ur/docs/chapter-1/lesson-3",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-2/lesson-1",
+              "path": "/ur/docs/chapter-2/lesson-1",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-2/lesson-2",
+              "path": "/ur/docs/chapter-2/lesson-2",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-2/lesson-3",
+              "path": "/ur/docs/chapter-2/lesson-3",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-3/lesson-1",
+              "path": "/ur/docs/chapter-3/lesson-1",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-3/lesson-2",
+              "path": "/ur/docs/chapter-3/lesson-2",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-3/lesson-3",
+              "path": "/ur/docs/chapter-3/lesson-3",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-4/lesson-1",
+              "path": "/ur/docs/chapter-4/lesson-1",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-4/lesson-2",
+              "path": "/ur/docs/chapter-4/lesson-2",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-4/lesson-3",
+              "path": "/ur/docs/chapter-4/lesson-3",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "chapter-4/lesson-4",
+              "path": "/ur/docs/chapter-4/lesson-4",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "introduction",
+              "path": "/ur/docs/introduction",
+              "sidebar": "tutorialSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "tutorialSidebar": {
+              "link": {
+                "path": "/ur/docs/introduction",
+                "label": "introduction"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

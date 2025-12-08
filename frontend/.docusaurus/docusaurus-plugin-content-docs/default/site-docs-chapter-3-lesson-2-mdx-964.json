@@ -1,0 +1,29 @@
+{
+  "id": "chapter-3/lesson-2",
+  "title": "Lesson 3.2: Vision-Language-Action (VLA) Systems",
+  "description": "Building robots that can see, understand, and act based on language commands",
+  "source": "@site/docs/chapter-3/lesson-2.mdx",
+  "sourceDirName": "chapter-3",
+  "slug": "/chapter-3/lesson-2",
+  "permalink": "/ur/docs/chapter-3/lesson-2",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-3/lesson-2.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "title": "Lesson 3.2: Vision-Language-Action (VLA) Systems",
+    "description": "Building robots that can see, understand, and act based on language commands",
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Lesson 3.1: NVIDIA Isaac Platform",
+    "permalink": "/ur/docs/chapter-3/lesson-1"
+  },
+  "next": {
+    "title": "Lesson 3.3: Conversational Robots",
+    "permalink": "/ur/docs/chapter-3/lesson-3"
+  }
+}

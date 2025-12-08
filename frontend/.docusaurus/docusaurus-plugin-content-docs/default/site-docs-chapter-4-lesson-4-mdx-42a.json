@@ -1,0 +1,25 @@
+{
+  "id": "chapter-4/lesson-4",
+  "title": "Lesson 4.4: Capstone Project - Autonomous Humanoid Robot",
+  "description": "Building a complete autonomous humanoid robot system integrating all course concepts",
+  "source": "@site/docs/chapter-4/lesson-4.mdx",
+  "sourceDirName": "chapter-4",
+  "slug": "/chapter-4/lesson-4",
+  "permalink": "/ur/docs/chapter-4/lesson-4",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-4/lesson-4.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "title": "Lesson 4.4: Capstone Project - Autonomous Humanoid Robot",
+    "description": "Building a complete autonomous humanoid robot system integrating all course concepts",
+    "sidebar_position": 4
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Lesson 4.3: Balance and Manipulation",
+    "permalink": "/ur/docs/chapter-4/lesson-3"
+  }
+}

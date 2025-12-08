@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "root": "frontend",
+  "buildCommand": "npm run build:vercel",
+  "outputDirectory": "build",
+  "framework": "docusaurus",
+  "engines": {
+    "node": "18.x"
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://your-backend-url.com/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

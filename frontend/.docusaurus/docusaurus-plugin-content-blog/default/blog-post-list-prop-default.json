@@ -1,0 +1,23 @@
+{
+  "title": "Recent posts",
+  "items": [
+    {
+      "title": "The Future of Humanoid Robots in Society",
+      "permalink": "/ur/blog/future-of-humanoid-robots",
+      "unlisted": false,
+      "date": "2024-02-01T00:00:00.000Z"
+    },
+    {
+      "title": "Getting Started with ROS 2 for Robotics",
+      "permalink": "/ur/blog/getting-started-with-ros2",
+      "unlisted": false,
+      "date": "2024-01-15T00:00:00.000Z"
+    },
+    {
+      "title": "Welcome to Physical AI & Humanoid Robotics",
+      "permalink": "/ur/blog/welcome-to-physical-ai",
+      "unlisted": false,
+      "date": "2024-01-01T00:00:00.000Z"
+    }
+  ]
+}

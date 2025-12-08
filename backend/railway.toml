@@ -1,0 +1,17 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 100
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+
+[env]
+# These should be set in Railway dashboard
+# GEMINI_API_KEY = ""
+# QDRANT_URL = ""
+# QDRANT_API_KEY = ""
+# DATABASE_URL = ""
+# SECRET_KEY = ""
+# BETTER_AUTH_SECRET = ""

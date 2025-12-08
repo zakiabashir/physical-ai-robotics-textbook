@@ -1,0 +1,270 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Physical AI Textbook Frontend Schema",
+  "description": "Data schemas for frontend components",
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "email": { "type": "string", "format": "email" },
+        "education": {
+          "type": "string",
+          "enum": ["high-school", "bachelor", "master", "phd", "other"],
+          "description": "User's highest education level"
+        },
+        "preferences": {
+          "type": "object",
+          "properties": {
+            "language": { "type": "string", "enum": ["en", "ur"] },
+            "learningStyle": { "type": "string", "enum": ["visual", "kinesthetic", "textual", "mixed"] },
+            "backgroundLevel": { "type": "string", "enum": ["beginner", "intermediate", "advanced"] },
+            "notifications": {
+              "type": "object",
+              "properties": {
+                "email": { "type": "boolean" },
+                "browser": { "type": "boolean" }
+              }
+            }
+          }
+        },
+        "progress": {
+          "type": "object",
+          "properties": {
+            "completedLessons": {
+              "type": "array",
+              "items": { "type": "string", "pattern": "^[1-4]\\.[1-3]$" }
+            },
+            "quizScores": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "score": { "type": "number", "minimum": 0, "maximum": 100 },
+                  "attempt": { "type": "integer" },
+                  "completedAt": { "type": "string", "format": "date-time" }
+                }
+              }
+            },
+            "readingTime": {
+              "type": "object",
+              "additionalProperties": { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "Lesson": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "pattern": "^[1-4]\\.[1-3]$" },
+        "chapter": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "lesson": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "objectives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string" },
+              "bloomLevel": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              }
+            }
+          }
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[1-4]\\.[1-3]$" }
+        },
+        "estimatedDuration": { "type": "integer", "minimum": 0 },
+        "sections": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/LessonSection" }
+        },
+        "labs": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Lab" }
+        },
+        "quiz": { "$ref": "#/definitions/Quiz" },
+        "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "LessonSection": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["theory", "code", "diagram", "video", "interactive"]
+        },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "duration": { "type": "integer", "minimum": 0 },
+            "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "interactive": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "Lab": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "lessonId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["simulation", "coding", "hardware", "analysis"]
+        },
+        "objectives": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "order": { "type": "integer" },
+              "title": { "type": "string" },
+              "instruction": { "type": "string" },
+              "type": { "type": "string", "enum": ["action", "observation", "analysis"] },
+              "expected": { "type": "string" }
+            }
+          }
+        },
+        "expectedOutcome": { "type": "string" },
+        "hints": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "estimatedTime": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "Quiz": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "lessonId": { "type": "string" },
+        "title": { "type": "string" },
+        "passingScore": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "timeLimit": { "type": "integer", "minimum": 0 },
+        "attempts": { "type": "integer", "minimum": 1 },
+        "questions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Question" }
+        }
+      }
+    },
+    "Question": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["multiple-choice", "true-false", "fill-blank", "code"]
+        },
+        "question": { "type": "string" },
+        "options": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "correctAnswer": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "explanation": { "type": "string" },
+        "points": { "type": "integer", "minimum": 0 },
+        "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "codeTemplate": { "type": "string" },
+        "language": { "type": "string" }
+      }
+    },
+    "ChatMessage": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "assistant"] },
+        "content": { "type": "string", "maxLength": 4000 },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "lessonContext": { "type": "string" },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "lessonId": { "type": "string" },
+              "sectionId": { "type": "string" },
+              "title": { "type": "string" },
+              "snippet": { "type": "string" }
+            }
+          }
+        },
+        "relatedLessons": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[1-4]\\.[1-3]$" }
+        },
+        "feedback": {
+          "type": "object",
+          "properties": {
+            "rating": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5,
+              "description": "User rating (1-5 stars)"
+            },
+            "category": {
+              "type": "string",
+              "enum": ["helpful", "incorrect", "irrelevant", "other"],
+              "description": "Feedback category"
+            },
+            "comment": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "Optional user comment"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "When feedback was provided"
+            }
+          },
+          "required": ["rating", "timestamp"],
+          "description": "User feedback on assistant responses only"
+        }
+      },
+      "required": ["id", "role", "content", "timestamp"]
+    },
+    "LessonProgress": {
+      "type": "object",
+      "properties": {
+        "lessonId": { "type": "string", "pattern": "^[1-4]\\.[1-3]$" },
+        "startedAt": { "type": "string", "format": "date-time" },
+        "completedAt": { "type": "string", "format": "date-time" },
+        "lastPosition": { "type": "string" },
+        "timeSpent": { "type": "integer", "minimum": 0 },
+        "sectionsCompleted": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "scrollDepth": { "type": "number", "minimum": 0, "maximum": 100 },
+        "interactions": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

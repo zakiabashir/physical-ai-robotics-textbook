@@ -1,0 +1,60 @@
+{
+  "permalink": "/ur/blog/future-of-humanoid-robots",
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/blog/2024-02-01-future-humanoid-robots.md",
+  "source": "@site/blog/2024-02-01-future-humanoid-robots.md",
+  "title": "The Future of Humanoid Robots in Society",
+  "description": "Humanoid robots are no longer science fiction. Companies like Boston Dynamics, Tesla, and Agility Robotics are demonstrating capabilities that bring us closer to a future where robots work alongside humans in everyday environments.",
+  "date": "2024-02-01T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "humanoid-robots",
+      "permalink": "/ur/blog/tags/humanoid-robots"
+    },
+    {
+      "inline": true,
+      "label": "future",
+      "permalink": "/ur/blog/tags/future"
+    },
+    {
+      "inline": true,
+      "label": "ai",
+      "permalink": "/ur/blog/tags/ai"
+    },
+    {
+      "inline": true,
+      "label": "society",
+      "permalink": "/ur/blog/tags/society"
+    }
+  ],
+  "readingTime": 2.9,
+  "hasTruncateMarker": true,
+  "authors": [
+    {
+      "name": "Zakia Bashir",
+      "title": "Content Creator",
+      "url": "https://github.com/zakia",
+      "imageURL": "/ur/img/logo.svg",
+      "key": "zakia-bashir",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "future-of-humanoid-robots",
+    "title": "The Future of Humanoid Robots in Society",
+    "authors": [
+      "zakia-bashir"
+    ],
+    "tags": [
+      "humanoid-robots",
+      "future",
+      "ai",
+      "society"
+    ]
+  },
+  "unlisted": false,
+  "nextItem": {
+    "title": "Getting Started with ROS 2 for Robotics",
+    "permalink": "/ur/blog/getting-started-with-ros2"
+  }
+}

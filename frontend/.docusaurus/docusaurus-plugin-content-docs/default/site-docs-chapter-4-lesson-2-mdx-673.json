@@ -1,0 +1,29 @@
+{
+  "id": "chapter-4/lesson-2",
+  "title": "Lesson 4.2: Biped Locomotion",
+  "description": "Understanding and implementing bipedal walking patterns for humanoid robots",
+  "source": "@site/docs/chapter-4/lesson-2.mdx",
+  "sourceDirName": "chapter-4",
+  "slug": "/chapter-4/lesson-2",
+  "permalink": "/ur/docs/chapter-4/lesson-2",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-4/lesson-2.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "title": "Lesson 4.2: Biped Locomotion",
+    "description": "Understanding and implementing bipedal walking patterns for humanoid robots",
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Lesson 4.1: Humanoid Robot Kinematics",
+    "permalink": "/ur/docs/chapter-4/lesson-1"
+  },
+  "next": {
+    "title": "Lesson 4.3: Balance and Manipulation",
+    "permalink": "/ur/docs/chapter-4/lesson-3"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "chapter-2/lesson-3",
+  "title": "Lesson 2.3: Weekly Learning Plan (Weeks 3-7)",
+  "description": "Structure and schedule for mastering ROS 2 and simulation systems",
+  "source": "@site/docs/chapter-2/lesson-3.mdx",
+  "sourceDirName": "chapter-2",
+  "slug": "/chapter-2/lesson-3",
+  "permalink": "/ur/docs/chapter-2/lesson-3",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-2/lesson-3.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "title": "Lesson 2.3: Weekly Learning Plan (Weeks 3-7)",
+    "description": "Structure and schedule for mastering ROS 2 and simulation systems",
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Lesson 2.2: Simulation: Gazebo & Unity",
+    "permalink": "/ur/docs/chapter-2/lesson-2"
+  },
+  "next": {
+    "title": "Lesson 3.1: NVIDIA Isaac Platform",
+    "permalink": "/ur/docs/chapter-3/lesson-1"
+  }
+}

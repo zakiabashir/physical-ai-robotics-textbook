@@ -1,0 +1,20 @@
+{
+  "id": "chapter-1/lesson-1-example",
+  "title": "Example: Interactive Lesson Components",
+  "description": "Demonstrating the new interactive components for Physical AI textbook",
+  "source": "@site/docs/chapter-1/lesson-1-example.mdx",
+  "sourceDirName": "chapter-1",
+  "slug": "/chapter-1/lesson-1-example",
+  "permalink": "/ur/docs/chapter-1/lesson-1-example",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-1/lesson-1-example.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "title": "Example: Interactive Lesson Components",
+    "description": "Demonstrating the new interactive components for Physical AI textbook",
+    "sidebar_position": 4
+  }
+}

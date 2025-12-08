@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkphysical_ai_robotics_textbook=globalThis.webpackChunkphysical_ai_robotics_textbook||[]).push([[2952],{4059:o=>{o.exports=JSON.parse('{"metadata":{"permalink":"/ur/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":3,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

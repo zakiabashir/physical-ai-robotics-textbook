@@ -1,0 +1,711 @@
+openapi: 3.0.3
+info:
+  title: Physical AI Textbook API
+  description: API for the Physical AI & Humanoid Robotics interactive textbook
+  version: 1.0.0
+  contact:
+    name: Panaversity Team
+    email: support@panaversity.org
+
+servers:
+  - url: https://api.physical-ai-robotics.panaversity.org/v1
+    description: Production server
+  - url: https://staging-api.physical-ai-robotics.panaversity.org/v1
+    description: Staging server
+
+paths:
+  /auth/signup:
+    post:
+      tags:
+        - Authentication
+      summary: Create new user account
+      description: Register a new user with optional background survey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSignup'
+            examples:
+              minimal:
+                value:
+                  email: "student@example.com"
+              full:
+                value:
+                  email: "student@example.com"
+                  preferences:
+                    language: "en"
+                    learningStyle: "visual"
+                    backgroundLevel: "intermediate"
+                  background:
+                    experience: ["python", "basic-robotics"]
+                    education: "bachelor"
+                    goals: ["industry"]
+                  hardware:
+                    hasRobot: false
+                    hasGPU: true
+                    platform: "windows"
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          description: User already exists
+
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: User login
+      description: Authenticate user and return session token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/me:
+    get:
+      tags:
+        - Authentication
+      summary: Get current user info
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /chat/ask:
+    post:
+      tags:
+        - Chat
+      summary: Ask question about textbook content
+      description: Get AI assistance with textbook content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: AI response with sources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /chat/feedback:
+    post:
+      tags:
+        - Chat
+      summary: Submit chat feedback
+      description: Rate chat response quality
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatFeedback'
+      responses:
+        '200':
+          description: Feedback recorded
+
+  /progress/lessons/{lessonId}:
+    put:
+      tags:
+        - Progress
+      summary: Update lesson progress
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: lessonId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '^[1-4]\.[1-3]$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonProgressUpdate'
+      responses:
+        '200':
+          description: Progress updated
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /progress/quiz/{quizId}:
+    post:
+      tags:
+        - Progress
+      summary: Submit quiz attempt
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: quizId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuizSubmission'
+      responses:
+        '200':
+          description: Quiz scored
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizScore'
+
+  /content/lessons:
+    get:
+      tags:
+        - Content
+      summary: List all lessons
+      description: Get list of all lessons with basic metadata
+      parameters:
+        - name: chapter
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 4
+        - name: language
+          in: query
+          schema:
+            type: string
+            enum: [en, ur]
+      responses:
+        '200':
+          description: List of lessons
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lessons:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LessonSummary'
+
+  /content/lessons/{lessonId}:
+    get:
+      tags:
+        - Content
+      summary: Get lesson details
+      parameters:
+        - name: lessonId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '^[1-4]\.[1-3]$'
+        - name: language
+          in: query
+          schema:
+            type: string
+            enum: [en, ur]
+            default: en
+      responses:
+        '200':
+          description: Lesson content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lesson'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /content/search:
+    get:
+      tags:
+        - Content
+      summary: Search across all content
+      description: Search for content across all lessons and topics
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 2
+          description: Search query text
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 50
+          description: Maximum number of results to return
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [all, lesson, topic, code, quiz]
+            default: all
+          description: Filter content type
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SearchResult'
+                  total:
+                    type: integer
+                    description: Total number of matches
+                  query:
+                    type: string
+                    description: The search query that was executed
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        preferences:
+          $ref: '#/components/schemas/UserPreferences'
+        background:
+          $ref: '#/components/schemas/UserBackground'
+        hardware:
+          $ref: '#/components/schemas/UserHardware'
+        createdAt:
+          type: string
+          format: date-time
+        lastActive:
+          type: string
+          format: date-time
+
+    UserPreferences:
+      type: object
+      properties:
+        language:
+          type: string
+          enum: [en, ur]
+        learningStyle:
+          type: string
+          enum: [visual, kinesthetic, textual, mixed]
+        backgroundLevel:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        notifications:
+          type: object
+          properties:
+            email:
+              type: boolean
+            browser:
+              type: boolean
+
+    UserBackground:
+      type: object
+      properties:
+        experience:
+          type: array
+          items:
+            type: string
+        education:
+          type: string
+          enum: [high-school, bachelor, master, phd, other]
+        goals:
+          type: array
+          items:
+            type: string
+            enum: [research, industry, hobby, education]
+
+    UserHardware:
+      type: object
+      properties:
+        hasRobot:
+          type: boolean
+        robotType:
+          type: string
+        hasGPU:
+          type: boolean
+        platform:
+          type: string
+          enum: [windows, linux, macos]
+
+    UserSignup:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+        preferences:
+          $ref: '#/components/schemas/UserPreferences'
+        background:
+          $ref: '#/components/schemas/UserBackground'
+        hardware:
+          $ref: '#/components/schemas/UserHardware'
+
+    UserLogin:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        token:
+          type: string
+          description: JWT token for authentication
+        expiresIn:
+          type: number
+          description: Token expiration time in seconds
+
+    ChatRequest:
+      type: object
+      required:
+        - question
+      properties:
+        question:
+          type: string
+          maxLength: 4000
+        context:
+          type: string
+          description: Selected text from the book
+        lessonId:
+          type: string
+          pattern: '^[1-4]\.[1-3]$'
+        sessionId:
+          type: string
+          description: For tracking conversation context
+
+    ChatResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceReference'
+        relatedLessons:
+          type: array
+          items:
+            type: string
+            pattern: '^[1-4]\.[1-3]$'
+        sessionId:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+
+    SourceReference:
+      type: object
+      properties:
+        lessonId:
+          type: string
+        sectionId:
+          type: string
+        title:
+          type: string
+        snippet:
+          type: string
+        relevanceScore:
+          type: number
+          minimum: 0
+          maximum: 1
+
+    ChatFeedback:
+      type: object
+      required:
+        - sessionId
+        - messageId
+        - rating
+      properties:
+        sessionId:
+          type: string
+        messageId:
+          type: string
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+        wasHelpful:
+          type: boolean
+        comment:
+          type: string
+          maxLength: 500
+
+    LessonProgressUpdate:
+      type: object
+      properties:
+        started:
+          type: boolean
+        completed:
+          type: boolean
+        lastPosition:
+          type: string
+        timeSpent:
+          type: integer
+          minimum: 0
+        sectionsCompleted:
+          type: array
+          items:
+            type: string
+
+    QuizSubmission:
+      type: object
+      required:
+        - answers
+      properties:
+        answers:
+          type: object
+          additionalProperties:
+            type: string
+        timeSpent:
+          type: integer
+          minimum: 0
+
+    QuizScore:
+      type: object
+      properties:
+        score:
+          type: number
+          minimum: 0
+          maximum: 100
+        maxScore:
+          type: number
+        passed:
+          type: boolean
+        attempt:
+          type: integer
+        feedback:
+          type: object
+          properties:
+            correctAnswers:
+              type: object
+              additionalProperties: true
+            explanations:
+              type: object
+              additionalProperties:
+                type: string
+
+    SearchResult:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [lesson, topic, code, quiz]
+          description: Type of content
+        id:
+          type: string
+          description: Unique identifier for the content
+        title:
+          type: string
+          description: Title of the content
+        snippet:
+          type: string
+          description: Relevant snippet with highlighted search term
+        url:
+          type: string
+          format: uri
+          description: Direct URL to the content
+        chapter:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Chapter number (1-4)
+        lesson:
+          type: integer
+          minimum: 1
+          maximum: 3
+          description: Lesson number (1-3)
+        relevanceScore:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Relevance score (0-1)
+
+    LessonSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        chapter:
+          type: integer
+        lesson:
+          type: integer
+        duration:
+          type: integer
+        difficulty:
+          type: integer
+          minimum: 1
+          maximum: 5
+        objectives:
+          type: array
+          items:
+            type: string
+
+    Lesson:
+      allOf:
+        - $ref: '#/components/schemas/LessonSummary'
+        - type: object
+          properties:
+            prerequisites:
+              type: array
+              items:
+                type: string
+            sections:
+              type: array
+              items:
+                $ref: '#/components/schemas/LessonSection'
+            labs:
+              type: array
+              items:
+                $ref: '#/components/schemas/LabSummary'
+            quiz:
+              $ref: '#/components/schemas/QuizSummary'
+
+    LessonSection:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [theory, code, diagram, video, interactive]
+        title:
+          type: string
+        content:
+          type: string
+        metadata:
+          type: object
+          properties:
+            duration:
+              type: integer
+            difficulty:
+              type: integer
+            interactive:
+              type: boolean
+
+    LabSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+          enum: [simulation, coding, hardware, analysis]
+        estimatedTime:
+          type: integer
+
+    QuizSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        questionCount:
+          type: integer
+        passingScore:
+          type: integer
+        timeLimit:
+          type: integer
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              details:
+                type: object
+
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Invalid or expired token
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Lesson not found
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+tags:
+  - name: Authentication
+    description: User authentication and management
+  - name: Chat
+    description: AI-powered chatbot functionality
+  - name: Progress
+    description: User progress tracking
+  - name: Content
+    description: Lesson and content management

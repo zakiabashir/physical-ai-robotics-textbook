@@ -1,0 +1,29 @@
+{
+  "id": "chapter-3/lesson-1",
+  "title": "Lesson 3.1: NVIDIA Isaac Platform",
+  "description": "Understanding NVIDIA's robotics AI platform and simulation tools",
+  "source": "@site/docs/chapter-3/lesson-1.mdx",
+  "sourceDirName": "chapter-3",
+  "slug": "/chapter-3/lesson-1",
+  "permalink": "/ur/docs/chapter-3/lesson-1",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-3/lesson-1.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "title": "Lesson 3.1: NVIDIA Isaac Platform",
+    "description": "Understanding NVIDIA's robotics AI platform and simulation tools",
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Lesson 2.3: Weekly Learning Plan (Weeks 3-7)",
+    "permalink": "/ur/docs/chapter-2/lesson-3"
+  },
+  "next": {
+    "title": "Lesson 3.2: Vision-Language-Action (VLA) Systems",
+    "permalink": "/ur/docs/chapter-3/lesson-2"
+  }
+}

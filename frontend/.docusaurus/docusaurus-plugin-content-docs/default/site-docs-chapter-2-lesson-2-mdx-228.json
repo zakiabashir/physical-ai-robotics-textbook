@@ -1,0 +1,29 @@
+{
+  "id": "chapter-2/lesson-2",
+  "title": "Lesson 2.2: Simulation: Gazebo & Unity",
+  "description": "Master robot simulation environments and physics engines",
+  "source": "@site/docs/chapter-2/lesson-2.mdx",
+  "sourceDirName": "chapter-2",
+  "slug": "/chapter-2/lesson-2",
+  "permalink": "/ur/docs/chapter-2/lesson-2",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-2/lesson-2.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "title": "Lesson 2.2: Simulation: Gazebo & Unity",
+    "description": "Master robot simulation environments and physics engines",
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Lesson 2.1: ROS 2 Fundamentals",
+    "permalink": "/ur/docs/chapter-2/lesson-1"
+  },
+  "next": {
+    "title": "Lesson 2.3: Weekly Learning Plan (Weeks 3-7)",
+    "permalink": "/ur/docs/chapter-2/lesson-3"
+  }
+}

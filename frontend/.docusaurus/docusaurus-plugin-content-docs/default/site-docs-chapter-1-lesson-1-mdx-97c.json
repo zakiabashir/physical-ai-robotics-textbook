@@ -1,0 +1,29 @@
+{
+  "id": "chapter-1/lesson-1",
+  "title": "Lesson 1.1: What is Physical AI?",
+  "description": "Understanding the fundamentals of embodied intelligence and Physical AI",
+  "source": "@site/docs/chapter-1/lesson-1.mdx",
+  "sourceDirName": "chapter-1",
+  "slug": "/chapter-1/lesson-1",
+  "permalink": "/ur/docs/chapter-1/lesson-1",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-1/lesson-1.mdx",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "title": "Lesson 1.1: What is Physical AI?",
+    "description": "Understanding the fundamentals of embodied intelligence and Physical AI",
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Introduction",
+    "permalink": "/ur/docs/introduction"
+  },
+  "next": {
+    "title": "Lesson 1.2: Sensors & Perception Systems",
+    "permalink": "/ur/docs/chapter-1/lesson-2"
+  }
+}

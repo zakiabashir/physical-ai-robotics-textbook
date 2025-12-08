@@ -1,0 +1,54 @@
+{
+  "permalink": "/ur/blog/welcome-to-physical-ai",
+  "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/blog/2024-01-01-welcome.md",
+  "source": "@site/blog/2024-01-01-welcome.md",
+  "title": "Welcome to Physical AI & Humanoid Robotics",
+  "description": "Welcome to the official blog of the Physical AI & Humanoid Robotics interactive textbook!",
+  "date": "2024-01-01T00:00:00.000Z",
+  "tags": [
+    {
+      "inline": true,
+      "label": "announcement",
+      "permalink": "/ur/blog/tags/announcement"
+    },
+    {
+      "inline": true,
+      "label": "robotics",
+      "permalink": "/ur/blog/tags/robotics"
+    },
+    {
+      "inline": true,
+      "label": "physical-ai",
+      "permalink": "/ur/blog/tags/physical-ai"
+    }
+  ],
+  "readingTime": 1.06,
+  "hasTruncateMarker": true,
+  "authors": [
+    {
+      "name": "Zakia Bashir",
+      "title": "Content Creator",
+      "url": "https://github.com/zakia",
+      "imageURL": "/ur/img/logo.svg",
+      "key": "zakia-bashir",
+      "page": null
+    }
+  ],
+  "frontMatter": {
+    "slug": "welcome-to-physical-ai",
+    "title": "Welcome to Physical AI & Humanoid Robotics",
+    "authors": [
+      "zakia-bashir"
+    ],
+    "tags": [
+      "announcement",
+      "robotics",
+      "physical-ai"
+    ]
+  },
+  "unlisted": false,
+  "prevItem": {
+    "title": "Getting Started with ROS 2 for Robotics",
+    "permalink": "/ur/blog/getting-started-with-ros2"
+  }
+}
