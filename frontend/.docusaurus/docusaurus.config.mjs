@@ -8,7 +8,7 @@ export default {
   "tagline": "An Interactive Technical Textbook",
   "favicon": "img/favicon.svg",
   "url": "https://physical-ai-robotics.org",
-  "baseUrl": "/ur/",
+  "baseUrl": "/",
   "organizationName": "Physical AI",
   "projectName": "physical-ai-robotics-textbook",
   "onBrokenLinks": "warn",
@@ -26,7 +26,7 @@ export default {
       "classic",
       {
         "docs": {
-          "sidebarPath": "D:\\physical_AI_book_hacka\\frontend\\sidebars.js",
+          "sidebarPath": "D:\\physical-ai-robotics-textbook\\frontend\\sidebars.js",
           "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/"
         },
         "blog": {
@@ -372,7 +372,7 @@ export default {
     "static"
   ],
   "clientModules": [
-    "D:\\physical_AI_book_hacka\\frontend\\src\\theme\\MDXComponents.js"
+    "D:\\physical-ai-robotics-textbook\\frontend\\src\\theme\\MDXComponents.js"
   ],
   "baseUrlIssueBanner": true,
   "future": {
