@@ -31,7 +31,7 @@ class SingleURLRequest(BaseModel):
     force: bool = Field(False, description="Force re-ingestion even if already exists")
 
 
-@router.post("/ingest/all", response_model=Dict[str, Any])
+@router.post("/all", response_model=Dict[str, Any])
 async def ingest_all_content(
     background_tasks: BackgroundTasks,
     max_urls: Optional[int] = Query(None, description="Maximum URLs to process (for testing)")
@@ -61,7 +61,7 @@ async def ingest_all_content(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/ingest/url", response_model=Dict[str, Any])
+@router.post("/url", response_model=Dict[str, Any])
 async def ingest_single_url(request: SingleURLRequest):
     """
     Ingest content from a single URL
@@ -84,7 +84,7 @@ async def ingest_single_url(request: SingleURLRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/ingest/status", response_model=Dict[str, Any])
+@router.get("/status", response_model=Dict[str, Any])
 async def get_ingestion_status():
     """
     Get current ingestion status
@@ -106,7 +106,7 @@ async def get_ingestion_status():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/ingest/test", response_model=Dict[str, Any])
+@router.post("/test", response_model=Dict[str, Any])
 async def test_ingestion(limit: int = Query(5, description="Number of URLs to test")):
     """
     Test ingestion with a limited number of URLs
@@ -131,7 +131,7 @@ async def test_ingestion(limit: int = Query(5, description="Number of URLs to te
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.delete("/ingest/clear", response_model=Dict[str, Any])
+@router.delete("/clear", response_model=Dict[str, Any])
 async def clear_collection():
     """
     Clear the entire collection

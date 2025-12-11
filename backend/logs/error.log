@@ -1,13 +1,35 @@
-2025-12-08 08:15:35 | ERROR    | logging:callHandlers:1762 - Unexpected error at POST http://testserver/api/v1/chat/: name '_chatbot' is not defined
+2025-12-10 15:15:36 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 15:15:36 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '22345577191141e1b5be7693b80a16e6', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 10:15:37 GMT', 'x-envoy-upstream-service-time': '18', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': 'd37d86c2-aed1-49ea-8397-2e03eb7eafe5', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:15:36 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '7e93807a9dc147d39904c5dd9771c6d4', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '38', 'date': 'Wed, 10 Dec 2025 10:15:37 GMT', 'x-envoy-upstream-service-time': '12', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '02840cca-e499-4382-93d3-658f42e27ab2', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:15:36 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '7e93807a9dc147d39904c5dd9771c6d4', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '38', 'date': 'Wed, 10 Dec 2025 10:15:37 GMT', 'x-envoy-upstream-service-time': '12', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '02840cca-e499-4382-93d3-658f42e27ab2', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:25:52 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 15:25:52 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': 'f28c67a480ce431d6a96f94875649a6f', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 10:25:53 GMT', 'x-envoy-upstream-service-time': '15', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '17cae338-bb25-4c84-a661-6191659e18ce', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:25:53 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': 'dc170a459cc0b6c50b4c5d0b8d3c129f', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '38', 'date': 'Wed, 10 Dec 2025 10:25:53 GMT', 'x-envoy-upstream-service-time': '12', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '755ed341-0c0a-4e32-9c37-6d714bcd1b11', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:25:53 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': 'dc170a459cc0b6c50b4c5d0b8d3c129f', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '38', 'date': 'Wed, 10 Dec 2025 10:25:53 GMT', 'x-envoy-upstream-service-time': '12', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '755ed341-0c0a-4e32-9c37-6d714bcd1b11', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:26:08 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 15:26:08 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '55c9795cee2e0d5d7e23d7c062fd34c3', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '37', 'date': 'Wed, 10 Dec 2025 10:26:09 GMT', 'x-envoy-upstream-service-time': '10', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '535177b9-fe7b-45e7-b8ac-3a7c9959905c', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:26:08 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '55c9795cee2e0d5d7e23d7c062fd34c3', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '37', 'date': 'Wed, 10 Dec 2025 10:26:09 GMT', 'x-envoy-upstream-service-time': '10', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '535177b9-fe7b-45e7-b8ac-3a7c9959905c', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:26:27 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 15:43:16 | ERROR    | logging:callHandlers:1762 - Unexpected error at POST http://localhost:8000/api/v1/chat/: GEMINI_API_KEY environment variable not set
 Traceback (most recent call last):
-  File "D:\physical_AI_book_hacka\backend\app\middleware\error_handler.py", line 25, in dispatch
+  File "D:\physical-ai-robotics-textbook\backend\app\middleware\error_handler.py", line 25, in dispatch
     response = await call_next(request)
                ^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
     raise app_exc from app_exc.__cause__ or app_exc.__context__
   File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
     await self.app(scope, receive_or_disconnect, send_no_error)
-  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
     await self.app(scope, receive, send)
   File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
@@ -38,47 +60,199 @@ Traceback (most recent call last):
   File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
     solved = await call(**solved_result.values)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\physical_AI_book_hacka\backend\app\core\dependencies.py", line 23, in get_chatbot
-    await _chatbot.initialize_with_content()
-          ^^^^^^^^
-NameError: name '_chatbot' is not defined. Did you mean: 'get_chatbot'?
+  File "D:\physical-ai-robotics-textbook\backend\app\core\dependencies.py", line 20, in get_chatbot
+    _chatbot_instance = PhysicalAIChatbot()
+                        ^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\chatbot.py", line 31, in __init__
+    self.gemini = GeminiClient()
+                  ^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\gemini_client.py", line 20, in __init__
+    raise ValueError("GEMINI_API_KEY environment variable not set")
+ValueError: GEMINI_API_KEY environment variable not set
 
-2025-12-08 08:15:36 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '5b8f11373d31aebd294fa6e7916b89a3', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '100', 'x-trial-endpoint-call-remaining': '99', 'date': 'Mon, 08 Dec 2025 03:15:36 GMT', 'x-envoy-upstream-service-time': '21', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': 'fb9d4a8a-5d45-4672-ac2a-e96a8e8517b3', 'message': 'invalid request: valid input_type must be provided with the provided model'}
-2025-12-08 08:15:36 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '5b8f11373d31aebd294fa6e7916b89a3', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '100', 'x-trial-endpoint-call-remaining': '99', 'date': 'Mon, 08 Dec 2025 03:15:36 GMT', 'x-envoy-upstream-service-time': '21', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': 'fb9d4a8a-5d45-4672-ac2a-e96a8e8517b3', 'message': 'invalid request: valid input_type must be provided with the provided model'}
-2025-12-08 08:15:36 | ERROR    | logging:callHandlers:1762 - RAG retrieval failed: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '5b8f11373d31aebd294fa6e7916b89a3', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '100', 'x-trial-endpoint-call-remaining': '99', 'date': 'Mon, 08 Dec 2025 03:15:36 GMT', 'x-envoy-upstream-service-time': '21', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': 'fb9d4a8a-5d45-4672-ac2a-e96a8e8517b3', 'message': 'invalid request: valid input_type must be provided with the provided model'}
-2025-12-08 08:15:36 | ERROR    | logging:callHandlers:1762 - Generation failed: GeminiClient.chat_completion() got an unexpected keyword argument 'max_tokens'
-2025-12-08 08:15:36 | ERROR    | logging:callHandlers:1762 - Error processing message: GeminiClient.chat_completion() got an unexpected keyword argument 'max_tokens'
-2025-12-08 08:15:37 | ERROR    | logging:callHandlers:1762 - Error creating collection textbook_content: Unexpected Response: 403 (Forbidden)
+2025-12-10 15:44:28 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
 Raw response content:
 b'{"error":"forbidden"}'
-2025-12-08 08:15:37 | ERROR    | logging:callHandlers:1762 - Indexing error: Unexpected Response: 403 (Forbidden)
+2025-12-10 15:44:28 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '61348016357e2a90c5d314bfd93f417f', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 10:44:29 GMT', 'x-envoy-upstream-service-time': '27', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '29804210-3052-495a-bc29-5e0ff4d2c384', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:44:28 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '61348016357e2a90c5d314bfd93f417f', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 10:44:29 GMT', 'x-envoy-upstream-service-time': '27', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '29804210-3052-495a-bc29-5e0ff4d2c384', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:52:01 | ERROR    | logging:callHandlers:1762 - Unexpected error at POST http://localhost:8000/api/v1/chat/: GEMINI_API_KEY environment variable not set
+Traceback (most recent call last):
+  File "D:\physical-ai-robotics-textbook\backend\app\middleware\error_handler.py", line 25, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\core\dependencies.py", line 20, in get_chatbot
+    _chatbot_instance = PhysicalAIChatbot()
+                        ^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\chatbot.py", line 31, in __init__
+    self.gemini = GeminiClient()
+                  ^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\gemini_client.py", line 20, in __init__
+    raise ValueError("GEMINI_API_KEY environment variable not set")
+ValueError: GEMINI_API_KEY environment variable not set
+
+2025-12-10 16:07:47 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
 Raw response content:
 b'{"error":"forbidden"}'
-2025-12-08 08:15:37 | ERROR    | logging:callHandlers:1762 - Search error: 'PhysicalAIChatbot' object has no attribute 'openai'
-2025-12-08 08:15:37 | ERROR    | logging:callHandlers:1762 - Suggestion error: 'PhysicalAIChatbot' object has no attribute 'openai'
-2025-12-08 08:15:37 | ERROR    | logging:callHandlers:1762 - Upload error: 'PhysicalAIChatbot' object has no attribute 'openai'
-2025-12-08 08:15:38 | ERROR    | logging:callHandlers:1762 - Error deleting collection test_collection: Unexpected Response: 403 (Forbidden)
+2025-12-10 16:07:48 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '559aeda3b6009a50f3b5d0f2deba35fe', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 11:07:48 GMT', 'x-envoy-upstream-service-time': '13', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '298589f0-e15e-436c-aea4-7933a1f03322', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 16:07:48 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '559aeda3b6009a50f3b5d0f2deba35fe', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 11:07:48 GMT', 'x-envoy-upstream-service-time': '13', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '298589f0-e15e-436c-aea4-7933a1f03322', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 16:21:43 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
 Raw response content:
 b'{"error":"forbidden"}'
-2025-12-08 08:15:38 | ERROR    | logging:callHandlers:1762 - Collection deletion error: Unexpected Response: 403 (Forbidden)
+2025-12-10 16:21:44 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': 'e28dbecd40b6ca6b88e1aa66fb5dfbcd', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 11:21:45 GMT', 'x-envoy-upstream-service-time': '14', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': 'f0f74b1c-5b83-48eb-aa8f-99327ecb2f42', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 16:21:44 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': 'e28dbecd40b6ca6b88e1aa66fb5dfbcd', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 11:21:45 GMT', 'x-envoy-upstream-service-time': '14', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': 'f0f74b1c-5b83-48eb-aa8f-99327ecb2f42', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 17:26:08 | ERROR    | logging:callHandlers:1762 - Unexpected error at POST http://localhost:8000/api/v1/chat/: GEMINI_API_KEY environment variable not set
+Traceback (most recent call last):
+  File "D:\physical-ai-robotics-textbook\backend\app\middleware\error_handler.py", line 25, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\core\dependencies.py", line 20, in get_chatbot
+    _chatbot_instance = PhysicalAIChatbot()
+                        ^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\chatbot.py", line 31, in __init__
+    self.gemini = GeminiClient()
+                  ^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\gemini_client.py", line 20, in __init__
+    raise ValueError("GEMINI_API_KEY environment variable not set")
+ValueError: GEMINI_API_KEY environment variable not set
+
+2025-12-10 23:17:37 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
 Raw response content:
 b'{"error":"forbidden"}'
-2025-12-08 08:15:38 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+2025-12-10 23:18:10 | ERROR    | logging:callHandlers:1762 - Error creating collection humanoid_ai_book: Unexpected Response: 403 (Forbidden)
 Raw response content:
 b'{"error":"forbidden"}'
-2025-12-08 08:15:39 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '92afb02fada86cf9afe3baa02c7dc9c9', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '100', 'x-trial-endpoint-call-remaining': '98', 'date': 'Mon, 08 Dec 2025 03:15:39 GMT', 'x-envoy-upstream-service-time': '151', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '9bf41fd6-1bf9-438e-b0ba-c619330a5394', 'message': 'invalid request: valid input_type must be provided with the provided model'}
-2025-12-08 08:15:41 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '927acac10ed7e41d8901851c8aeb3572', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '100', 'x-trial-endpoint-call-remaining': '97', 'date': 'Mon, 08 Dec 2025 03:15:41 GMT', 'x-envoy-upstream-service-time': '14', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': 'ff530a50-bf90-489e-b1e9-f5ce22e5f46e', 'message': 'invalid request: valid input_type must be provided with the provided model'}
-2025-12-08 08:15:43 | ERROR    | logging:callHandlers:1762 - Error generating embeddings: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '7ec2038704edffc906ccd0c0ff1ee60b', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '100', 'x-trial-endpoint-call-remaining': '96', 'date': 'Mon, 08 Dec 2025 03:15:43 GMT', 'x-envoy-upstream-service-time': '9', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '800dda64-b114-42f1-ad91-1c39dce7b843', 'message': 'invalid request: valid input_type must be provided with the provided model'}
-2025-12-08 08:15:45 | ERROR    | logging:callHandlers:1762 - Error searching vectors: 'list' object has no attribute 'tolist'
-2025-12-08 08:15:45 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: 'list' object has no attribute 'tolist'
-2025-12-08 08:15:46 | ERROR    | logging:callHandlers:1762 - Error searching vectors: 'list' object has no attribute 'tolist'
-2025-12-08 08:15:46 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: 'list' object has no attribute 'tolist'
-2025-12-08 08:15:48 | ERROR    | logging:callHandlers:1762 - parsed tree length: 0, wrong data type or not valid HTML
-2025-12-08 08:15:48 | ERROR    | logging:callHandlers:1762 - empty HTML tree: None
-2025-12-08 08:15:48 | ERROR    | logging:callHandlers:1762 - Error extracting text from https://example.com: module 'trafilatura' has no attribute 'extract_title'
-2025-12-08 08:15:50 | ERROR    | logging:callHandlers:1762 - parsed tree length: 0, wrong data type or not valid HTML
-2025-12-08 08:15:50 | ERROR    | logging:callHandlers:1762 - empty HTML tree: None
-2025-12-08 08:15:50 | ERROR    | logging:callHandlers:1762 - Error extracting text from https://example.com: module 'trafilatura' has no attribute 'extract_title'
-2025-12-08 08:15:52 | ERROR    | logging:callHandlers:1762 - parsed tree length: 0, wrong data type or not valid HTML
-2025-12-08 08:15:52 | ERROR    | logging:callHandlers:1762 - empty HTML tree: None
-2025-12-08 08:15:52 | ERROR    | logging:callHandlers:1762 - Error extracting text from https://example.com: module 'trafilatura' has no attribute 'extract_title'
+2025-12-10 23:18:10 | ERROR    | logging:callHandlers:1762 - Error during ingestion: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 23:18:49 | ERROR    | logging:callHandlers:1762 - Error creating collection humanoid_ai_book: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 23:18:49 | ERROR    | logging:callHandlers:1762 - Error during ingestion: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 23:19:45 | ERROR    | logging:callHandlers:1762 - Unexpected error at POST http://localhost:8000/api/v1/chat/: GEMINI_API_KEY environment variable not set
+Traceback (most recent call last):
+  File "D:\physical-ai-robotics-textbook\backend\app\middleware\error_handler.py", line 25, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\core\dependencies.py", line 20, in get_chatbot
+    _chatbot_instance = PhysicalAIChatbot()
+                        ^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\chatbot.py", line 31, in __init__
+    self.gemini = GeminiClient()
+                  ^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\gemini_client.py", line 20, in __init__
+    raise ValueError("GEMINI_API_KEY environment variable not set")
+ValueError: GEMINI_API_KEY environment variable not set
+

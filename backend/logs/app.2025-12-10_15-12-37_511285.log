@@ -1,0 +1,322 @@
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - Starting up Physical AI Textbook API...
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - BEGIN (implicit)
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - PRAGMA main.table_info("users")
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - [raw sql] ()
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - PRAGMA main.table_info("chat_sessions")
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - [raw sql] ()
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - PRAGMA main.table_info("chat_messages")
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - [raw sql] ()
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - Database tables created successfully
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - COMMIT
+2025-12-10 15:12:37 | INFO     | logging:callHandlers:1762 - Database initialized
+2025-12-10 15:13:03 | INFO     | logging:callHandlers:1762 - HTTP Exception: 404 - Not Found
+2025-12-10 15:14:16 | INFO     | logging:callHandlers:1762 - HTTP Exception: 404 - Not Found
+2025-12-10 15:15:36 | INFO     | logging:callHandlers:1762 - HTTP Request: GET https://cfc968b3-733f-49f0-810f-7dcfd76c4caa.us-east4-0.gcp.cloud.qdrant.io:6333/collections "HTTP/1.1 403 Forbidden"
+2025-12-10 15:15:36 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 15:15:36 | INFO     | logging:callHandlers:1762 - HTTP Request: POST https://api.cohere.com/v1/embed "HTTP/1.1 400 Bad Request"
+2025-12-10 15:15:36 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '22345577191141e1b5be7693b80a16e6', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 10:15:37 GMT', 'x-envoy-upstream-service-time': '18', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': 'd37d86c2-aed1-49ea-8397-2e03eb7eafe5', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:15:36 | INFO     | logging:callHandlers:1762 - HTTP Request: POST https://api.cohere.com/v1/embed "HTTP/1.1 400 Bad Request"
+2025-12-10 15:15:36 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '7e93807a9dc147d39904c5dd9771c6d4', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '38', 'date': 'Wed, 10 Dec 2025 10:15:37 GMT', 'x-envoy-upstream-service-time': '12', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '02840cca-e499-4382-93d3-658f42e27ab2', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:15:36 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '7e93807a9dc147d39904c5dd9771c6d4', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '38', 'date': 'Wed, 10 Dec 2025 10:15:37 GMT', 'x-envoy-upstream-service-time': '12', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '02840cca-e499-4382-93d3-658f42e27ab2', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:23:58 | INFO     | logging:callHandlers:1762 - HTTP Exception: 404 - Not Found
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - Starting up Physical AI Textbook API...
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - BEGIN (implicit)
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - PRAGMA main.table_info("users")
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - [raw sql] ()
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - PRAGMA main.table_info("chat_sessions")
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - [raw sql] ()
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - PRAGMA main.table_info("chat_messages")
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - [raw sql] ()
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - Database tables created successfully
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - COMMIT
+2025-12-10 15:25:19 | INFO     | logging:callHandlers:1762 - Database initialized
+2025-12-10 15:25:52 | INFO     | logging:callHandlers:1762 - HTTP Request: GET https://cfc968b3-733f-49f0-810f-7dcfd76c4caa.us-east4-0.gcp.cloud.qdrant.io:6333/collections "HTTP/1.1 403 Forbidden"
+2025-12-10 15:25:52 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 15:25:52 | INFO     | logging:callHandlers:1762 - HTTP Request: POST https://api.cohere.com/v1/embed "HTTP/1.1 400 Bad Request"
+2025-12-10 15:25:52 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': 'f28c67a480ce431d6a96f94875649a6f', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 10:25:53 GMT', 'x-envoy-upstream-service-time': '15', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '17cae338-bb25-4c84-a661-6191659e18ce', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:25:53 | INFO     | logging:callHandlers:1762 - HTTP Request: POST https://api.cohere.com/v1/embed "HTTP/1.1 400 Bad Request"
+2025-12-10 15:25:53 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': 'dc170a459cc0b6c50b4c5d0b8d3c129f', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '38', 'date': 'Wed, 10 Dec 2025 10:25:53 GMT', 'x-envoy-upstream-service-time': '12', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '755ed341-0c0a-4e32-9c37-6d714bcd1b11', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:25:53 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': 'dc170a459cc0b6c50b4c5d0b8d3c129f', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '38', 'date': 'Wed, 10 Dec 2025 10:25:53 GMT', 'x-envoy-upstream-service-time': '12', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '755ed341-0c0a-4e32-9c37-6d714bcd1b11', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:26:08 | INFO     | logging:callHandlers:1762 - HTTP Request: GET https://cfc968b3-733f-49f0-810f-7dcfd76c4caa.us-east4-0.gcp.cloud.qdrant.io:6333/collections "HTTP/1.1 403 Forbidden"
+2025-12-10 15:26:08 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 15:26:08 | INFO     | logging:callHandlers:1762 - HTTP Request: POST https://api.cohere.com/v1/embed "HTTP/1.1 400 Bad Request"
+2025-12-10 15:26:08 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '55c9795cee2e0d5d7e23d7c062fd34c3', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '37', 'date': 'Wed, 10 Dec 2025 10:26:09 GMT', 'x-envoy-upstream-service-time': '10', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '535177b9-fe7b-45e7-b8ac-3a7c9959905c', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:26:08 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '55c9795cee2e0d5d7e23d7c062fd34c3', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '37', 'date': 'Wed, 10 Dec 2025 10:26:09 GMT', 'x-envoy-upstream-service-time': '10', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '535177b9-fe7b-45e7-b8ac-3a7c9959905c', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:26:27 | INFO     | logging:callHandlers:1762 - HTTP Request: GET https://cfc968b3-733f-49f0-810f-7dcfd76c4caa.us-east4-0.gcp.cloud.qdrant.io:6333/collections "HTTP/1.1 403 Forbidden"
+2025-12-10 15:26:27 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 15:41:17 | INFO     | logging:callHandlers:1762 - HTTP Exception: 404 - Not Found
+2025-12-10 15:41:18 | INFO     | logging:callHandlers:1762 - HTTP Exception: 404 - Not Found
+2025-12-10 15:43:16 | INFO     | logging:callHandlers:1762 - Initializing PhysicalAI Chatbot...
+2025-12-10 15:43:16 | ERROR    | logging:callHandlers:1762 - Unexpected error at POST http://localhost:8000/api/v1/chat/: GEMINI_API_KEY environment variable not set
+Traceback (most recent call last):
+  File "D:\physical-ai-robotics-textbook\backend\app\middleware\error_handler.py", line 25, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\core\dependencies.py", line 20, in get_chatbot
+    _chatbot_instance = PhysicalAIChatbot()
+                        ^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\chatbot.py", line 31, in __init__
+    self.gemini = GeminiClient()
+                  ^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\gemini_client.py", line 20, in __init__
+    raise ValueError("GEMINI_API_KEY environment variable not set")
+ValueError: GEMINI_API_KEY environment variable not set
+
+2025-12-10 15:44:28 | INFO     | logging:callHandlers:1762 - HTTP Request: GET https://cfc968b3-733f-49f0-810f-7dcfd76c4caa.us-east4-0.gcp.cloud.qdrant.io:6333/collections "HTTP/1.1 403 Forbidden"
+2025-12-10 15:44:28 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 15:44:28 | INFO     | logging:callHandlers:1762 - HTTP Request: POST https://api.cohere.com/v1/embed "HTTP/1.1 400 Bad Request"
+2025-12-10 15:44:28 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '61348016357e2a90c5d314bfd93f417f', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 10:44:29 GMT', 'x-envoy-upstream-service-time': '27', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '29804210-3052-495a-bc29-5e0ff4d2c384', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:44:28 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '61348016357e2a90c5d314bfd93f417f', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 10:44:29 GMT', 'x-envoy-upstream-service-time': '27', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '29804210-3052-495a-bc29-5e0ff4d2c384', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 15:44:58 | INFO     | logging:callHandlers:1762 - HTTP Exception: 404 - Not Found
+2025-12-10 15:52:01 | INFO     | logging:callHandlers:1762 - Initializing PhysicalAI Chatbot...
+2025-12-10 15:52:01 | ERROR    | logging:callHandlers:1762 - Unexpected error at POST http://localhost:8000/api/v1/chat/: GEMINI_API_KEY environment variable not set
+Traceback (most recent call last):
+  File "D:\physical-ai-robotics-textbook\backend\app\middleware\error_handler.py", line 25, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\core\dependencies.py", line 20, in get_chatbot
+    _chatbot_instance = PhysicalAIChatbot()
+                        ^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\chatbot.py", line 31, in __init__
+    self.gemini = GeminiClient()
+                  ^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\gemini_client.py", line 20, in __init__
+    raise ValueError("GEMINI_API_KEY environment variable not set")
+ValueError: GEMINI_API_KEY environment variable not set
+
+2025-12-10 16:07:47 | INFO     | logging:callHandlers:1762 - HTTP Request: GET https://cfc968b3-733f-49f0-810f-7dcfd76c4caa.us-east4-0.gcp.cloud.qdrant.io:6333/collections "HTTP/1.1 403 Forbidden"
+2025-12-10 16:07:47 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 16:07:48 | INFO     | logging:callHandlers:1762 - HTTP Request: POST https://api.cohere.com/v1/embed "HTTP/1.1 400 Bad Request"
+2025-12-10 16:07:48 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '559aeda3b6009a50f3b5d0f2deba35fe', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 11:07:48 GMT', 'x-envoy-upstream-service-time': '13', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '298589f0-e15e-436c-aea4-7933a1f03322', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 16:07:48 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': '559aeda3b6009a50f3b5d0f2deba35fe', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 11:07:48 GMT', 'x-envoy-upstream-service-time': '13', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': '298589f0-e15e-436c-aea4-7933a1f03322', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 16:21:43 | INFO     | logging:callHandlers:1762 - HTTP Request: GET https://cfc968b3-733f-49f0-810f-7dcfd76c4caa.us-east4-0.gcp.cloud.qdrant.io:6333/collections "HTTP/1.1 403 Forbidden"
+2025-12-10 16:21:43 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 16:21:44 | INFO     | logging:callHandlers:1762 - HTTP Request: POST https://api.cohere.com/v1/embed "HTTP/1.1 400 Bad Request"
+2025-12-10 16:21:44 | ERROR    | logging:callHandlers:1762 - Error generating embedding: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': 'e28dbecd40b6ca6b88e1aa66fb5dfbcd', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 11:21:45 GMT', 'x-envoy-upstream-service-time': '14', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': 'f0f74b1c-5b83-48eb-aa8f-99327ecb2f42', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 16:21:44 | ERROR    | logging:callHandlers:1762 - Error retrieving documents: headers: {'access-control-expose-headers': 'X-Debug-Trace-ID', 'cache-control': 'no-cache, no-store, no-transform, must-revalidate, private, max-age=0', 'content-encoding': 'gzip', 'content-type': 'application/json', 'expires': 'Thu, 01 Jan 1970 00:00:00 GMT', 'pragma': 'no-cache', 'vary': 'Origin,Accept-Encoding', 'x-accel-expires': '0', 'x-debug-trace-id': 'e28dbecd40b6ca6b88e1aa66fb5dfbcd', 'x-endpoint-monthly-call-limit': '1000', 'x-trial-endpoint-call-limit': '40', 'x-trial-endpoint-call-remaining': '39', 'date': 'Wed, 10 Dec 2025 11:21:45 GMT', 'x-envoy-upstream-service-time': '14', 'server': 'envoy', 'via': '1.1 google', 'alt-svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000', 'transfer-encoding': 'chunked'}, status_code: 400, body: {'id': 'f0f74b1c-5b83-48eb-aa8f-99327ecb2f42', 'message': 'invalid request: valid input_type must be provided with the provided model'}
+2025-12-10 17:26:08 | INFO     | logging:callHandlers:1762 - Initializing PhysicalAI Chatbot...
+2025-12-10 17:26:08 | ERROR    | logging:callHandlers:1762 - Unexpected error at POST http://localhost:8000/api/v1/chat/: GEMINI_API_KEY environment variable not set
+Traceback (most recent call last):
+  File "D:\physical-ai-robotics-textbook\backend\app\middleware\error_handler.py", line 25, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\core\dependencies.py", line 20, in get_chatbot
+    _chatbot_instance = PhysicalAIChatbot()
+                        ^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\chatbot.py", line 31, in __init__
+    self.gemini = GeminiClient()
+                  ^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\gemini_client.py", line 20, in __init__
+    raise ValueError("GEMINI_API_KEY environment variable not set")
+ValueError: GEMINI_API_KEY environment variable not set
+
+2025-12-10 17:26:40 | INFO     | logging:callHandlers:1762 - HTTP Exception: 404 - Not Found
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - Starting up Physical AI Textbook API...
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - BEGIN (implicit)
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - PRAGMA main.table_info("users")
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - [raw sql] ()
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - PRAGMA main.table_info("chat_sessions")
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - [raw sql] ()
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - PRAGMA main.table_info("chat_messages")
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - [raw sql] ()
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - Database tables created successfully
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - COMMIT
+2025-12-10 23:16:15 | INFO     | logging:callHandlers:1762 - Database initialized
+2025-12-10 23:17:37 | INFO     | logging:callHandlers:1762 - HTTP Request: GET https://cfc968b3-733f-49f0-810f-7dcfd76c4caa.us-east4-0.gcp.cloud.qdrant.io:6333/collections "HTTP/1.1 403 Forbidden"
+2025-12-10 23:17:37 | ERROR    | logging:callHandlers:1762 - Error getting collection stats: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 23:18:10 | INFO     | logging:callHandlers:1762 - Testing ingestion with 10 URLs
+2025-12-10 23:18:10 | INFO     | logging:callHandlers:1762 - HTTP Request: GET https://cfc968b3-733f-49f0-810f-7dcfd76c4caa.us-east4-0.gcp.cloud.qdrant.io:6333/collections "HTTP/1.1 403 Forbidden"
+2025-12-10 23:18:10 | ERROR    | logging:callHandlers:1762 - Error creating collection humanoid_ai_book: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 23:18:10 | ERROR    | logging:callHandlers:1762 - Error during ingestion: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 23:18:48 | INFO     | logging:callHandlers:1762 - Starting ingestion of all content (max_urls=None)
+2025-12-10 23:18:49 | INFO     | logging:callHandlers:1762 - HTTP Request: GET https://cfc968b3-733f-49f0-810f-7dcfd76c4caa.us-east4-0.gcp.cloud.qdrant.io:6333/collections "HTTP/1.1 403 Forbidden"
+2025-12-10 23:18:49 | ERROR    | logging:callHandlers:1762 - Error creating collection humanoid_ai_book: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 23:18:49 | ERROR    | logging:callHandlers:1762 - Error during ingestion: Unexpected Response: 403 (Forbidden)
+Raw response content:
+b'{"error":"forbidden"}'
+2025-12-10 23:19:45 | INFO     | logging:callHandlers:1762 - Initializing PhysicalAI Chatbot...
+2025-12-10 23:19:45 | ERROR    | logging:callHandlers:1762 - Unexpected error at POST http://localhost:8000/api/v1/chat/: GEMINI_API_KEY environment variable not set
+Traceback (most recent call last):
+  File "D:\physical-ai-robotics-textbook\backend\app\middleware\error_handler.py", line 25, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 120, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 106, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 420, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\dependencies\utils.py", line 667, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\core\dependencies.py", line 20, in get_chatbot
+    _chatbot_instance = PhysicalAIChatbot()
+                        ^^^^^^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\chatbot.py", line 31, in __init__
+    self.gemini = GeminiClient()
+                  ^^^^^^^^^^^^^^
+  File "D:\physical-ai-robotics-textbook\backend\app\services\gemini_client.py", line 20, in __init__
+    raise ValueError("GEMINI_API_KEY environment variable not set")
+ValueError: GEMINI_API_KEY environment variable not set
+

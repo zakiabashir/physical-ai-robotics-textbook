@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.get("/health", response_model=Dict[str, Any])
+@router.get("/", response_model=Dict[str, Any])
 async def health_check():
     """Basic health check"""
     return {
@@ -29,7 +29,7 @@ async def health_check():
     }
 
 
-@router.get("/health/detailed", response_model=Dict[str, Any])
+@router.get("/detailed", response_model=Dict[str, Any])
 async def detailed_health_check():
     """Detailed health check including RAG components"""
     health_status = {
@@ -119,7 +119,7 @@ async def detailed_health_check():
     return health_status
 
 
-@router.get("/health/rag", response_model=Dict[str, Any])
+@router.get("/rag", response_model=Dict[str, Any])
 async def rag_health_check():
     """Specific RAG component health check"""
     rag_status = {
@@ -226,7 +226,7 @@ async def rag_health_check():
     return rag_status
 
 
-@router.post("/health/ingestion/test", response_model=Dict[str, Any])
+@router.post("/ingestion/test", response_model=Dict[str, Any])
 async def test_ingestion_pipeline():
     """Test the entire ingestion pipeline with a small sample"""
     test_results = {
