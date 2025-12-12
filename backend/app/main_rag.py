@@ -200,17 +200,12 @@ async def retrieve_relevant_content(query: str, limit: int = 5) -> List[Dict]:
         query_vector = embed_response.embeddings[0]
 
         # Search in Qdrant
-        from qdrant_client.http import models
-
         search_result = qdrant_client.search(
             collection_name=collection_name,
-            query_vector=models.NamedVector(
-                name="",
-                vector=query_vector
-            ),
+            query_vector=query_vector,
             limit=limit,
             with_payload=True,
-            score_threshold=None
+            with_vectors=False
         )
 
         # Check if we got any results
