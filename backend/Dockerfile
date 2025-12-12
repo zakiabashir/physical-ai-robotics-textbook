@@ -33,9 +33,9 @@ EXPOSE 8000
 # Switch to non-root user
 USER app
 
-# Set environment variables
-ENV PORT=$PORT
+# Set default environment variables (will be overridden by Railway)
+ENV PORT=8000
 ENV HOST=0.0.0.0
 
 # Run the application
-CMD ["./start.sh"]
+CMD ["sh", "-c", "./start.sh"]
