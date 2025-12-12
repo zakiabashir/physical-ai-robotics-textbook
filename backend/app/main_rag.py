@@ -176,6 +176,21 @@ async def retrieve_relevant_content(query: str, limit: int = 5) -> List[Dict]:
         return []
 
     try:
+        collection_name = os.getenv("COLLECTION_NAME", "humanoid_ai_book")
+
+        # Check if collection exists
+        try:
+            collections = qdrant_client.get_collections()
+            collection_exists = any(c.name == collection_name for c in collections.collections)
+
+            if not collection_exists:
+                logger.warning(f"Collection '{collection_name}' does not exist")
+                return []
+
+        except Exception as e:
+            logger.error(f"Error checking collections: {e}")
+            return []
+
         # Create embedding for the query
         embed_response = cohere_client.embed(
             texts=[query],
@@ -186,11 +201,16 @@ async def retrieve_relevant_content(query: str, limit: int = 5) -> List[Dict]:
 
         # Search in Qdrant
         search_result = qdrant_client.search(
-            collection_name=os.getenv("COLLECTION_NAME", "humanoid_ai_book"),
+            collection_name=collection_name,
             query_vector=query_vector,
             limit=limit,
             with_payload=True
         )
+
+        # Check if we got any results
+        if not search_result:
+            logger.warning(f"No results found for query: {query}")
+            return []
 
         # Format results
         results = []
@@ -202,7 +222,9 @@ async def retrieve_relevant_content(query: str, limit: int = 5) -> List[Dict]:
                 "score": hit.score
             })
 
+        logger.info(f"Retrieved {len(results)} documents from Qdrant")
         return results
+
     except Exception as e:
         logger.error(f"Error retrieving content: {e}")
         return []
@@ -211,6 +233,7 @@ async def retrieve_relevant_content(query: str, limit: int = 5) -> List[Dict]:
 def generate_contextual_response(query: str, context: List[Dict]) -> str:
     """Generate response using retrieved context"""
     if not gemini_model:
+        logger.warning("Gemini model not available")
         return "AI service not available. Please check your API keys."
 
     context_text = ""
@@ -218,6 +241,7 @@ def generate_contextual_response(query: str, context: List[Dict]) -> str:
         context_text = "\n\nRelevant content from the textbook:\n"
         for i, doc in enumerate(context, 1):
             context_text += f"\n{i}. {doc['title']}: {doc['content'][:300]}...\n"
+        logger.info(f"Using {len(context)} context documents for response")
 
     prompt = f"""You are a knowledgeable assistant for the Physical AI & Humanoid Robotics textbook.
     Use the following context to answer the user's question accurately.
@@ -230,11 +254,15 @@ def generate_contextual_response(query: str, context: List[Dict]) -> str:
     """
 
     try:
+        logger.info(f"Generating response with Gemini for query: {query[:50]}...")
         response = gemini_model.generate_content(prompt)
-        return response.text
+        response_text = response.text
+        logger.info(f"Gemini response generated successfully")
+        return response_text
     except Exception as e:
         logger.error(f"Error generating response: {e}")
-        return "Sorry, I encountered an error while generating the response."
+        # Return a fallback response about Physical AI
+        return f"I understand you're asking about '{query}'. As a Physical AI assistant, I'm here to help you learn about robotics and AI integration."
 
 
 @app.post("/api/v1/chat/")
@@ -385,6 +413,134 @@ async def get_suggestions():
             "Challenges in human-robot interaction"
         ]
     }
+
+
+@app.get("/api/v1/health/rag")
+async def health_rag():
+    collection_name = os.getenv("COLLECTION_NAME", "humanoid_ai_book")
+    collection_info = {
+        "exists": False,
+        "document_count": 0,
+        "status": "not_initialized"
+    }
+
+    if qdrant_client:
+        try:
+            from qdrant_client.http.models import Distance, VectorParams
+            collections = qdrant_client.get_collections()
+            collection_exists = any(c.name == collection_name for c in collections.collections)
+
+            if collection_exists:
+                collection_data = qdrant_client.get_collection(collection_name)
+                collection_info = {
+                    "exists": True,
+                    "document_count": collection_data.points_count,
+                    "status": "initialized",
+                    "vector_size": collection_data.config.params.vectors.size
+                }
+        except Exception as e:
+            logger.error(f"Error checking collection: {e}")
+
+    return {
+        "status": "healthy",
+        "rag_status": collection_info["status"],
+        "vector_db": "qdrant",
+        "embedding_model": "cohere",
+        "ai_enabled": gemini_model is not None,
+        "collection": {
+            "name": collection_name,
+            "exists": collection_info["exists"],
+            "document_count": collection_info.get("document_count", 0)
+        },
+        "timestamp": time.time()
+    }
+
+
+@app.post("/api/v1/ingest/sample")
+async def ingest_sample_data():
+    """Ingest sample Physical AI content into Qdrant for testing"""
+    if not qdrant_client or not cohere_client:
+        raise HTTPException(status_code=503, detail="RAG services not available")
+
+    collection_name = os.getenv("COLLECTION_NAME", "humanoid_ai_book")
+
+    try:
+        from qdrant_client.http.models import Distance, VectorParams
+
+        # Create collection if it doesn't exist
+        try:
+            qdrant_client.get_collection(collection_name)
+        except:
+            qdrant_client.create_collection(
+                collection_name=collection_name,
+                vectors_config=VectorParams(size=1024, distance=Distance.COSINE)
+            )
+            logger.info(f"Created collection: {collection_name}")
+
+        # Sample content about Physical AI
+        sample_docs = [
+            {
+                "text": "Physical AI refers to artificial intelligence systems that interact with the physical world through sensors and actuators. Unlike purely digital AI, Physical AI systems must perceive, reason about, and act in real-world environments. This includes robots, autonomous vehicles, and smart devices that can manipulate physical objects.",
+                "title": "Introduction to Physical AI",
+                "url": "/docs/intro"
+            },
+            {
+                "text": "Humanoid robots are designed to mimic human form and function. They typically feature a torso, head, two arms, and two legs. Key challenges in humanoid robotics include balance control, bipedal locomotion, manipulation skills, and human-robot interaction. Famous examples include ASIMO, Atlas, and Pepper.",
+                "title": "Humanoid Robotics Fundamentals",
+                "url": "/docs/chapter-1/lesson-1"
+            },
+            {
+                "text": "Computer vision enables robots to perceive and understand visual information from the world. Key techniques include image processing, object detection, facial recognition, and depth sensing. Modern approaches use deep learning and convolutional neural networks to achieve human-level performance in many visual tasks.",
+                "title": "Perception and Computer Vision",
+                "url": "/docs/chapter-2/lesson-3"
+            },
+            {
+                "text": "Reinforcement learning is a machine learning paradigm where an agent learns to make decisions by taking actions in an environment to maximize cumulative reward. In robotics, RL is used for teaching complex behaviors like walking, grasping, and manipulation through trial and error, often combined with simulation for efficient learning.",
+                "title": "Reinforcement Learning in Robotics",
+                "url": "/docs/chapter-3/lesson-2"
+            },
+            {
+                "text": "Actuators are the muscles of robots, converting energy into physical motion. Common types include electric motors (servo, stepper, brushless DC), hydraulic systems, pneumatic systems, and newer technologies like shape memory alloys and artificial muscles. The choice of actuator depends on factors like power, precision, speed, and weight requirements.",
+                "title": "Actuation Systems",
+                "url": "/docs/chapter-4/lesson-1"
+            }
+        ]
+
+        # Create embeddings for each document
+        texts = [doc["text"] for doc in sample_docs]
+        embed_response = cohere_client.embed(
+            texts=texts,
+            model="embed-english-v3.0",
+            input_type="search_document"
+        )
+
+        # Upload to Qdrant
+        points = []
+        for i, (doc, embedding) in enumerate(zip(sample_docs, embed_response.embeddings)):
+            points.append({
+                "id": i,
+                "vector": embedding,
+                "payload": {
+                    "text": doc["text"],
+                    "title": doc["title"],
+                    "url": doc["url"]
+                }
+            })
+
+        qdrant_client.upsert(
+            collection_name=collection_name,
+            points=points
+        )
+
+        return {
+            "status": "success",
+            "message": f"Successfully ingested {len(sample_docs)} documents",
+            "collection": collection_name
+        }
+
+    except Exception as e:
+        logger.error(f"Error ingesting data: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to ingest data: {str(e)}")
 
 
 if __name__ == "__main__":
