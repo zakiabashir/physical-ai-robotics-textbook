@@ -200,22 +200,26 @@ async def retrieve_relevant_content(query: str, limit: int = 5) -> List[Dict]:
         query_vector = embed_response.embeddings[0]
 
         # Search in Qdrant
-        search_result = qdrant_client.search(
+        from qdrant_client.http import models
+
+        search_result = qdrant_client.query_points(
             collection_name=collection_name,
-            query_vector=query_vector,
+            query=models.NamedVector(
+                name="",
+                vector=query_vector
+            ),
             limit=limit,
-            with_payload=True,
-            with_vectors=False
+            with_payload=True
         )
 
         # Check if we got any results
-        if not search_result:
+        if not search_result.points:
             logger.warning(f"No results found for query: {query}")
             return []
 
         # Format results
         results = []
-        for hit in search_result:
+        for hit in search_result.points:
             results.append({
                 "content": hit.payload.get("text", ""),
                 "title": hit.payload.get("title", ""),
