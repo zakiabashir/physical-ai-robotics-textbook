@@ -38,4 +38,4 @@ ENV PORT=8000
 ENV HOST=0.0.0.0
 
 # Run the application
-CMD ["sh", "-c", "./start.sh"]
+CMD ["sh", "-c", "if [ -n \"$PORT\" ]; then export PORT=$PORT; else export PORT=8000; fi; ./start.sh"]
