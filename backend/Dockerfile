@@ -26,10 +26,16 @@ RUN chmod +x start.sh
 # Create non-root user
 RUN useradd --create-home --shell /bin/bash app \
     && chown -R app:app /app
+
+# Expose port dynamically (Railway sets PORT env var)
+EXPOSE 8000
+
+# Switch to non-root user
 USER app
 
-# Expose port
-EXPOSE ${PORT:-8000}
+# Set environment variables
+ENV PORT=$PORT
+ENV HOST=0.0.0.0
 
 # Run the application
 CMD ["./start.sh"]
