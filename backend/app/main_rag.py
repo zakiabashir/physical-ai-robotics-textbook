@@ -1,6 +1,7 @@
 """
 Physical AI & Humanoid Robotics Textbook - FastAPI Backend
 Main application with RAG support - Simplified for Railway deployment
+Fixed Qdrant API compatibility
 """
 
 from fastapi import FastAPI, HTTPException
