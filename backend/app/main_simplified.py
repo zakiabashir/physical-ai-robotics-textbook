@@ -86,17 +86,29 @@ async def api_info():
 @app.post("/api/v1/chat/")
 async def chat_endpoint(request: Dict[str, Any]):
     """Simple chat endpoint with mock response"""
-    message = request.get("message", "")
-    context = request.get("context")
+    try:
+        message = request.get("message", "")
+        context = request.get("context")
 
-    # Simple mock response for now
-    response_text = f"I received your message: '{message}'. This is a simplified response. The full RAG functionality will be available once all dependencies are properly configured."
+        # Debug logging
+        logger.info(f"Received chat request: message='{message[:50]}...'")
 
-    return {
-        "response": response_text,
-        "sources": [],
-        "timestamp": time.time()
-    }
+        # Simple mock response for now
+        response_text = f"I received your message: '{message}'. This is a simplified response. The full RAG functionality will be available once all dependencies are properly configured."
+
+        return {
+            "response": response_text,
+            "sources": [],
+            "timestamp": time.time()
+        }
+    except Exception as e:
+        logger.error(f"Chat endpoint error: {str(e)}")
+        return {
+            "response": "Sorry, I encountered an error processing your request.",
+            "sources": [],
+            "timestamp": time.time(),
+            "error": str(e)
+        }
 
 
 @app.post("/api/v1/chat/feedback")
@@ -105,6 +117,16 @@ async def feedback_endpoint(request: Dict[str, Any]):
     return {
         "status": "success",
         "message": "Feedback received (simplified mode)"
+    }
+
+
+@app.get("/api/v1/test")
+async def test_endpoint():
+    """Test endpoint to verify API is working"""
+    return {
+        "status": "ok",
+        "message": "API is working correctly",
+        "timestamp": time.time()
     }
 
 
