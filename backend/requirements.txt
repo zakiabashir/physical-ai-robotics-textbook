@@ -1,31 +1,22 @@
 # FastAPI and ASGI server
 fastapi>=0.110.0
-uvicorn[standard]>=0.28.0
+uvicorn>=0.28.0
 python-multipart>=0.0.6
 
 # Database
 sqlalchemy==2.0.23
-alembic==1.12.1
-psycopg2-binary==2.9.9
-asyncpg==0.29.0
 aiosqlite==0.21.0
 
 # Authentication
-better-auth==0.0.1b11
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 
 # Vector Database and Embeddings
 qdrant-client==1.16.1
-cohere==5.5.4
-openai-agents==0.6.2
 google-generativeai==0.3.2
-sentence-transformers==2.2.2
-trafilatura==2.0.0
 
 # HTTP client
 httpx>=0.27.0
-aiohttp>=3.10.0
 
 # Data validation and serialization
 pydantic>=2.12.3,<3.0.0
@@ -33,22 +24,5 @@ pydantic-settings>=2.1.0,<3.0.0
 
 # Utilities
 python-dotenv==1.0.0
-loguru==0.7.2
-typer==0.9.0
-rich==13.7.0
-PyYAML==6.0.1
 numpy>=1.26.0
-
-# Testing
-pytest==7.4.3
-pytest-asyncio==0.21.1
-pytest-mock==3.12.0
-
-# Production
-gunicorn==21.2.0
-
-# Development tools
-black==23.11.0
-isort==5.12.0
-flake8==6.1.0
-mypy==1.7.1
+PyYAML==6.0.1
