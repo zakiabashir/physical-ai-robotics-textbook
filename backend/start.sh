@@ -7,9 +7,17 @@ echo "Working directory: $(pwd)"
 echo "Listing files:"
 ls -la
 
+# Debug environment variables
+echo "=== Environment Variables Debug ==="
+echo "Raw PORT: '$PORT'"
+echo "Raw HOST: '$HOST'"
+echo "All environment variables containing PORT:"
+env | grep -i port || echo "No PORT env var found"
+echo "===================================="
+
 # Set default port if not provided
-PORT=${PORT:-8000}
-HOST=${HOST:-0.0.0.0}
+export PORT=${PORT:-8000}
+export HOST=${HOST:-0.0.0.0}
 
 echo "Final PORT: $PORT"
 echo "Final HOST: $HOST"
@@ -18,9 +26,11 @@ echo "Final HOST: $HOST"
 echo "Attempting to start RAG-enabled main application..."
 if python -c "from app.main_rag import app; print('RAG-enabled main app imported successfully')" 2>/dev/null; then
     echo "RAG-enabled main app import successful, starting uvicorn..."
+    echo "Running: uvicorn app.main_rag:app --host $HOST --port $PORT"
     exec uvicorn app.main_rag:app --host $HOST --port $PORT
 elif python -c "from app.main import app; print('Main app imported successfully')" 2>/dev/null; then
     echo "RAG app failed, trying original main app..."
+    echo "Running: uvicorn app.main:app --host $HOST --port $PORT"
     exec uvicorn app.main:app --host $HOST --port $PORT
 elif python -c "from ai_main import app; print('AI Enhanced app imported successfully')" 2>/dev/null; then
     echo "Main app failed, starting AI enhanced app..."

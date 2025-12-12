@@ -9,5 +9,9 @@ cmds = [
   "pip install -r requirements.txt"
 ]
 
+[variables]
+PORT = { default = "8000", deployOnly = true }
+HOST = { default = "0.0.0.0", deployOnly = true }
+
 [start]
-cmd = ". /opt/venv/bin/activate && sh -c 'PORT=${PORT:-8000} ./start.sh'"
+cmd = "export PORT=${PORT:-8000} && export HOST=${HOST:-0.0.0.0} && . /opt/venv/bin/activate && ./start.sh"
