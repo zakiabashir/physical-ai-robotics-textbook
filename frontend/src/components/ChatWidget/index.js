@@ -16,9 +16,7 @@ const ChatWidget = ({ isOpen: externalIsOpen, onToggle }) => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  const API_BASE_URL = typeof window !== 'undefined' && window.location.hostname === 'localhost'
-    ? 'http://localhost:8000/api/v1'
-    : 'https://physical-ai-robotics-textbook-production.up.railway.app/api/v1';
+  const API_BASE_URL = 'https://physical-ai-robotics-textbook-production.up.railway.app/api/v1';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
