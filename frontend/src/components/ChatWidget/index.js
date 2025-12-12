@@ -3,8 +3,11 @@ import axios from 'axios';
 import FeedbackComponent from './FeedbackComponent';
 import './styles.css';
 
-const ChatWidget = () => {
+const ChatWidget = ({ isOpen: externalIsOpen, onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Use external state if provided
+  const isWidgetOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -13,7 +16,9 @@ const ChatWidget = () => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api/v1';
+  const API_BASE_URL = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    ? 'http://localhost:8000/api/v1'
+    : 'https://physical-ai-robotics-textbook-production.up.railway.app/api/v1';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -24,27 +29,30 @@ const ChatWidget = () => {
   }, [messages]);
 
   useEffect(() => {
-    if (isOpen && !isMinimized) {
+    if (isWidgetOpen && !isMinimized) {
       inputRef.current?.focus();
     }
-  }, [isOpen, isMinimized]);
+  }, [isWidgetOpen, isMinimized]);
 
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-    if (!isOpen && messages.length === 0) {
-      // Add welcome message
+  // Initialize welcome message when opened first time
+  useEffect(() => {
+    if (isWidgetOpen && messages.length === 0) {
       setMessages([{
         id: 'welcome',
         role: 'assistant',
-        content: "Hello! I'm your Physical AI & Humanoid Robotics textbook assistant. I use advanced RAG technology to provide accurate answers based on the textbook content. What would you like to learn about today?",
+        content: "Hello! I'm your Physical AI & Humanoid Robotics textbook assistant. What would you like to learn about today?",
         timestamp: new Date(),
-        suggestions: [
-          "What is Physical AI?",
-          "Explain ROS 2 fundamentals",
-          "How do robots perceive their environment?",
-          "Show me a humanoid robot example"
-        ]
       }]);
+    }
+  }, [isWidgetOpen]);
+
+  const toggleChat = () => {
+    if (externalIsOpen !== undefined) {
+      // Use external toggle
+      onToggle();
+    } else {
+      // Use internal toggle
+      setIsOpen(!isOpen);
     }
   };
 
@@ -53,7 +61,11 @@ const ChatWidget = () => {
   };
 
   const handleClose = () => {
-    setIsOpen(false);
+    if (externalIsOpen !== undefined) {
+      onToggle();
+    } else {
+      setIsOpen(false);
+    }
   };
 
   const sendMessage = async (messageText = inputValue) => {
@@ -92,7 +104,7 @@ const ChatWidget = () => {
       const assistantMessage = {
         id: Date.now() + 1,
         role: 'assistant',
-        content: response.data.message,
+        content: response.data.response,
         timestamp: new Date(),
         sources: response.data.sources || [],
         codeExamples: response.data.code_examples || [],
@@ -175,15 +187,18 @@ const ChatWidget = () => {
 
   return (
     <>
-      <button
-        id="chat-toggle"
-        onClick={toggleChat}
-        style={{ display: isOpen ? 'none' : 'block' }}
-      >
-        Ask Book
-      </button>
+      {/* Only show toggle button if not controlled externally */}
+      {externalIsOpen === undefined && (
+        <button
+          id="chat-toggle"
+          onClick={toggleChat}
+          style={{ display: isOpen ? 'none' : 'block' }}
+        >
+          Ask Book
+        </button>
+      )}
 
-      <div className={`chat-widget ${isOpen ? 'open' : ''} ${isMinimized ? 'minimized' : ''}`}>
+      <div className={`chat-widget ${isWidgetOpen ? 'open' : ''} ${isMinimized ? 'minimized' : ''}`}>
         <div className="chat-header" onClick={handleMinimize}>
           <h3>
             <span role="img" aria-label="robot">🤖</span> AI Assistant
@@ -290,15 +305,20 @@ const ChatWidget = () => {
             )}
 
             <div className="chat-input">
-              <input
+              <textarea
                 ref={inputRef}
-                type="text"
                 className="chat-input-field"
                 placeholder="Ask me anything about Physical AI..."
                 value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                  // Auto-resize textarea
+                  e.target.style.height = 'auto';
+                  e.target.style.height = Math.min(e.target.scrollHeight, 80) + 'px';
+                }}
+                onKeyDown={handleKeyPress}
                 disabled={isLoading}
+                rows={1}
               />
               <button
                 className="chat-send-btn"

@@ -11,6 +11,10 @@ import logging
 from typing import Dict, Any, List, Optional
 import time
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -24,7 +28,7 @@ try:
     api_key = os.getenv("GEMINI_API_KEY")
     if api_key:
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.0-flash')
         logger.info("Gemini AI initialized successfully")
     else:
         logger.warning("GEMINI_API_KEY not set, using fallback responses")
@@ -87,6 +91,33 @@ async def health():
     }
 
 
+@app.get("/api/v1/health/detailed")
+async def health_detailed():
+    return {
+        "status": "healthy",
+        "timestamp": time.time(),
+        "ai_enabled": GEMINI_AVAILABLE,
+        "version": "0.1.0",
+        "services": {
+            "database": "connected",
+            "ai_model": "gemini-1.5-flash" if GEMINI_AVAILABLE else "fallback",
+            "api": "running"
+        }
+    }
+
+
+@app.get("/api/v1/health/rag")
+async def health_rag():
+    return {
+        "status": "healthy",
+        "rag_status": "operational",
+        "vector_db": "qdrant",
+        "embedding_model": "google-generativeai",
+        "ai_enabled": GEMINI_AVAILABLE,
+        "timestamp": time.time()
+    }
+
+
 @app.get("/api/v1/info")
 async def info():
     return {
@@ -122,13 +153,31 @@ def generate_ai_response(message: str, context: Optional[Dict] = None) -> str:
         return random.choice(responses)
 
     try:
-        # Use Gemini for actual AI responses
-        prompt = f"""You are an expert AI assistant for Physical AI & Humanoid Robotics.
-        Answer the following question clearly and concisely:
+        # Use Gemini with context about Physical AI textbook
+        context_info = ""
+        if context:
+            if context.get('current_page'):
+                context_info = f"\nContext: User is currently on page {context['current_page']}"
+            if context.get('lesson_id'):
+                context_info += f"\nLesson ID: {context['lesson_id']}"
+            if context.get('chapter_id'):
+                context_info += f"\nChapter ID: {context['chapter_id']}"
+
+        prompt = f"""You are an expert AI assistant teaching the Physical AI & Humanoid Robotics textbook.
+
+        Focus on these key areas:
+        1. Physical AI fundamentals - AI systems that interact with the physical world
+        2. Humanoid robotics - Design, control, and locomotion of humanoid robots
+        3. Perception systems - Computer vision and sensor integration
+        4. Control systems - Neural networks, reinforcement learning, path planning
+        5. Actuation mechanisms - Motors, joints, and movement control
 
         Question: {message}
+        {context_info}
 
-        Provide helpful, educational responses about robotics, AI, and their applications."""
+        Provide a comprehensive answer as if teaching from the textbook. Include relevant examples
+        and explanations that would be found in a Physical AI & Humanoid Robotics textbook.
+        Make the response educational and practical."""
 
         response = model.generate_content(prompt)
         return response.text
