@@ -245,13 +245,20 @@ def generate_contextual_response(query: str, context: List[Dict]) -> str:
         logger.info(f"Using {len(context)} context documents for response")
 
     prompt = f"""You are a knowledgeable assistant for the Physical AI & Humanoid Robotics textbook.
-    Use the following context to answer the user's question accurately.
+    Use the following context to answer the user's question accurately and CONCISELY.
 
     User Question: {query}
     {context_text}
 
-    Provide a comprehensive answer based on the textbook content. If the context doesn't contain
-    relevant information, say so and provide a general response about the topic.
+    Instructions:
+    1. Answer in 2-3 sentences maximum
+    2. Be direct and to-the-point
+    3. Focus on the most important information
+    4. Use simple language
+    5. Don't add unnecessary explanations
+    6. The system will provide sources separately
+
+    Provide a brief, direct answer based on the textbook content.
     """
 
     try:
