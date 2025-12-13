@@ -26,12 +26,12 @@ try:
     from qdrant_client import QdrantClient
     from qdrant_client.http.models import Distance, VectorParams
     import cohere
-    from groq import Groq
+    import google.generativeai as genai
 
     # Check if all required services are available
     qdrant_available = os.getenv("QDRANT_URL") and os.getenv("QDRANT_API_KEY")
     cohere_available = os.getenv("COHERE_API_KEY")
-    groq_available = os.getenv("GROQ_API_KEY")
+    gemini_available = os.getenv("GEMINI_API_KEY")
 
     # Initialize clients if keys are available
     if qdrant_available:
@@ -51,23 +51,24 @@ try:
         logger.warning("Cohere API key not available")
         cohere_client = None
 
-    if groq_available:
-        groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-        logger.info("Groq AI initialized")
+    if gemini_available:
+        genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+        gemini_model = genai.GenerativeModel('gemini-2.0-flash')
+        logger.info("Gemini AI initialized")
     else:
-        logger.warning("Groq API key not available")
-        groq_client = None
+        logger.warning("Gemini API key not available")
+        gemini_model = None
 
 except ImportError as e:
     logger.error(f"Import error: {e}")
     qdrant_client = None
     cohere_client = None
-    groq_client = None
+    gemini_model = None
 except Exception as e:
     logger.error(f"Service initialization error: {e}")
     qdrant_client = None
     cohere_client = None
-    groq_client = None
+    gemini_model = None
 
 
 @asynccontextmanager
@@ -232,8 +233,8 @@ async def retrieve_relevant_content(query: str, limit: int = 5) -> List[Dict]:
 
 def generate_contextual_response(query: str, context: List[Dict]) -> str:
     """Generate response using retrieved context"""
-    if not groq_client:
-        logger.warning("Groq client not available")
+    if not gemini_model:
+        logger.warning("Gemini model not available")
         return "AI service not available. Please check your API keys."
 
     context_text = ""
@@ -261,17 +262,11 @@ def generate_contextual_response(query: str, context: List[Dict]) -> str:
     """
 
     try:
-        logger.info(f"Generating response with Groq for query: {query[:50]}...")
+        logger.info(f"Generating response with Gemini for query: {query[:50]}...")
         logger.info(f"Prompt length: {len(prompt)} chars")
-        model_name = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
-        response = groq_client.chat.completions.create(
-            model=model_name,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=500,
-            temperature=0.5
-        )
-        response_text = response.choices[0].message.content
-        logger.info(f"Groq response generated successfully, length: {len(response_text)}")
+        response = gemini_model.generate_content(prompt)
+        response_text = response.text
+        logger.info(f"Gemini response generated successfully, length: {len(response_text)}")
         return response_text
     except Exception as e:
         logger.error(f"Error generating response: {e}")
@@ -303,7 +298,7 @@ async def chat_endpoint(request: Dict[str, Any]):
         else:
             # Fallback response
             response_text = f"I understand you're asking about '{message}'. "
-            if not (qdrant_client and cohere_client and groq_client):
+            if not (qdrant_client and cohere_client and gemini_model):
                 response_text += "Note: Some AI services are not configured. "
             response_text += "As a Physical AI assistant, I'm here to help you learn about robotics and AI integration."
             sources = []
@@ -313,7 +308,7 @@ async def chat_endpoint(request: Dict[str, Any]):
             "sources": sources,
             "timestamp": time.time(),
             "rag_used": len(retrieved_content) > 0,
-            "ai_used": groq_client is not None
+            "ai_used": gemini_model is not None
         }
 
     except HTTPException:
