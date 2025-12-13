@@ -256,12 +256,14 @@ def generate_contextual_response(query: str, context: List[Dict]) -> str:
 
     try:
         logger.info(f"Generating response with Gemini for query: {query[:50]}...")
+        logger.info(f"Prompt length: {len(prompt)} chars")
         response = gemini_model.generate_content(prompt)
         response_text = response.text
-        logger.info(f"Gemini response generated successfully")
+        logger.info(f"Gemini response generated successfully, length: {len(response_text)}")
         return response_text
     except Exception as e:
         logger.error(f"Error generating response: {e}")
+        logger.error(f"Prompt preview: {prompt[:200]}...")
         # Return a fallback response about Physical AI
         return f"I understand you're asking about '{query}'. As a Physical AI assistant, I'm here to help you learn about robotics and AI integration."
 
