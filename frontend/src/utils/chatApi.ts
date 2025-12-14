@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://physical-ai-robotics-textbook-production.up.railway.app';
+const API_BASE_URL = 'https://physical-ai-robotics-textbook-production.up.railway.app/api/v1';
 
 export interface ChatMessage {
   role: 'user' | 'assistant';
@@ -52,7 +52,7 @@ export class ChatAPI {
 
   async sendMessage(request: ChatRequest): Promise<ChatResponse> {
     try {
-      const response = await fetch(`${this.baseUrl}/api/v1/chat/`, {
+      const response = await fetch(`${this.baseUrl}/chat/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ export class ChatAPI {
   ): Promise<ChatMessage[]> {
     try {
       const response = await fetch(
-        `${this.baseUrl}/api/v1/chat/history/${conversationId}?limit=${limit}`
+        `${this.baseUrl}/chat/history/${conversationId}?limit=${limit}`
       );
 
       if (!response.ok) {
@@ -100,7 +100,7 @@ export class ChatAPI {
   async listConversations(limit: number = 20): Promise<Conversation[]> {
     try {
       const response = await fetch(
-        `${this.baseUrl}/api/v1/chat/conversations?limit=${limit}`
+        `${this.baseUrl}/chat/conversations?limit=${limit}`
       );
 
       if (!response.ok) {
@@ -117,7 +117,7 @@ export class ChatAPI {
   async deleteConversation(conversationId: string): Promise<void> {
     try {
       const response = await fetch(
-        `${this.baseUrl}/api/v1/chat/conversations/${conversationId}`,
+        `${this.baseUrl}/chat/conversations/${conversationId}`,
         {
           method: 'DELETE',
         }
@@ -142,7 +142,7 @@ export class ChatAPI {
     }
   ): Promise<void> {
     try {
-      const response = await fetch(`${this.baseUrl}/api/v1/chat/feedback`, {
+      const response = await fetch(`${this.baseUrl}/chat/feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
