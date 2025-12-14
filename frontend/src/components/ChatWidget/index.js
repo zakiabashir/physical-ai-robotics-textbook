@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { chatAPI } from '../../utils/chatApi';
 import FeedbackComponent from './FeedbackComponent';
+import { useAuth } from '../../context/AuthContext';
 import './styles.css';
 
 const ChatWidget = ({ isOpen: externalIsOpen, onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, user, token } = useAuth();
 
   // Use external state if provided
   const isWidgetOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;

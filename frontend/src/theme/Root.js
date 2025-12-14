@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import ChatWidget from '@site/src/components/ChatWidget';
+import { AuthProvider, useAuth } from '@site/src/context/AuthContext';
+import AuthModal from '@site/src/components/Auth/AuthModal';
 
-export default function Root({ children }) {
+function RootContent({ children }) {
+  const { isAuthenticated, user } = useAuth();
   const [showChat, setShowChat] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState('login');
 
   const toggleChat = () => {
+    if (!isAuthenticated) {
+      setAuthMode('login');
+      setShowAuthModal(true);
+      return;
+    }
     console.log('Chat toggle clicked, current state:', showChat);
     setShowChat(!showChat);
   };
@@ -68,7 +78,7 @@ export default function Root({ children }) {
         onMouseLeave={(e) => {
           e.target.style.transform = 'scale(1)';
         }}
-        title="Ask Book - AI Assistant"
+        title={isAuthenticated ? `Ask Book - ${user.username}` : "Ask Book - Sign in to use"}
       >
         <svg
           width="24"
@@ -94,6 +104,13 @@ export default function Root({ children }) {
         </svg>
       </button>
 
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        initialMode={authMode}
+      />
+
       {/* Chat Widget - only show when icon is clicked */}
       {showChat && (
         <div
@@ -112,5 +129,13 @@ export default function Root({ children }) {
         </div>
       )}
     </>
+  );
+}
+
+export default function Root({ children }) {
+  return (
+    <AuthProvider>
+      <RootContent>{children}</RootContent>
+    </AuthProvider>
   );
 }

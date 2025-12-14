@@ -52,11 +52,18 @@ export class ChatAPI {
 
   async sendMessage(request: ChatRequest): Promise<ChatResponse> {
     try {
+      const token = localStorage.getItem('authToken');
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+      };
+
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
       const response = await fetch(`${this.baseUrl}/chat/`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify(request),
       });
 
@@ -79,8 +86,16 @@ export class ChatAPI {
     limit: number = 50
   ): Promise<ChatMessage[]> {
     try {
+      const token = localStorage.getItem('authToken');
+      const headers: HeadersInit = {};
+
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
       const response = await fetch(
-        `${this.baseUrl}/chat/history/${conversationId}?limit=${limit}`
+        `${this.baseUrl}/chat/history/${conversationId}?limit=${limit}`,
+        { headers }
       );
 
       if (!response.ok) {
@@ -99,8 +114,16 @@ export class ChatAPI {
 
   async listConversations(limit: number = 20): Promise<Conversation[]> {
     try {
+      const token = localStorage.getItem('authToken');
+      const headers: HeadersInit = {};
+
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
       const response = await fetch(
-        `${this.baseUrl}/chat/conversations?limit=${limit}`
+        `${this.baseUrl}/chat/conversations?limit=${limit}`,
+        { headers }
       );
 
       if (!response.ok) {
@@ -116,10 +139,18 @@ export class ChatAPI {
 
   async deleteConversation(conversationId: string): Promise<void> {
     try {
+      const token = localStorage.getItem('authToken');
+      const headers: HeadersInit = {};
+
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
       const response = await fetch(
         `${this.baseUrl}/chat/conversations/${conversationId}`,
         {
           method: 'DELETE',
+          headers,
         }
       );
 
@@ -142,11 +173,18 @@ export class ChatAPI {
     }
   ): Promise<void> {
     try {
+      const token = localStorage.getItem('authToken');
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+      };
+
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
       const response = await fetch(`${this.baseUrl}/chat/feedback`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({
           conversation_id: conversationId,
           message_id: messageId,
