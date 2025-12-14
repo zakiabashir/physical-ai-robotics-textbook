@@ -1,7 +1,6 @@
 import React from 'react';
 import InteractiveCode from '@site/src/components/InteractiveCode';
 import Quiz from '@site/src/components/Quiz';
-import QuizComponent from '@site/src/components/QuizComponent';
 import DiagramComponent from '@site/src/components/DiagramComponent';
 import CodeComponent from '@site/src/components/CodeComponent';
 import CodeBlock from '@theme/CodeBlock';
@@ -121,8 +120,8 @@ const MDXComponents = {
     );
   },
 
-  // New Quiz Component
-  QuizComponent: (props) => <QuizComponent {...props} />,
+  // New Quiz Component (using the Quiz component)
+  QuizComponent: (props) => <Quiz {...props} />,
 
   // Enhanced Diagram Component
   DiagramComponent: (props) => <DiagramComponent {...props} />,
