@@ -269,10 +269,17 @@ def generate_contextual_response(query: str, context: List[Dict]) -> str:
         logger.info(f"Gemini response generated successfully, length: {len(response_text)}")
         return response_text
     except Exception as e:
-        logger.error(f"Error generating response: {e}")
+        logger.error(f"Error generating response: {str(e)}")
+        logger.error(f"Error type: {type(e).__name__}")
         logger.error(f"Prompt preview: {prompt[:200]}...")
-        # Return a fallback response about Physical AI
-        return f"I understand you're asking about '{query}'. As a Physical AI assistant, I'm here to help you learn about robotics and AI integration."
+
+        # If Gemini is not available, try to answer using the retrieved context directly
+        if context and len(context) > 0:
+            # Try to provide a simple answer based on the retrieved content
+            first_doc = context[0]
+            return f"Based on the textbook, {first_doc['content'][:200]}..."
+        else:
+            return f"I understand you're asking about '{query}'. As a Physical AI assistant, I'm here to help you learn about robotics and AI integration."
 
 
 @app.post("/api/v1/chat/")
