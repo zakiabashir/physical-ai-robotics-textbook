@@ -1,12 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ChatWidget from '@site/src/components/ChatWidget';
 
 export default function Root({ children }) {
   const [showChat, setShowChat] = useState(false);
 
   const toggleChat = () => {
+    console.log('Chat toggle clicked, current state:', showChat);
     setShowChat(!showChat);
   };
+
+  useEffect(() => {
+    console.log('Chat state changed:', showChat);
+  }, [showChat]);
+
+  // Add CSS animation
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .chat-wrapper {
+        animation: slideIn 0.3s ease-out;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   return (
     <>
@@ -38,6 +68,7 @@ export default function Root({ children }) {
         onMouseLeave={(e) => {
           e.target.style.transform = 'scale(1)';
         }}
+        title="Ask Book - AI Assistant"
       >
         <svg
           width="24"
@@ -65,33 +96,21 @@ export default function Root({ children }) {
 
       {/* Chat Widget - only show when icon is clicked */}
       {showChat && (
-        <div style={{
-          position: 'fixed',
-          right: '90px',
-          bottom: '20px',
-          zIndex: 9998,
-          transform: 'scale(1)',
-          animation: 'slideIn 0.3s ease-out'
-        }}>
+        <div
+          className="chat-wrapper"
+          style={{
+            position: 'fixed',
+            right: '90px',
+            bottom: '20px',
+            zIndex: 9998
+          }}
+        >
           <ChatWidget
             isOpen={showChat}
             onToggle={toggleChat}
           />
         </div>
       )}
-
-      <style jsx>{`
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </>
   );
 }
