@@ -8,7 +8,7 @@ export default {
   "tagline": "An Interactive Technical Textbook",
   "favicon": "img/favicon.svg",
   "url": "https://physical-ai-robotics.org",
-  "baseUrl": "/",
+  "baseUrl": "/ur/",
   "organizationName": "Physical AI",
   "projectName": "physical-ai-robotics-textbook",
   "onBrokenLinks": "warn",
@@ -105,7 +105,7 @@ export default {
             },
             {
               "label": "About",
-              "href": "/about"
+              "to": "/docs/introduction"
             }
           ]
         }

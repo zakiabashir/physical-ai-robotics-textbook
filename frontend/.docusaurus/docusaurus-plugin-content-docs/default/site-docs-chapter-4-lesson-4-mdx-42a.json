@@ -5,7 +5,7 @@
   "source": "@site/docs/chapter-4/lesson-4.mdx",
   "sourceDirName": "chapter-4",
   "slug": "/chapter-4/lesson-4",
-  "permalink": "/docs/chapter-4/lesson-4",
+  "permalink": "/ur/docs/chapter-4/lesson-4",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-4/lesson-4.mdx",
@@ -20,6 +20,6 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Lesson 4.3: Balance and Manipulation",
-    "permalink": "/docs/chapter-4/lesson-3"
+    "permalink": "/ur/docs/chapter-4/lesson-3"
   }
 }

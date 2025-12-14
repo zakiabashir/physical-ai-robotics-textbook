@@ -1,5 +1,5 @@
 {
-  "permalink": "/blog/welcome-to-physical-ai",
+  "permalink": "/ur/blog/welcome-to-physical-ai",
   "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/blog/2024-01-01-welcome.md",
   "source": "@site/blog/2024-01-01-welcome.md",
   "title": "Welcome to Physical AI & Humanoid Robotics",
@@ -9,17 +9,17 @@
     {
       "inline": true,
       "label": "announcement",
-      "permalink": "/blog/tags/announcement"
+      "permalink": "/ur/blog/tags/announcement"
     },
     {
       "inline": true,
       "label": "robotics",
-      "permalink": "/blog/tags/robotics"
+      "permalink": "/ur/blog/tags/robotics"
     },
     {
       "inline": true,
       "label": "physical-ai",
-      "permalink": "/blog/tags/physical-ai"
+      "permalink": "/ur/blog/tags/physical-ai"
     }
   ],
   "readingTime": 1.06,
@@ -29,7 +29,7 @@
       "name": "Zakia Bashir",
       "title": "Content Creator",
       "url": "https://github.com/zakia",
-      "imageURL": "/img/logo.svg",
+      "imageURL": "/ur/img/logo.svg",
       "key": "zakia-bashir",
       "page": null
     }
@@ -49,6 +49,6 @@
   "unlisted": false,
   "prevItem": {
     "title": "Getting Started with ROS 2 for Robotics",
-    "permalink": "/blog/getting-started-with-ros2"
+    "permalink": "/ur/blog/getting-started-with-ros2"
   }
 }
