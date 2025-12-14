@@ -99,7 +99,7 @@ const config = {
             },
             {
               label: 'About',
-              href: '/about',
+              to: '/docs/introduction',
             },
           ],
         },
