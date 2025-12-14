@@ -1,343 +1,300 @@
 {
-  "/__docusaurus/debug-5ff": {
-    "__comp": "__comp---theme-debug-config-23-a-2ff",
-    "__context": {
-      "plugin": "plugin---docusaurus-debugb-38-ad3"
-    }
-  },
-  "/__docusaurus/debug/config-5ba": {
-    "__comp": "__comp---theme-debug-config-23-a-2ff",
-    "__context": {
-      "plugin": "plugin---docusaurus-debugb-38-ad3"
-    }
-  },
-  "/__docusaurus/debug/content-a2b": {
-    "__comp": "__comp---theme-debug-contentba-8-ce7",
-    "__context": {
-      "plugin": "plugin---docusaurus-debugb-38-ad3"
-    },
-    "__props": "__props---docusaurus-debug-content-3-c-0-be2"
-  },
-  "/__docusaurus/debug/globalData-c3c": {
-    "__comp": "__comp---theme-debug-global-dataede-0fa",
-    "__context": {
-      "plugin": "plugin---docusaurus-debugb-38-ad3"
-    }
-  },
-  "/__docusaurus/debug/metadata-156": {
-    "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
-    "__context": {
-      "plugin": "plugin---docusaurus-debugb-38-ad3"
-    }
-  },
-  "/__docusaurus/debug/registry-88c": {
-    "__comp": "__comp---theme-debug-registry-679-501",
-    "__context": {
-      "plugin": "plugin---docusaurus-debugb-38-ad3"
-    }
-  },
-  "/__docusaurus/debug/routes-000": {
-    "__comp": "__comp---theme-debug-routes-946-699",
-    "__context": {
-      "plugin": "plugin---docusaurus-debugb-38-ad3"
-    }
-  },
   "/blog-fcc": {
-    "__comp": "__comp---theme-blog-list-pagea-6-a-7ba",
+    "__comp": "a6aa9e1f",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---blogcdc-e66"
+        "content": "cdcd1065"
       },
       {
-        "content": "content---blog-347-116"
+        "content": "3471d989"
       },
       {
-        "content": "content---bloga-17-5fc"
+        "content": "a1769088"
       }
     ],
-    "__props": "__props---blogc-15-573"
+    "__props": "c15d9823"
   },
   "/blog/archive-182": {
-    "__comp": "__comp---theme-blog-archive-page-9-e-4-1d8",
+    "__comp": "9e4087bc",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "__props": "__props---blog-archivef-81-229"
+    "__props": "f81c1134"
   },
   "/blog/authors-0b7": {
-    "__comp": "__comp---theme-blog-pages-blog-authors-list-page-621-70c",
+    "__comp": "621db11d",
     "__context": {
       "data": {
-        "blogMetadata": "blogMetadata---blog-authorsace-e7d"
+        "blogMetadata": "acecf23e"
       },
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
-    "__props": "__props---blog-authorsef-8-44f"
+    "sidebar": "814f3328",
+    "__props": "ef8b811a"
   },
   "/blog/future-of-humanoid-robots-0ab": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
+    "__comp": "ccc49370",
     "__context": {
       "data": {
-        "blogMetadata": "blogMetadata---blog-authorsace-e7d"
+        "blogMetadata": "acecf23e"
       },
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
-    "content": "content---blog-future-of-humanoid-robots-2-e-7-7e7"
+    "sidebar": "814f3328",
+    "content": "2e735962"
   },
   "/blog/getting-started-with-ros2-a5b": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
+    "__comp": "ccc49370",
     "__context": {
       "data": {
-        "blogMetadata": "blogMetadata---blog-authorsace-e7d"
+        "blogMetadata": "acecf23e"
       },
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
-    "content": "content---blog-getting-started-with-ros-2-aa-2-304"
+    "sidebar": "814f3328",
+    "content": "aa29bc9b"
   },
   "/blog/tags-287": {
-    "__comp": "__comp---theme-blog-tags-list-page-01-a-d0b",
+    "__comp": "01a85c17",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
-    "__props": "__props---blog-tags-3-a-2-fa2"
+    "sidebar": "814f3328",
+    "__props": "3a2db09e"
   },
   "/blog/tags/ai-7e9": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---blogcdc-e66"
+        "content": "cdcd1065"
       }
     ],
-    "__props": "__props---blog-tags-ai-65-a-ec1"
+    "__props": "65a6d713"
   },
   "/blog/tags/announcement-05c": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---bloga-17-5fc"
+        "content": "a1769088"
       }
     ],
-    "__props": "__props---blog-tags-announcement-9-d-8-052"
+    "__props": "9d86e7fa"
   },
   "/blog/tags/beginner-1c9": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---blog-347-116"
+        "content": "3471d989"
       }
     ],
-    "__props": "__props---blog-tags-beginner-8-e-4-5c7"
+    "__props": "8e4df3f0"
   },
   "/blog/tags/future-83f": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---blogcdc-e66"
+        "content": "cdcd1065"
       }
     ],
-    "__props": "__props---blog-tags-future-86-f-ea8"
+    "__props": "86faba0d"
   },
   "/blog/tags/humanoid-robots-257": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---blogcdc-e66"
+        "content": "cdcd1065"
       }
     ],
-    "__props": "__props---blog-tags-humanoid-robots-636-79e"
+    "__props": "63632d31"
   },
   "/blog/tags/physical-ai-275": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---bloga-17-5fc"
+        "content": "a1769088"
       }
     ],
-    "__props": "__props---blog-tags-physical-ai-60-d-e43"
+    "__props": "60d2d3a9"
   },
   "/blog/tags/robotics-7f5": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---blog-347-116"
+        "content": "3471d989"
       },
       {
-        "content": "content---bloga-17-5fc"
+        "content": "a1769088"
       }
     ],
-    "__props": "__props---blog-tags-robotics-753-22f"
+    "__props": "7537a2fe"
   },
   "/blog/tags/ros-2-be4": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---blog-347-116"
+        "content": "3471d989"
       }
     ],
-    "__props": "__props---blog-tags-ros-287-d-db6"
+    "__props": "87d0f360"
   },
   "/blog/tags/society-bb3": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---blogcdc-e66"
+        "content": "cdcd1065"
       }
     ],
-    "__props": "__props---blog-tags-society-899-8e0"
+    "__props": "8993e34e"
   },
   "/blog/tags/tutorial-c13": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
+    "__comp": "6875c492",
     "__context": {
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
+    "sidebar": "814f3328",
     "items": [
       {
-        "content": "content---blog-347-116"
+        "content": "3471d989"
       }
     ],
-    "__props": "__props---blog-tags-tutorial-0-ca-703"
+    "__props": "0ca22e55"
   },
   "/blog/welcome-to-physical-ai-161": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
+    "__comp": "ccc49370",
     "__context": {
       "data": {
-        "blogMetadata": "blogMetadata---blog-authorsace-e7d"
+        "blogMetadata": "acecf23e"
       },
-      "plugin": "plugin---blog-369-22e"
+      "plugin": "36994c47"
     },
-    "sidebar": "sidebar---blog-814-8ac",
-    "content": "content---blog-welcome-to-physical-aie-01-87e"
+    "sidebar": "814f3328",
+    "content": "e019bb33"
   },
   "/rag-monitor-bf2": {
-    "__comp": "__comp---site-src-pages-rag-monitor-jse-9-a-82c",
+    "__comp": "e9a868fd",
     "__context": {
-      "plugin": "plugin---rag-monitora-74-1e4"
+      "plugin": "a7456010"
     },
-    "config": "config---rag-monitor-5-e-9-274"
+    "config": "5e9f5e1a"
   },
   "/docs-d19": {
-    "__comp": "__comp---theme-docs-root-5-e-9-0b6",
+    "__comp": "5e95c892",
     "__context": {
-      "plugin": "plugin---docsaba-d7c"
+      "plugin": "aba21aa0"
     }
   },
   "/docs-924": {
-    "__comp": "__comp---theme-doc-version-roota-7-b-5de",
-    "__props": "__props---docs-005-788"
+    "__comp": "a7bd4aaa",
+    "__props": "0058b4c6"
   },
   "/docs-401": {
-    "__comp": "__comp---theme-doc-roota-94-67a"
+    "__comp": "a94703ab"
   },
   "/docs/chapter-1/lesson-1-31f": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-1-lesson-197-c-d3e"
+    "__comp": "17896441",
+    "content": "97c7abd0"
   },
   "/docs/chapter-1/lesson-1-example-308": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-1-lesson-1-examplec-3-c-4bb"
+    "__comp": "17896441",
+    "content": "c3c74100"
   },
   "/docs/chapter-1/lesson-2-40c": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-1-lesson-2-a-59-932"
+    "__comp": "17896441",
+    "content": "a597e563"
   },
   "/docs/chapter-1/lesson-3-a56": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-1-lesson-3-f-91-45f"
+    "__comp": "17896441",
+    "content": "f9194cab"
   },
   "/docs/chapter-2/lesson-1-0a1": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-2-lesson-11-ae-935"
+    "__comp": "17896441",
+    "content": "1ae66389"
   },
   "/docs/chapter-2/lesson-2-506": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-2-lesson-2228-576"
+    "__comp": "17896441",
+    "content": "228901ad"
   },
   "/docs/chapter-2/lesson-3-4c5": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-2-lesson-3-c-9-b-178"
+    "__comp": "17896441",
+    "content": "c9b40538"
   },
   "/docs/chapter-3/lesson-1-dc4": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-3-lesson-16-b-3-51e"
+    "__comp": "17896441",
+    "content": "6b387374"
   },
   "/docs/chapter-3/lesson-2-def": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-3-lesson-2964-9ed"
+    "__comp": "17896441",
+    "content": "96453287"
   },
   "/docs/chapter-3/lesson-3-13f": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-3-lesson-39-da-4a8"
+    "__comp": "17896441",
+    "content": "9da868de"
   },
   "/docs/chapter-4/lesson-1-5f9": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-4-lesson-1469-5ec"
+    "__comp": "17896441",
+    "content": "4694a1cc"
   },
   "/docs/chapter-4/lesson-2-768": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-4-lesson-2673-d0f"
+    "__comp": "17896441",
+    "content": "6738c817"
   },
   "/docs/chapter-4/lesson-3-7f3": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-4-lesson-3355-41e"
+    "__comp": "17896441",
+    "content": "355b7ef0"
   },
   "/docs/chapter-4/lesson-4-f64": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-chapter-4-lesson-442-a-4f5"
+    "__comp": "17896441",
+    "content": "42a2c5ee"
   },
   "/docs/introduction-f7d": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-introductiona-09-6b4"
+    "__comp": "17896441",
+    "content": "a09c2993"
   },
   "/-2e1": {
-    "__comp": "__comp---site-src-pages-index-jsc-4-f-f99",
+    "__comp": "c4f5d8e4",
     "__context": {
-      "plugin": "plugin---rag-monitora-74-1e4"
+      "plugin": "a7456010"
     },
-    "config": "config---rag-monitor-5-e-9-274"
+    "config": "5e9f5e1a"
   }
 }
