@@ -17,6 +17,9 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+# Import routers
+from .routers import auth, chat
+
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -100,6 +103,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include routers
+app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
+app.include_router(chat.router, prefix="/api/v1/chat", tags=["Chat"])
 
 
 @app.get("/")
