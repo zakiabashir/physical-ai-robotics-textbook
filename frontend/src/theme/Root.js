@@ -4,13 +4,17 @@ import ChatWidget from '@site/src/components/ChatWidget';
 export default function Root({ children }) {
   const [showChat, setShowChat] = useState(false);
 
+  const toggleChat = () => {
+    setShowChat(!showChat);
+  };
+
   return (
     <>
       {children}
 
       {/* Chat Icon Button */}
       <button
-        onClick={() => setShowChat(!showChat)}
+        onClick={toggleChat}
         style={{
           position: 'fixed',
           right: '20px',
@@ -18,7 +22,7 @@ export default function Root({ children }) {
           width: '60px',
           height: '60px',
           borderRadius: '50%',
-          backgroundColor: '#2563eb',
+          backgroundColor: showChat ? '#667eea' : '#2563eb',
           border: 'none',
           cursor: 'pointer',
           boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
@@ -29,11 +33,9 @@ export default function Root({ children }) {
           transition: 'all 0.3s ease'
         }}
         onMouseEnter={(e) => {
-          e.target.style.backgroundColor = '#1d4ed8';
           e.target.style.transform = 'scale(1.1)';
         }}
         onMouseLeave={(e) => {
-          e.target.style.backgroundColor = '#2563eb';
           e.target.style.transform = 'scale(1)';
         }}
       >
@@ -62,7 +64,34 @@ export default function Root({ children }) {
       </button>
 
       {/* Chat Widget - only show when icon is clicked */}
-      {showChat && <div style={{ position: 'fixed', right: '90px', bottom: '20px', zIndex: 9998 }}><ChatWidget isOpen={true} onToggle={() => setShowChat(false)} /></div>}
+      {showChat && (
+        <div style={{
+          position: 'fixed',
+          right: '90px',
+          bottom: '20px',
+          zIndex: 9998,
+          transform: 'scale(1)',
+          animation: 'slideIn 0.3s ease-out'
+        }}>
+          <ChatWidget
+            isOpen={showChat}
+            onToggle={toggleChat}
+          />
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </>
   );
 }

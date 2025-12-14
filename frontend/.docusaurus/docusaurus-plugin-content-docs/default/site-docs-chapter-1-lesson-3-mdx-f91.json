@@ -5,7 +5,7 @@
   "source": "@site/docs/chapter-1/lesson-3.mdx",
   "sourceDirName": "chapter-1",
   "slug": "/chapter-1/lesson-3",
-  "permalink": "/ur/docs/chapter-1/lesson-3",
+  "permalink": "/docs/chapter-1/lesson-3",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/physical-ai/physical-ai-robotics-textbook/tree/main/docs/chapter-1/lesson-3.mdx",
@@ -20,10 +20,10 @@
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Lesson 1.2: Sensors & Perception Systems",
-    "permalink": "/ur/docs/chapter-1/lesson-2"
+    "permalink": "/docs/chapter-1/lesson-2"
   },
   "next": {
     "title": "Lesson 2.1: ROS 2 Fundamentals",
-    "permalink": "/ur/docs/chapter-2/lesson-1"
+    "permalink": "/docs/chapter-2/lesson-1"
   }
 }
