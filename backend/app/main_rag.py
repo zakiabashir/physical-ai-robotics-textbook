@@ -231,11 +231,113 @@ async def retrieve_relevant_content(query: str, limit: int = 5) -> List[Dict]:
         return []
 
 
+def generate_simple_response(query: str, context: List[Dict]) -> str:
+    """Generate a simple response using retrieved context when Gemini is not available"""
+    logger.info(f"generate_simple_response called with query: {query[:50]}... and {len(context)} context docs")
+
+    if not context:
+        logger.info("No context available, returning fallback response")
+        return f"I understand you're asking about '{query}'. As a Physical AI assistant, I'm here to help you learn about robotics and AI integration."
+
+    query_lower = query.lower()
+
+    # First, try to find explanations in quiz content
+    for doc in context:
+        content = doc.get("content", "")
+
+        # If it's a quiz, extract explanations
+        if "explanation:" in content.lower():
+            import re
+            explanations = re.findall(r'explanation:\s*"([^"]+)"', content, re.IGNORECASE)
+            if explanations:
+                # Find the most relevant explanation
+                for explanation in explanations:
+                    if any(word in explanation.lower() for word in query_lower.split()):
+                        return explanation + "."
+                # If no specific match, return the first explanation
+                return explanations[0] + "."
+
+    # If no quiz explanations, look for regular content
+    best_response = ""
+    best_score = 0
+
+    for doc in context:
+        content = doc.get("content", "")
+        title = doc.get("title", "Unknown")
+
+        # Skip quiz components entirely
+        if ("<Quiz" in content or
+            "quizId=" in content or
+            "questions={[" in content):
+            continue
+
+        # Split into paragraphs and sentences
+        paragraphs = content.split("\n\n")
+
+        for paragraph in paragraphs:
+            if len(paragraph) < 20:  # Skip very short paragraphs
+                continue
+
+            # Skip code blocks
+            if paragraph.startswith("```") or paragraph.startswith("import"):
+                continue
+
+            paragraph_lower = paragraph.lower()
+
+            # Calculate relevance score for paragraph
+            score = 0
+            if query_lower in paragraph_lower:
+                score = 100
+            else:
+                for word in query_lower.split():
+                    if word in paragraph_lower:
+                        score += 10
+
+            # Bonus for definitions and key terms
+            if any(term in paragraph_lower for term in ["is defined as", "refers to", "means", "is a"]):
+                score += 20
+
+            if score > best_score and paragraph:
+                best_score = score
+                # Get first 2-3 sentences from the paragraph
+                sentences = paragraph.split('. ')
+                relevant_sentences = [s.strip() for s in sentences[:2] if s.strip()]
+                if relevant_sentences:
+                    best_response = '. '.join(relevant_sentences) + '.'
+                    # Limit length
+                    if len(best_response) > 300:
+                        best_response = best_response[:300] + "..."
+
+    if best_score > 20:
+        return best_response
+
+    # Final fallback - try to extract any meaningful content
+    for doc in context:
+        content = doc.get("content", "")
+
+        # Skip pure quiz content
+        if "<Quiz" in content:
+            continue
+
+        # Find first meaningful sentence
+        sentences = content.split('. ')
+        for sentence in sentences:
+            sentence = sentence.strip()
+            if len(sentence) > 30 and not sentence.startswith('<') and not sentence.startswith('```'):
+                return sentence[:200] + ('...' if len(sentence) > 200 else '')
+
+    return f"I found information about '{query}' in the textbook. Please check the provided sources for detailed explanations."
+
+
 def generate_contextual_response(query: str, context: List[Dict]) -> str:
     """Generate response using retrieved context"""
+    logger.info(f"generate_contextual_response called with query: {query[:50]}...")
+
     if not gemini_model:
-        logger.warning("Gemini model not available")
-        return "AI service not available. Please check your API keys."
+        logger.warning("Gemini model not available, using simple response generation")
+        response = generate_simple_response(query, context)
+        logger.info(f"generate_simple_response returned: {response[:100]}...")
+        return response
 
     context_text = ""
     if context:
@@ -275,9 +377,9 @@ def generate_contextual_response(query: str, context: List[Dict]) -> str:
 
         # If Gemini is not available, try to answer using the retrieved context directly
         if context and len(context) > 0:
-            # Try to provide a simple answer based on the retrieved content
-            first_doc = context[0]
-            return f"Based on the textbook, {first_doc['content'][:200]}..."
+            # Simple response generation using retrieved content
+            response = generate_simple_response(query, context)
+            return response
         else:
             return f"I understand you're asking about '{query}'. As a Physical AI assistant, I'm here to help you learn about robotics and AI integration."
 
@@ -303,10 +405,13 @@ async def chat_endpoint(request: Dict[str, Any]):
             response_text = generate_contextual_response(message, retrieved_content)
             sources = [{"title": doc["title"], "url": doc["url"], "score": doc["score"]} for doc in retrieved_content]
         else:
-            # Fallback response
-            response_text = f"I understand you're asking about '{message}'. "
-            if not (qdrant_client and cohere_client and gemini_model):
+            # Fallback response when no content is retrieved
+            if qdrant_client and cohere_client:
+                response_text = f"I couldn't find specific information about '{message}' in the textbook. "
+            else:
+                response_text = f"I understand you're asking about '{message}'. "
                 response_text += "Note: Some AI services are not configured. "
+
             response_text += "As a Physical AI assistant, I'm here to help you learn about robotics and AI integration."
             sources = []
 
