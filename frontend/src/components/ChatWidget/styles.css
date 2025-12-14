@@ -25,7 +25,7 @@
 }
 
 .chat-header {
-  background: #2563eb;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 15px 20px;
   border-radius: 12px 12px 0 0;
@@ -33,6 +33,7 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .chat-header h3 {
@@ -223,10 +224,11 @@
 
 .chat-sources {
   margin-top: 10px;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.02);
+  padding: 12px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
   border-radius: 8px;
-  border-left: 3px solid #1890ff;
+  border-left: 3px solid #667eea;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .chat-sources h4 {
@@ -285,17 +287,20 @@
 }
 
 .concept-tag {
-  padding: 3px 8px;
-  background: #f0f9ff;
-  color: #1890ff;
-  border-radius: 12px;
+  padding: 4px 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 15px;
   font-size: 12px;
   font-weight: 500;
-  border: 1px solid #bae7ff;
+  border: none;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .concept-tag:hover {
-  background: #e6f7ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
   cursor: default;
 }
 
@@ -317,9 +322,10 @@
 .typing-dot {
   width: 8px;
   height: 8px;
-  background: #1890ff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 50%;
   animation: typing 1.4s infinite;
+  box-shadow: 0 0 4px rgba(102, 126, 234, 0.5);
 }
 
 .typing-dot:nth-child(2) {

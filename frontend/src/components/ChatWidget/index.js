@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import { chatAPI } from '../../utils/chatApi';
 import FeedbackComponent from './FeedbackComponent';
 import './styles.css';
 
@@ -16,8 +16,7 @@ const ChatWidget = ({ isOpen: externalIsOpen, onToggle }) => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  const API_BASE_URL = 'https://physical-ai-robotics-textbook-production.up.railway.app/api/v1';
-
+  
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -90,28 +89,24 @@ const ChatWidget = ({ isOpen: externalIsOpen, onToggle }) => {
         chapter_id: currentPath.match(/chapter-(\d+)/)?.[1]
       };
 
-      const response = await axios.post(`${API_BASE_URL}/chat/`, {
+      const response = await chatAPI.sendMessage({
         message: messageText,
         context: context
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
       });
 
       const assistantMessage = {
         id: Date.now() + 1,
         role: 'assistant',
-        content: response.data.response,
+        content: response.response,
         timestamp: new Date(),
-        sources: response.data.sources || [],
-        codeExamples: response.data.code_examples || [],
-        suggestions: response.data.suggestions || [],
-        relatedConcepts: response.data.related_concepts || []
+        sources: response.sources || [],
+        codeExamples: response.code_examples || [],
+        suggestions: response.suggestions || [],
+        relatedConcepts: response.related_concepts || []
       };
 
       setMessages(prev => [...prev, assistantMessage]);
-      setSuggestions(response.data.suggestions || []);
+      setSuggestions(response.suggestions || []);
     } catch (error) {
       console.error('Chat error:', error);
       const errorMessage = {

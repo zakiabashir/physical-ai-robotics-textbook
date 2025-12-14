@@ -6,7 +6,7 @@ Simple test for Gemini API without full app dependencies
 import os
 
 # Set your API key
-os.environ["GEMINI_API_KEY"] = "AIzaSyD5WImup0-jUECh8F4HJr0VL8-XwWy_v6Q"
+os.environ["GEMINI_API_KEY"] = "AIzaSyAyITMcW_a1WIpXAb07jYyq_YdnKlBU4RA"
 
 try:
     import google.generativeai as genai
