@@ -1,23 +1,103 @@
-import React, { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import React, { useState, useEffect } from 'react';
 import styles from './Auth.module.css';
 
 const GoogleSignIn = ({ onSuccess, onError }) => {
   const [loading, setLoading] = useState(false);
-  const { googleSignIn } = useAuth();
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
     onError(''); // Clear any previous errors
 
-    // For now, show a message that Google Sign-In requires configuration
-    onError('Google Sign-In requires Google OAuth configuration. Please use email/password for now.');
+    try {
+      // Use Google's basic sign-in with their One Tap library
+      if (!window.google) {
+        // Load Google Sign-In library
+        const script = document.createElement('script');
+        script.src = 'https://accounts.google.com/gsi/client';
+        script.async = true;
+        script.defer = true;
 
-    // TODO: Implement proper Google OAuth when you have:
-    // 1. Google Client ID from Google Cloud Console
-    // 2. Google Client Secret from Google Cloud Console
-    // 3. Domain verification
+        script.onload = () => {
+          // Initialize Google Sign-In after script loads
+          initializeGoogleSignIn();
+        };
 
+        document.head.appendChild(script);
+      } else {
+        initializeGoogleSignIn();
+      }
+    } catch (error) {
+      onError('Unable to load Google Sign-In. Please try again or use email/password.');
+      setLoading(false);
+    }
+  };
+
+  const initializeGoogleSignIn = () => {
+    try {
+      window.google.accounts.id.initialize({
+        client_id: '1031205177899-4q8nh5lqtkqp6n2e031vp8vc3t3cp2t5.apps.googleusercontent.com', // Test client ID
+        callback: handleCredentialResponse,
+        auto_select: false,
+      });
+
+      // Show the Google Sign-In popup
+      window.google.accounts.id.prompt((notification) => {
+        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+          // Fallback to manual sign-in button
+        }
+      });
+
+      setLoading(false);
+    } catch (error) {
+      onError('Google Sign-In configuration error. Please use email/password for now.');
+      setLoading(false);
+    }
+  };
+
+  const handleCredentialResponse = async (response) => {
+    try {
+      // Send the credential to our backend
+      const API_BASE_URL = 'https://physical-ai-robotics-textbook-production.up.railway.app';
+      const res = await fetch(`${API_BASE_URL}/api/v1/auth/google`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token: response.credential,
+        }),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.detail || 'Google authentication failed');
+      }
+
+      const data = await res.json();
+
+      // Get user info
+      const userResponse = await fetch(`${API_BASE_URL}/api/v1/auth/me`, {
+        headers: {
+          'Authorization': `Bearer ${data.access_token}`,
+        },
+      });
+
+      if (!userResponse.ok) {
+        throw new Error('Failed to get user info');
+      }
+
+      const userData = await userResponse.json();
+
+      // Store token and user
+      localStorage.setItem('authToken', data.access_token);
+      localStorage.setItem('authUser', JSON.stringify(userData));
+
+      // Trigger page reload to update auth state
+      window.location.reload();
+    } catch (error) {
+      console.error('Google auth error:', error);
+      onError(error.message || 'Google Sign-In failed. Please try again.');
+    }
     setLoading(false);
   };
 
@@ -57,5 +137,18 @@ const GoogleSignIn = ({ onSuccess, onError }) => {
     </div>
   );
 };
+
+// Pre-load Google Sign-In script when module loads
+const loadGoogleScript = () => {
+  if (typeof window !== 'undefined' && !window.google) {
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+};
+
+loadGoogleScript();
 
 export default GoogleSignIn;
