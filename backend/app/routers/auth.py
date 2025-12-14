@@ -7,6 +7,8 @@ import logging
 from datetime import datetime, timedelta
 import jwt
 from passlib.context import CryptContext
+import requests
+import json
 
 from ..models.chat import Conversation
 from ..core.config import settings
@@ -188,3 +190,93 @@ async def delete_account(username: str = Depends(verify_token)):
 
     logger.info(f"User {username} deleted account")
     return {"message": "Account deleted successfully"}
+
+
+@router.post("/google")
+async def google_auth(token: Dict[str, str]):
+    """Authenticate with Google OAuth token"""
+    try:
+        google_token = token.get("token")
+        if not google_token:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Google token is required"
+            )
+
+        # Verify Google token
+        google_response = requests.get(
+            f"https://www.googleapis.com/oauth2/v3/userinfo?access_token={google_token}"
+        )
+
+        if google_response.status_code != 200:
+            # Try with ID token verification
+            google_response = requests.post(
+                "https://oauth2.googleapis.com/tokeninfo",
+                data={"id_token": google_token}
+            )
+
+        if google_response.status_code != 200:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid Google token"
+            )
+
+        user_data = google_response.json()
+        email = user_data.get("email")
+        username = user_data.get("email", "").split("@")[0]  # Use email prefix as username
+
+        if not email:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Email is required from Google"
+            )
+
+        # Check if user exists
+        if username in users:
+            # Existing user
+            user = users[username]
+        else:
+            # New user - create account
+            users[username] = {
+                "username": username,
+                "password": "",  # No password for OAuth users
+                "email": email,
+                "created_at": datetime.utcnow(),
+                "is_active": True,
+                "provider": "google"
+            }
+            user = users[username]
+
+        # Create access token
+        access_token = jwt.encode(
+            {
+                "sub": username,
+                "exp": datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES),
+                "type": "access"
+            },
+            settings.SECRET_KEY,
+            algorithm="HS256"
+        )
+
+        # Store session
+        user_sessions[username] = {
+            "token": access_token,
+            "created_at": datetime.utcnow(),
+            "last_active": datetime.utcnow()
+        }
+
+        logger.info(f"Google user {username} authenticated successfully")
+        return {
+            "access_token": access_token,
+            "token_type": "bearer",
+            "expires_in": settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Google authentication error: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Google authentication failed"
+        )

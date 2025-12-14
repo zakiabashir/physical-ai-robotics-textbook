@@ -38,7 +38,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = useCallback(async (username, password) => {
     try {
-      const response = await fetch(`${process.env.API_BASE_URL || 'https://physical-ai-robotics-textbook-production.up.railway.app'}/api/v1/auth/login`, {
+      const API_BASE_URL = 'https://physical-ai-robotics-textbook-production.up.railway.app';
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -57,7 +58,7 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       // Get user info
-      const userResponse = await fetch(`${process.env.API_BASE_URL || 'https://physical-ai-robotics-textbook-production.up.railway.app'}/api/v1/auth/me`, {
+      const userResponse = await fetch(`${API_BASE_URL}/api/v1/auth/me`, {
         headers: {
           'Authorization': `Bearer ${data.access_token}`,
         },
@@ -85,7 +86,8 @@ export const AuthProvider = ({ children }) => {
 
   const register = useCallback(async (username, password, email) => {
     try {
-      const response = await fetch(`${process.env.API_BASE_URL || 'https://physical-ai-robotics-textbook-production.up.railway.app'}/api/v1/auth/register`, {
+      const API_BASE_URL = 'https://physical-ai-robotics-textbook-production.up.railway.app';
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -112,7 +114,8 @@ export const AuthProvider = ({ children }) => {
   const logout = useCallback(async () => {
     try {
       if (token) {
-        await fetch(`${process.env.API_BASE_URL || 'https://physical-ai-robotics-textbook-production.up.railway.app'}/api/v1/auth/logout`, {
+        const API_BASE_URL = 'https://physical-ai-robotics-textbook-production.up.railway.app';
+        await fetch(`${API_BASE_URL}/api/v1/auth/logout`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -130,12 +133,61 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
+  // Google Sign-In handler
+  const googleSignIn = useCallback(async (googleToken) => {
+    try {
+      const API_BASE_URL = 'https://physical-ai-robotics-textbook-production.up.railway.app';
+      const response = await fetch(`${API_BASE_URL}/api/v1/auth/google`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token: googleToken,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.detail || 'Google Sign-In failed');
+      }
+
+      const data = await response.json();
+
+      // Get user info
+      const userResponse = await fetch(`${API_BASE_URL}/api/v1/auth/me`, {
+        headers: {
+          'Authorization': `Bearer ${data.access_token}`,
+        },
+      });
+
+      if (!userResponse.ok) {
+        throw new Error('Failed to get user info');
+      }
+
+      const userData = await userResponse.json();
+
+      // Store token and user
+      localStorage.setItem('authToken', data.access_token);
+      localStorage.setItem('authUser', JSON.stringify(userData));
+
+      setToken(data.access_token);
+      setUser(userData);
+
+      return { success: true };
+    } catch (error) {
+      console.error('Google Sign-In error:', error);
+      return { success: false, error: error.message };
+    }
+  }, []);
+
   const value = {
     user,
     token,
     login,
     logout,
     register,
+    googleSignIn,
     loading,
     isAuthenticated: !!token,
   };

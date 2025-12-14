@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import GoogleSignIn from './GoogleSignIn';
 import styles from './Auth.module.css';
 
 const SignupForm = ({ onToggleMode }) => {
@@ -10,7 +11,7 @@ const SignupForm = ({ onToggleMode }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { register, login } = useAuth();
+  const { register, login, googleSignIn } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -131,6 +132,19 @@ const SignupForm = ({ onToggleMode }) => {
             {loading ? 'Creating Account...' : 'Create Account'}
           </button>
         </form>
+
+        <div className={styles.divider}>
+          <span>OR</span>
+        </div>
+
+        <GoogleSignIn
+          onSuccess={() => {
+            // Success is handled by GoogleSignIn component
+          }}
+          onError={(errorMessage) => {
+            setError(errorMessage);
+          }}
+        />
 
         <div className={styles.authFooter}>
           <p>
