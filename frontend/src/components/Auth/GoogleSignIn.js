@@ -8,34 +8,27 @@ const GoogleSignIn = ({ onSuccess, onError }) => {
     setLoading(true);
     onError(''); // Clear any previous errors
 
-    try {
-      // Use Google's basic sign-in with their One Tap library
-      if (!window.google) {
-        // Load Google Sign-In library
-        const script = document.createElement('script');
-        script.src = 'https://accounts.google.com/gsi/client';
-        script.async = true;
-        script.defer = true;
-
-        script.onload = () => {
-          // Initialize Google Sign-In after script loads
-          initializeGoogleSignIn();
-        };
-
-        document.head.appendChild(script);
-      } else {
-        initializeGoogleSignIn();
-      }
-    } catch (error) {
-      onError('Unable to load Google Sign-In. Please try again or use email/password.');
-      setLoading(false);
-    }
+    // Google Sign-In is not configured yet
+    // This prevents the script loading error
+    initializeGoogleSignIn();
   };
 
   const initializeGoogleSignIn = () => {
     try {
+      // Note: Google Sign-In requires proper OAuth configuration
+      // For production, you need to:
+      // 1. Create a Google Cloud Console project
+      // 2. Create OAuth 2.0 credentials
+      // 3. Add your domain to authorized origins
+      // 4. Replace the placeholder client ID
+
+      onError('Google Sign-In is not configured. Please use email/password to sign up or sign in.');
+      setLoading(false);
+
+      // Uncomment and configure when you have a valid client ID:
+      /*
       window.google.accounts.id.initialize({
-        client_id: '1031205177899-4q8nh5lqtkqp6n2e031vp8vc3t3cp2t5.apps.googleusercontent.com', // Test client ID
+        client_id: 'YOUR_VALID_GOOGLE_CLIENT_ID_HERE',
         callback: handleCredentialResponse,
         auto_select: false,
       });
@@ -46,10 +39,9 @@ const GoogleSignIn = ({ onSuccess, onError }) => {
           // Fallback to manual sign-in button
         }
       });
-
-      setLoading(false);
+      */
     } catch (error) {
-      onError('Google Sign-In configuration error. Please use email/password for now.');
+      onError('Google Sign-In is currently unavailable. Please use email/password.');
       setLoading(false);
     }
   };
@@ -132,23 +124,13 @@ const GoogleSignIn = ({ onSuccess, onError }) => {
             d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
           />
         </svg>
-        {loading ? 'Connecting...' : 'Continue with Google'}
+        {loading ? 'Connecting...' : 'Continue with Google (Coming Soon)'}
       </button>
     </div>
   );
 };
 
-// Pre-load Google Sign-In script when module loads
-const loadGoogleScript = () => {
-  if (typeof window !== 'undefined' && !window.google) {
-    const script = document.createElement('script');
-    script.src = 'https://accounts.google.com/gsi/client';
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-  }
-};
-
-loadGoogleScript();
+// Google Sign-In script will be loaded when properly configured
+// This prevents errors from invalid client IDs
 
 export default GoogleSignIn;

@@ -18,7 +18,76 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Import routers
-from .routers import auth, chat
+from .routers import chat
+
+# Simple auth implementation (temporary)
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from typing import Dict, Any, Optional
+import jwt
+from datetime import datetime, timedelta
+from passlib.context import CryptContext
+
+# Simple in-memory auth
+security_auth = HTTPBearer()
+pwd_context_auth = CryptContext(schemes=["bcrypt"], deprecated="auto")
+users_db = {}
+sessions_db = {}
+
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+    to_encode = data.copy()
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=30)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, "test_secret_key_123", algorithm="HS256")
+    return encoded_jwt
+
+async def register(username: str, password: str, email: str = ""):
+    if username in users_db:
+        raise HTTPException(status_code=400, detail="Username already registered")
+
+    hashed_password = pwd_context_auth.hash(password)
+    users_db[username] = {
+        "username": username,
+        "email": email,
+        "password": hashed_password,
+        "created_at": datetime.utcnow()
+    }
+
+    return {"message": "User registered successfully"}
+
+@router_auth.post("/login")
+async def login(username: str, password: str):
+    user = users_db.get(username)
+    if not user or not pwd_context_auth.verify(password, user["password"]):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    access_token = create_access_token(data={"sub": username})
+    sessions_db[username] = access_token
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "expires_in": 1800
+    }
+
+@router_auth.get("/me")
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security_auth)):
+    try:
+        payload = jwt.decode(credentials.credentials, "test_secret_key_123", algorithms=["HS256"])
+        username: str = payload.get("sub")
+        if username is None:
+            raise HTTPException(status_code=401, detail="Invalid token")
+    except jwt.PyJWTError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+    user = users_db.get(username)
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    return user
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -105,8 +174,12 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
 app.include_router(chat.router, prefix="/api/v1/chat", tags=["Chat"])
+
+# Include auth endpoints
+app.post("/api/v1/auth/register", register)
+app.post("/api/v1/auth/login", login)
+app.get("/api/v1/auth/me", get_current_user)
 
 
 @app.get("/")
