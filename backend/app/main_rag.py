@@ -6,6 +6,7 @@ Fixed Qdrant API compatibility
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.routing import APIRoute
 from contextlib import asynccontextmanager
 import uvicorn
 import logging
@@ -58,7 +59,6 @@ async def register(username: str, password: str, email: str = ""):
 
     return {"message": "User registered successfully"}
 
-@router_auth.post("/login")
 async def login(username: str, password: str):
     user = users_db.get(username)
     if not user or not pwd_context_auth.verify(password, user["password"]):
@@ -73,7 +73,6 @@ async def login(username: str, password: str):
         "expires_in": 1800
     }
 
-@router_auth.get("/me")
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security_auth)):
     try:
         payload = jwt.decode(credentials.credentials, "test_secret_key_123", algorithms=["HS256"])
@@ -177,9 +176,9 @@ app.add_middleware(
 app.include_router(chat.router, prefix="/api/v1/chat", tags=["Chat"])
 
 # Include auth endpoints
-app.post("/api/v1/auth/register", register)
-app.post("/api/v1/auth/login", login)
-app.get("/api/v1/auth/me", get_current_user)
+app.add_route("/api/v1/auth/register", register, methods=["POST"])
+app.add_route("/api/v1/auth/login", login, methods=["POST"])
+app.add_route("/api/v1/auth/me", get_current_user, methods=["GET"])
 
 
 @app.get("/")

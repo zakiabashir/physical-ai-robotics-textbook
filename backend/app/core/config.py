@@ -23,15 +23,15 @@ class Settings(BaseSettings):
     DATABASE_POOL_SIZE: int = 20
     DATABASE_MAX_OVERFLOW: int = 30
 
-    # Gemini API
-    GEMINI_API_KEY: str
-    GEMINI_MODEL: str = "models/gemini-2.5-flash"
+    # Gemini API (optional)
+    GEMINI_API_KEY: Optional[str] = None
+    GEMINI_MODEL: str = "models/gemini-2.0-flash"
     GEMINI_EMBEDDING_MODEL: str = "models/embedding-001"
     GEMINI_MAX_TOKENS: int = 4000
     GEMINI_TEMPERATURE: float = 0.7
 
     # Cohere API (for embeddings)
-    COHERE_API_KEY: str
+    COHERE_API_KEY: Optional[str] = None
 
     # RAG Configuration
     EMBED_MODEL: str = "embed-english-v3.0"
@@ -41,8 +41,8 @@ class Settings(BaseSettings):
     SITEMAP_URL: str = "https://physical-ai-book-hacka-mges.vercel.app/sitemap.xml"
 
     # Qdrant
-    QDRANT_URL: str
-    QDRANT_API_KEY: str
+    QDRANT_URL: Optional[str] = None
+    QDRANT_API_KEY: Optional[str] = None
     QDRANT_COLLECTION_NAME: str = "textbook_content"
     QDRANT_VECTOR_SIZE: int = 1024  # Updated for Cohere's embed-english-v3.0
     VECTOR_DISTANCE: str = "Cosine"
