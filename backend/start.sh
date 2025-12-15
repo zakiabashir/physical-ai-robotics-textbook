@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo "Starting FastAPI application..."
+# Auth deployment - v2
 
 # Check if PORT is set by Railway
 if [ -z "$PORT" ]; then
