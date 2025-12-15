@@ -27,5 +27,5 @@ ENV PORT=8000
 # Railway injects its own PORT anyway
 # EXPOSE optional
 
-# Force main.py with authentication
-CMD ["sh", "-c", "uvicorn app.main:app --host $HOST --port $PORT"]
+# Force main_auth.py with authentication
+CMD ["sh", "-c", "uvicorn app.main_auth:app --host $HOST --port $PORT"]

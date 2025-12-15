@@ -13,8 +13,15 @@ logger = logging.getLogger(__name__)
 
 # Create async engine
 # SQLite doesn't support connection pooling
+# Replace DATABASE_URL with async version for SQLite
+db_url = settings.DATABASE_URL
+if db_url.startswith("sqlite:///"):
+    db_url = db_url.replace("sqlite:///", "sqlite+aiosqlite:///")
+elif db_url.startswith("postgresql://"):
+    db_url = db_url.replace("postgresql://", "postgresql+asyncpg://")
+
 engine = create_async_engine(
-    settings.DATABASE_URL,
+    db_url,
     echo=settings.DEBUG,
 )
 
