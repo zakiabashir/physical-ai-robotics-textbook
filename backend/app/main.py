@@ -266,3 +266,8 @@ if __name__ == "__main__":
         reload=settings.DEBUG,
         log_level=settings.LOG_LEVEL.lower(),
     )
+
+@app.post("/api/v1/auth/test")
+async def test_auth():
+    """Test endpoint to verify auth is working"""
+    return {"message": "Auth endpoints are working!"}

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Starting FastAPI application..."
-# Auth deployment - v2
+# Force main.py deployment with auth
 
 # Check if PORT is set by Railway
 if [ -z "$PORT" ]; then
