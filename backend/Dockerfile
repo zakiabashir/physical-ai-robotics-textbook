@@ -27,6 +27,6 @@ ENV PORT=8000
 # Railway injects its own PORT anyway
 # EXPOSE optional
 
-# Deploy standalone RAG server V4 Fixed
-# Handles both JSON and form-encoded data with RAG-powered chat
-CMD ["uvicorn", "app.standalone_rag_fixed:app", "--host", "0.0.0.0", "--port", "8080"]
+# Deploy standalone RAG server V5 Enhanced
+# Enhanced RAG with better context retrieval and smarter responses
+CMD ["uvicorn", "app.standalone_rag_v5_enhanced:app", "--host", "0.0.0.0", "--port", "8080"]
