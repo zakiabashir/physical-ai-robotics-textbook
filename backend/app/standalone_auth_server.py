@@ -7,7 +7,7 @@ from fastapi import FastAPI, HTTPException, status, Depends, Body, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Union
 from pydantic import BaseModel
 import uvicorn
 import os
@@ -41,6 +41,35 @@ class RegisterRequest(BaseModel):
 class LoginRequest(BaseModel):
     username: str
     password: str
+
+# Flexible models that can handle dict input
+def get_register_data(data: Union[RegisterRequest, Dict[str, Any]]) -> Dict[str, Any]:
+    """Extract register data from either Pydantic model or dict"""
+    if isinstance(data, dict):
+        return {
+            "username": data.get("username"),
+            "password": data.get("password"),
+            "email": data.get("email")
+        }
+    else:
+        return {
+            "username": data.username,
+            "password": data.password,
+            "email": data.email
+        }
+
+def get_login_data(data: Union[LoginRequest, Dict[str, Any]]) -> Dict[str, Any]:
+    """Extract login data from either Pydantic model or dict"""
+    if isinstance(data, dict):
+        return {
+            "username": data.get("username"),
+            "password": data.get("password")
+        }
+    else:
+        return {
+            "username": data.username,
+            "password": data.password
+        }
 
 
 @asynccontextmanager
@@ -108,45 +137,111 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 
 @app.post("/api/v1/auth/register", status_code=status.HTTP_201_CREATED)
-async def register(request: RegisterRequest):
+async def register(request: Request):
     """Register a new user"""
+    # Get the raw body
+    body = await request.body()
+
+    # Parse the data based on content type
+    content_type = request.headers.get('content-type', '')
+
+    try:
+        if 'application/json' in content_type:
+            data = json.loads(body.decode('utf-8'))
+        else:
+            # Try to parse as JSON even if content-type is not set
+            data = json.loads(body.decode('utf-8'))
+    except:
+        # If JSON parsing fails, assume it's malformed
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Invalid request format. Expected JSON."
+        )
+
+    # Extract data
+    if not isinstance(data, dict):
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Invalid request format. Expected JSON object."
+        )
+
+    username = data.get('username')
+    password = data.get('password')
+    email = data.get('email')
+
+    # Validate required fields
+    if not username or not password:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Username and password are required"
+        )
+
     # Check if user already exists
-    if request.username in users:
+    if username in users:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username already registered"
         )
 
     # Hash password using bcrypt directly (truncate to 72 bytes max for bcrypt)
-    password_bytes = request.password.encode('utf-8')[:72]
+    password_bytes = password.encode('utf-8')[:72]
     salt = bcrypt.gensalt()
     hashed_password = bcrypt.hashpw(password_bytes, salt).decode('utf-8')
 
     # Store user
-    users[request.username] = {
-        "username": request.username,
-        "email": request.email,
+    users[username] = {
+        "username": username,
+        "email": email,
         "password": hashed_password,
         "created_at": datetime.utcnow().isoformat()
     }
 
-    logger.info(f"User {request.username} registered successfully")
+    logger.info(f"User {username} registered successfully")
     return {"message": "User created successfully"}
 
 
 @app.post("/api/v1/auth/login")
-async def login(request: LoginRequest):
+async def login(request: Request):
     """Login user and return access token"""
+    # Get the raw body
+    body = await request.body()
+
+    # Parse the data
+    try:
+        data = json.loads(body.decode('utf-8'))
+    except:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Invalid request format. Expected JSON."
+        )
+
+    # Extract data
+    if not isinstance(data, dict):
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Invalid request format. Expected JSON object."
+        )
+
+    username = data.get('username')
+    password = data.get('password')
+
+    # Validate required fields
+    if not username or not password:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Username and password are required"
+        )
+
     # Verify user exists
-    if request.username not in users:
+    if username not in users:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid username or password"
         )
 
     # Verify password
-    stored_password = users[request.username]["password"]
-    password_bytes = request.password.encode('utf-8')[:72]
+    stored_password = users[username]["password"]
+    password_bytes = password.encode('utf-8')[:72]
 
     if not bcrypt.checkpw(password_bytes, stored_password.encode('utf-8')):
         raise HTTPException(
@@ -157,16 +252,16 @@ async def login(request: LoginRequest):
     # Create access token
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": request.username}, expires_delta=access_token_expires
+        data={"sub": username}, expires_delta=access_token_expires
     )
 
     # Store session
-    user_sessions[request.username] = {
+    user_sessions[username] = {
         "token": access_token,
         "expires_at": (datetime.utcnow() + access_token_expires).isoformat()
     }
 
-    logger.info(f"User {request.username} logged in successfully")
+    logger.info(f"User {username} logged in successfully")
     return {
         "access_token": access_token,
         "token_type": "bearer",
@@ -191,27 +286,6 @@ async def get_current_user(current_user: str = Depends(verify_token)):
     }
 
 
-@app.post("/api/v1/auth/debug-register")
-async def debug_register(request: Request):
-    """Debug endpoint to see what frontend is sending"""
-    body = await request.body()
-    logger.info(f"Received body: {body}")
-    logger.info(f"Content-Type: {request.headers.get('content-type')}")
-
-    try:
-        body_str = body.decode('utf-8')
-        logger.info(f"Body as string: {body_str}")
-
-        # Try to parse as JSON
-        if request.headers.get('content-type') == 'application/json':
-            json_data = json.loads(body_str)
-            logger.info(f"Parsed JSON: {json_data}")
-            return {"received": json_data, "content_type": request.headers.get('content-type')}
-        else:
-            return {"received": body_str, "content_type": request.headers.get('content-type')}
-    except Exception as e:
-        logger.error(f"Error parsing body: {e}")
-        return {"error": str(e), "raw_body": body.decode('utf-8') if body else "empty"}
 
 
 @app.post("/api/v1/auth/logout")
