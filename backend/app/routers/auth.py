@@ -7,6 +7,7 @@ import logging
 from datetime import datetime, timedelta
 import jwt
 from passlib.context import CryptContext
+import bcrypt
 import requests
 import json
 
@@ -17,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 security = HTTPBearer()
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Using bcrypt directly to avoid passlib compatibility issues
 
 # In-memory user store for demo (replace with database in production)
 users = {}
@@ -55,8 +56,10 @@ async def register(username: str, password: str, email: Optional[str] = None):
             detail="Username already exists"
         )
 
-    # Hash password
-    hashed_password = pwd_context.hash(password)
+    # Hash password using bcrypt directly (truncate to 72 bytes max for bcrypt)
+    password_bytes = password.encode('utf-8')[:72]
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password_bytes, salt).decode('utf-8')
 
     # Store user
     users[username] = {
@@ -81,7 +84,10 @@ async def login(username: str, password: str) -> Dict[str, Any]:
         )
 
     user = users[username]
-    if not pwd_context.verify(password, user["password"]):
+    # Verify password using bcrypt directly
+    password_bytes = password.encode('utf-8')[:72]
+    stored_hash = user["password"].encode('utf-8')
+    if not bcrypt.checkpw(password_bytes, stored_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid credentials"
