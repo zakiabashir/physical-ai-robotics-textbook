@@ -6,7 +6,18 @@ import './styles.css';
 
 const ChatWidget = ({ isOpen: externalIsOpen, onToggle, onSignInRequired }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, user, token } = useAuth();
+  const { isAuthenticated, user, token, loading } = useAuth();
+
+  // Debug logging for authentication state
+  useEffect(() => {
+    console.log('ChatWidget Auth State:', {
+      isAuthenticated,
+      hasUser: !!user,
+      hasToken: !!token,
+      loading,
+      userUsername: user?.username
+    });
+  }, [isAuthenticated, user, token, loading]);
 
   // Use external state if provided
   const isWidgetOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;
@@ -140,7 +151,27 @@ const ChatWidget = ({ isOpen: externalIsOpen, onToggle, onSignInRequired }) => {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      sendMessage();
+      console.log('=== CHAT INPUT DEBUG ===');
+      console.log('Enter key pressed');
+      console.log('Input value:', inputValue);
+      console.log('Input value length:', inputValue.length);
+      console.log('Is authenticated:', isAuthenticated);
+      console.log('Has token:', !!token);
+      console.log('Is loading:', isLoading);
+      console.log('Send button disabled:', !inputValue.trim() || isLoading || !isAuthenticated);
+      console.log('========================');
+
+      if (!isAuthenticated) {
+        console.log('Not authenticated, showing sign-in');
+        onSignInRequired && onSignInRequired();
+      } else {
+        console.log('Authenticated, attempting to send message');
+        if (inputValue.trim()) {
+          sendMessage();
+        } else {
+          console.log('Cannot send: empty message');
+        }
+      }
     }
   };
 
@@ -201,9 +232,9 @@ const ChatWidget = ({ isOpen: externalIsOpen, onToggle, onSignInRequired }) => {
         <button
           id="chat-toggle"
           onClick={toggleChat}
-          style={{ display: isOpen ? 'none' : 'block' }}
+          style={{ display: isOpen ? 'none' : 'flex' }}
         >
-          Ask Book
+          <span role="img" aria-label="book">📚</span> Ask Book
         </button>
       )}
 
@@ -329,24 +360,56 @@ const ChatWidget = ({ isOpen: externalIsOpen, onToggle, onSignInRequired }) => {
               <textarea
                 ref={inputRef}
                 className="chat-input-field"
-                placeholder="Ask me anything about Physical AI..."
+                placeholder={isAuthenticated ? "Ask me anything about Physical AI..." : "Please sign in to ask questions..."}
                 value={inputValue}
                 onChange={(e) => {
-                  setInputValue(e.target.value);
+                  const newValue = e.target.value;
+                  console.log('Textarea change:', {
+                    newValue,
+                    length: newValue.length,
+                    isAuthenticated,
+                    disabled: isLoading || !isAuthenticated
+                  });
+                  setInputValue(newValue);
                   // Auto-resize textarea
                   e.target.style.height = 'auto';
                   e.target.style.height = Math.min(e.target.scrollHeight, 80) + 'px';
                 }}
                 onKeyDown={handleKeyPress}
-                disabled={isLoading}
+                disabled={isLoading || !isAuthenticated}
                 rows={1}
+                style={{
+                  backgroundColor: !isAuthenticated ? '#f5f5f5' : 'white',
+                  color: !isAuthenticated ? '#999' : 'inherit'
+                }}
               />
               <button
                 className="chat-send-btn"
-                onClick={() => sendMessage()}
-                disabled={!inputValue.trim() || isLoading}
+                onClick={() => {
+                  console.log('=== SEND BUTTON CLICKED ===');
+                  console.log('Input value:', inputValue);
+                  console.log('Is authenticated:', isAuthenticated);
+                  console.log('Has token:', !!token);
+                  console.log('Is loading:', isLoading);
+                  console.log('Button disabled state:', !inputValue.trim() || isLoading || !isAuthenticated);
+                  console.log('==========================');
+
+                  if (!isAuthenticated) {
+                    console.log('Not authenticated, triggering sign-in');
+                    onSignInRequired && onSignInRequired();
+                  } else {
+                    console.log('Authenticated, attempting to send');
+                    if (inputValue.trim()) {
+                      sendMessage();
+                    } else {
+                      console.log('Cannot send: empty input');
+                    }
+                  }
+                }}
+                disabled={!inputValue.trim() || isLoading || !isAuthenticated}
+                title={!isAuthenticated ? "Sign in to send messages" : "Send message"}
               >
-                <span>➤</span>
+                {!isAuthenticated ? '🔐' : '➤'}
               </button>
             </div>
           </>

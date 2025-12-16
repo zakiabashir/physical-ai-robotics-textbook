@@ -5,15 +5,16 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 350px;
-  height: 500px;
+  width: 380px;
+  height: 550px;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   display: none;
   flex-direction: column;
   z-index: 9999;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .chat-widget.open {
@@ -27,19 +28,22 @@
 .chat-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 15px 20px;
-  border-radius: 12px 12px 0 0;
+  padding: 18px 24px;
+  border-radius: 16px 16px 0 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
 .chat-header h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .chat-controls {
@@ -69,10 +73,11 @@
 .chat-messages {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  background: #fafbfc;
 }
 
 .chat-message {
@@ -106,11 +111,13 @@
 }
 
 .chat-bubble {
-  background: #f3f4f6;
-  padding: 12px 16px;
-  border-radius: 18px;
-  font-size: 14px;
-  line-height: 1.5;
+  background: white;
+  padding: 14px 18px;
+  border-radius: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .chat-message.user .chat-bubble {
@@ -118,60 +125,77 @@
   color: white;
 }
 
-.chat-input-container {
-  padding: 10px;
-  border-top: 1px solid #e5e7eb;
-  display: flex;
-  gap: 8px;
-}
-
 .chat-input {
-  flex: 1;
+  padding: 16px 20px;
+  border-top: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 0 0 16px 16px;
   display: flex;
   align-items: flex-end;
+  gap: 12px;
 }
 
 .chat-input-field {
   flex: 1;
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 20px;
-  font-size: 13px;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 24px;
+  font-size: 15px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.3s ease;
   resize: none;
-  min-height: 36px;
-  max-height: 80px;
+  min-height: 44px;
+  max-height: 100px;
   overflow-y: auto;
   font-family: inherit;
-  line-height: 1.4;
+  line-height: 1.5;
+  background: #f8fafc;
 }
 
 .chat-input-field:focus {
-  border-color: #2563eb;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.chat-input-field:disabled {
+  background: #f1f3f4;
+  border-color: #e0e0e0;
+  color: #9aa0a6;
+  cursor: not-allowed;
 }
 
 .chat-send-btn {
-  background: #2563eb;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  font-weight: 600;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
-.chat-send-btn:hover {
-  background: #1d4ed8;
+.chat-send-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.chat-send-btn:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .chat-send-btn:disabled {
-  background: #9ca3af;
+  background: #d1d5db;
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
 /* Floating Toggle Button */
@@ -179,23 +203,29 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #2563eb;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 50px;
-  padding: 12px 24px;
+  border-radius: 28px;
+  padding: 14px 28px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
   transition: all 0.3s ease;
   z-index: 9998;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #chat-toggle:hover {
-  background: #1d4ed8;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+#chat-toggle:active {
+  transform: translateY(-1px);
 }
 
 /* Loading indicator */
@@ -308,24 +338,30 @@
 .typing-indicator {
   display: flex;
   align-items: center;
-  padding: 8px 0;
-  gap: 4px;
+  padding: 12px 18px;
+  gap: 8px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin-top: 8px;
 }
 
 .typing-indicator::before {
   content: "🔍 Searching textbook...";
-  font-size: 13px;
-  color: #666;
-  margin-right: 8px;
+  font-size: 14px;
+  color: #667eea;
+  font-weight: 500;
+  margin-right: 4px;
 }
 
 .typing-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 50%;
   animation: typing 1.4s infinite;
-  box-shadow: 0 0 4px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 0 6px rgba(102, 126, 234, 0.6);
 }
 
 .typing-dot:nth-child(2) {
@@ -343,6 +379,37 @@
   30% {
     transform: translateY(-10px);
   }
+}
+
+/* Chat Suggestions */
+.chat-suggestions {
+  padding: 12px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: flex-start;
+}
+
+.suggestion-chip {
+  padding: 8px 14px;
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 18px;
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.suggestion-chip:hover {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
 }
 
 /* Sign In Button Styles */
