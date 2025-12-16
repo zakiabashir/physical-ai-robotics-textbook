@@ -9,7 +9,7 @@ const ProgressTracker = ({ chapterId, lessonId }) => {
   const [startTime] = useState(Date.now());
   const [isClient, setIsClient] = useState(false);
 
-  const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://localhost:8000/api/v1';
+  const API_BASE_URL = 'https://physical-ai-robotics-textbook-production.up.railway.app/api/v1';
 
   useEffect(() => {
     // Set isClient to true after component mounts

@@ -26,7 +26,7 @@ const FeedbackComponent = ({ messageId, onFeedbackSubmit }) => {
 
     try {
       // Send feedback to backend
-      await fetch(`${process.env.REACT_APP_API_URL || 'https://localhost:8000'}/api/v1/chat/feedback`, {
+      await fetch(`https://physical-ai-robotics-textbook-production.up.railway.app/api/v1/chat/feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

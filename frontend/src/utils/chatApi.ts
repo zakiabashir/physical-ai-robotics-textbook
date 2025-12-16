@@ -1,4 +1,4 @@
-const API_BASE_URL = `${process.env.REACT_APP_API_URL || 'https://physical-ai-robotics-textbook-production.up.railway.app'}/api/v1`;
+const API_BASE_URL = 'https://physical-ai-robotics-textbook-production.up.railway.app/api/v1';
 
 export interface ChatMessage {
   role: 'user' | 'assistant';
