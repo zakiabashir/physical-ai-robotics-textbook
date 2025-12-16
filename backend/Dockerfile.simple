@@ -1,0 +1,21 @@
+# Simple Dockerfile for Railway debugging
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir fastapi uvicorn
+
+# Copy only the minimal app
+COPY app/main_minimal.py ./app/
+
+# Set environment variables
+ENV HOST=0.0.0.0
+ENV PORT=8000
+
+# Expose port (Railway sets this automatically)
+EXPOSE 8000
+
+# Run the minimal app
+CMD ["uvicorn", "app.main_minimal:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -21,9 +21,12 @@ export HOST=${HOST:-0.0.0.0}
 echo "Final PORT: $PORT"
 echo "Final HOST: $HOST"
 
-# Try to run apps in order: main_auth_only, main_auth, main, main_rag, ai_main, simplified, simple
-echo "Attempting to start main application with auth..."
-if python -c "from app.main_auth_only import app; print('Main auth only app imported successfully')" 2>/dev/null; then
+# Try to run apps in order: main_minimal, main_auth_only, main_auth, main, main_rag, ai_main, simplified, simple
+echo "Attempting to start minimal application for debugging..."
+if python -c "from app.main_minimal import app; print('Minimal app imported successfully')" 2>/dev/null; then
+    echo "Minimal app import successful, starting uvicorn..."
+    exec uvicorn app.main_minimal:app --host $HOST --port $PORT
+elif python -c "from app.main_auth_only import app; print('Main auth only app imported successfully')" 2>/dev/null; then
     echo "Main auth only app import successful, starting uvicorn..."
     exec uvicorn app.main_auth_only:app --host $HOST --port $PORT
 elif python -c "from app.main_auth import app; print('Main auth app imported successfully')" 2>/dev/null; then
