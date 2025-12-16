@@ -19,6 +19,11 @@ function RootContent({ children }) {
     setShowChat(!showChat);
   };
 
+  const handleAuthSuccess = () => {
+    // Open chat after successful authentication
+    setShowChat(true);
+  };
+
   useEffect(() => {
     console.log('Chat state changed:', showChat);
   }, [showChat]);
@@ -109,6 +114,7 @@ function RootContent({ children }) {
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
         initialMode={authMode}
+        onAuthSuccess={handleAuthSuccess}
       />
 
       {/* Chat Widget - only show when icon is clicked */}

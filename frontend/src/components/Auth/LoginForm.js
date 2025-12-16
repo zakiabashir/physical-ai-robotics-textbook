@@ -3,7 +3,7 @@ import { useAuth } from '../../context/AuthContext';
 import GoogleSignIn from './GoogleSignIn';
 import styles from './Auth.module.css';
 
-const LoginForm = ({ onToggleMode }) => {
+const LoginForm = ({ onToggleMode, onClose, onAuthSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -20,6 +20,12 @@ const LoginForm = ({ onToggleMode }) => {
 
     if (!result.success) {
       setError(result.error);
+    } else {
+      // Success! Close modal and open chat
+      setTimeout(() => {
+        onClose && onClose();
+        onAuthSuccess && onAuthSuccess();
+      }, 500);
     }
 
     setLoading(false);

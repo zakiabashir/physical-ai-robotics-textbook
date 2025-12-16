@@ -102,6 +102,15 @@
   margin-bottom: 20px;
 }
 
+.successMessage {
+  background: #c6f6d5;
+  color: #22543d;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+}
+
 /* Google Sign-In */
 .googleSignInContainer {
   margin: 20px 0;

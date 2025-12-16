@@ -3,7 +3,7 @@ import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import styles from './Auth.module.css';
 
-const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
+const AuthModal = ({ isOpen, onClose, initialMode = 'login', onAuthSuccess }) => {
   const [mode, setMode] = useState(initialMode);
 
   if (!isOpen) return null;
@@ -24,9 +24,9 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
         </button>
 
         {mode === 'login' ? (
-          <LoginForm onToggleMode={toggleMode} />
+          <LoginForm onToggleMode={toggleMode} onClose={onClose} onAuthSuccess={onAuthSuccess} />
         ) : (
-          <SignupForm onToggleMode={toggleMode} />
+          <SignupForm onToggleMode={toggleMode} onClose={onClose} onAuthSuccess={onAuthSuccess} />
         )}
       </div>
     </div>

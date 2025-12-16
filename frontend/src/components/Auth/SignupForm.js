@@ -3,19 +3,21 @@ import { useAuth } from '../../context/AuthContext';
 import GoogleSignIn from './GoogleSignIn';
 import styles from './Auth.module.css';
 
-const SignupForm = ({ onToggleMode }) => {
+const SignupForm = ({ onToggleMode, onClose, onAuthSuccess }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState('');
 
   const { register, login, googleSignIn } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
 
     // Validate passwords match
     if (password !== confirmPassword) {
@@ -40,14 +42,23 @@ const SignupForm = ({ onToggleMode }) => {
       return;
     }
 
+    setSuccess('Account created successfully! Logging you in...');
+
     // Auto-login after successful registration
     const loginResult = await login(username, password);
 
     if (!loginResult.success) {
       setError('Registration successful, but login failed. Please try logging in manually.');
+      setLoading(false);
+      return;
     }
 
+    // Success! Close modal and open chat
     setLoading(false);
+    setTimeout(() => {
+      onClose && onClose();
+      onAuthSuccess && onAuthSuccess();
+    }, 1000);
   };
 
   return (
@@ -62,6 +73,12 @@ const SignupForm = ({ onToggleMode }) => {
           {error && (
             <div className={styles.errorMessage}>
               {error}
+            </div>
+          )}
+
+          {success && (
+            <div className={styles.successMessage}>
+              {success}
             </div>
           )}
 
