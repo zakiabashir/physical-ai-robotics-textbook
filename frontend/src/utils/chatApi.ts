@@ -69,6 +69,17 @@ export class ChatAPI {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
+
+        // Handle expired token specifically
+        if (response.status === 401) {
+          // Clear expired token
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('authUser');
+          }
+          throw new Error('Your session has expired. Please sign in again to continue chatting.');
+        }
+
         throw new Error(
           errorData.detail || `HTTP error! status: ${response.status}`
         );

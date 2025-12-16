@@ -114,7 +114,9 @@ const ChatWidget = ({ isOpen: externalIsOpen, onToggle }) => {
       const errorMessage = {
         id: Date.now() + 1,
         role: 'assistant',
-        content: "I apologize, but I'm having trouble connecting right now. Please try again in a moment.",
+        content: error.message.includes('expired')
+          ? "⏰ Your session has expired!\n\nPlease sign out and sign back in to continue chatting with the AI assistant.\n\nClick the X button in the chat corner, then click the chat button again to sign in."
+          : "❌ Connection Error\n\nI'm having trouble connecting right now. Please try again in a moment.\n\nIf the problem persists, please refresh the page.",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);
