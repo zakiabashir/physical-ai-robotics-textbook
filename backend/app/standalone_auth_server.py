@@ -12,7 +12,7 @@ import uvicorn
 import os
 import logging
 from datetime import datetime, timedelta
-import jwt
+from jose import jwt
 import bcrypt
 
 # Setup logging
@@ -76,7 +76,7 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
                 detail="Invalid token"
             )
         return username
-    except jwt.PyJWTError:
+    except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid token"
