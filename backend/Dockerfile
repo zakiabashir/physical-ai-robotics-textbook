@@ -27,6 +27,6 @@ ENV PORT=8000
 # Railway injects its own PORT anyway
 # EXPOSE optional
 
-# Deploy completely standalone authentication server
-# No router imports, no external dependencies
-CMD ["uvicorn", "app.standalone_auth_server:app", "--host", "0.0.0.0", "--port", "8080"]
+# Deploy flexible standalone authentication server V2
+# Handles both JSON and form-encoded data from frontend
+CMD ["uvicorn", "app.standalone_auth_v2:app", "--host", "0.0.0.0", "--port", "8080"]

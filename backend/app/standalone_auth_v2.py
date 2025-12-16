@@ -1,14 +1,13 @@
 """
-Physical AI & Humanoid Robotics Textbook - Standalone Authentication Server
-No external dependencies, completely isolated from other routers
+Physical AI & Humanoid Robotics Textbook - Standalone Authentication Server V2
+Handles both JSON and form-encoded data
 """
 
-from fastapi import FastAPI, HTTPException, status, Depends, Body, Request, Form
+from fastapi import FastAPI, HTTPException, status, Depends, Request, Form
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from typing import Dict, Any, Optional, Union
-from pydantic import BaseModel
+from typing import Dict, Any, Optional
 import uvicorn
 import os
 import logging
@@ -33,59 +32,80 @@ user_sessions = {}
 # Security
 security = HTTPBearer()
 
-# Request models
-class RegisterRequest(BaseModel):
-    username: str
-    password: str
-    email: Optional[str] = None
 
-class LoginRequest(BaseModel):
-    username: str
-    password: str
+def parse_request_data(request: Request) -> Dict[str, Any]:
+    """Parse request data from JSON or form-encoded format"""
+    content_type = request.headers.get('content-type', '').lower()
 
-# Flexible models that can handle dict input
-def get_register_data(data: Union[RegisterRequest, Dict[str, Any]]) -> Dict[str, Any]:
-    """Extract register data from either Pydantic model or dict"""
-    if isinstance(data, dict):
-        return {
-            "username": data.get("username"),
-            "password": data.get("password"),
-            "email": data.get("email")
-        }
-    else:
-        return {
-            "username": data.username,
-            "password": data.password,
-            "email": data.email
-        }
+    # Get raw body
+    body = await request.body()
 
-def get_login_data(data: Union[LoginRequest, Dict[str, Any]]) -> Dict[str, Any]:
-    """Extract login data from either Pydantic model or dict"""
-    if isinstance(data, dict):
-        return {
-            "username": data.get("username"),
-            "password": data.get("password")
-        }
-    else:
-        return {
-            "username": data.username,
-            "password": data.password
-        }
+    # Log what we received
+    logger.info(f"Content-Type: {content_type}")
+    logger.info(f"Raw body length: {len(body)}")
+
+    # Try to parse as JSON first
+    if 'application/json' in content_type:
+        try:
+            data = json.loads(body.decode('utf-8'))
+            logger.info(f"Parsed as JSON: {data}")
+            return data
+        except Exception as e:
+            logger.error(f"Failed to parse JSON: {e}")
+
+    # Try to parse as form data
+    if 'application/x-www-form-urlencoded' in content_type:
+        try:
+            # Parse URL-encoded form data
+            form_data = body.decode('utf-8')
+            parsed = parse_qs(form_data)
+            # Convert from {key: [value]} to {key: value}
+            data = {k: v[0] if v else '' for k, v in parsed.items()}
+            logger.info(f"Parsed as form data: {data}")
+            return data
+        except Exception as e:
+            logger.error(f"Failed to parse form data: {e}")
+
+    # If content-type is not set or unrecognized, try both
+    if not content_type:
+        # Try JSON first
+        try:
+            data = json.loads(body.decode('utf-8'))
+            logger.info(f"Parsed as JSON (no content-type): {data}")
+            return data
+        except:
+            pass
+
+        # Then try form data
+        try:
+            form_data = body.decode('utf-8')
+            if '=' in form_data and '&' in form_data:
+                parsed = parse_qs(form_data)
+                data = {k: v[0] if v else '' for k, v in parsed.items()}
+                logger.info(f"Parsed as form data (no content-type): {data}")
+                return data
+        except:
+            pass
+
+    raise HTTPException(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        detail=f"Unable to parse request. Content-Type: {content_type}"
+    )
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan events"""
     # Startup
-    logger.info("Starting up Physical AI Textbook Standalone Auth Server...")
+    logger.info("Starting up Physical AI Textbook Standalone Auth Server V2...")
     yield
     # Shutdown
-    logger.info("Shutting down Physical AI Textbook Standalone Auth Server...")
+    logger.info("Shutting down Physical AI Textbook Standalone Auth Server V2...")
 
 
 # Create FastAPI application
 app = FastAPI(
-    title="Physical AI Textbook API - Standalone Auth",
+    title="Physical AI Textbook API - Standalone Auth V2",
     description="Backend API for the Physical AI & Humanoid Robotics interactive textbook",
     version="0.1.0",
     lifespan=lifespan,
@@ -139,40 +159,11 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 @app.post("/api/v1/auth/register", status_code=status.HTTP_201_CREATED)
 async def register(request: Request):
-    """Register a new user"""
-    # Get the raw body
-    body = await request.body()
+    """Register a new user - accepts JSON or form data"""
+    # Parse the request data
+    data = await parse_request_data(request)
 
-    # Log what we received
-    logger.info(f"Register endpoint - Content-Type: {request.headers.get('content-type')}")
-    logger.info(f"Register endpoint - Raw body: {body}")
-    logger.info(f"Register endpoint - Body as string: {body.decode('utf-8')}")
-
-    # Parse the data based on content type
-    content_type = request.headers.get('content-type', '')
-
-    try:
-        if 'application/json' in content_type:
-            data = json.loads(body.decode('utf-8'))
-        else:
-            # Try to parse as JSON even if content-type is not set
-            data = json.loads(body.decode('utf-8'))
-        logger.info(f"Register endpoint - Parsed data: {data}")
-    except Exception as e:
-        # If JSON parsing fails, assume it's malformed
-        logger.error(f"Register endpoint - JSON parse error: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=f"Invalid request format. Expected JSON. Error: {str(e)}"
-        )
-
-    # Extract data
-    if not isinstance(data, dict):
-        raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Invalid request format. Expected JSON object."
-        )
-
+    # Extract fields
     username = data.get('username')
     password = data.get('password')
     email = data.get('email')
@@ -210,33 +201,11 @@ async def register(request: Request):
 
 @app.post("/api/v1/auth/login")
 async def login(request: Request):
-    """Login user and return access token"""
-    # Get the raw body
-    body = await request.body()
+    """Login user and return access token - accepts JSON or form data"""
+    # Parse the request data
+    data = await parse_request_data(request)
 
-    # Log what we received
-    logger.info(f"Login endpoint - Content-Type: {request.headers.get('content-type')}")
-    logger.info(f"Login endpoint - Raw body: {body}")
-    logger.info(f"Login endpoint - Body as string: {body.decode('utf-8')}")
-
-    # Parse the data
-    try:
-        data = json.loads(body.decode('utf-8'))
-        logger.info(f"Login endpoint - Parsed data: {data}")
-    except Exception as e:
-        logger.error(f"Login endpoint - JSON parse error: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=f"Invalid request format. Expected JSON. Error: {str(e)}"
-        )
-
-    # Extract data
-    if not isinstance(data, dict):
-        raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Invalid request format. Expected JSON object."
-        )
-
+    # Extract fields
     username = data.get('username')
     password = data.get('password')
 
@@ -301,8 +270,6 @@ async def get_current_user(current_user: str = Depends(verify_token)):
     }
 
 
-
-
 @app.post("/api/v1/auth/logout")
 async def logout(current_user: str = Depends(verify_token)):
     """Logout user"""
@@ -317,7 +284,7 @@ async def logout(current_user: str = Depends(verify_token)):
 async def root():
     """Root endpoint"""
     return {
-        "message": "Physical AI & Humanoid Robotics Textbook API - Standalone Auth",
+        "message": "Physical AI & Humanoid Robotics Textbook API - Standalone Auth V2",
         "version": "0.1.0",
         "docs": "/docs",
         "health": "/health"
@@ -334,11 +301,11 @@ async def health_check():
 async def api_info():
     """API information endpoint"""
     return {
-        "name": "Physical AI Textbook API - Standalone Auth",
+        "name": "Physical AI Textbook API - Standalone Auth V2",
         "version": "0.1.0",
         "description": "Backend API for interactive Physical AI textbook",
         "features": [
-            "User authentication",
+            "User authentication with flexible request parsing",
         ]
     }
 
@@ -351,7 +318,7 @@ async def test_auth():
 
 if __name__ == "__main__":
     uvicorn.run(
-        "app.standalone_auth_server:app",
+        "app.standalone_auth_v2:app",
         host="0.0.0.0",
         port=int(os.getenv("PORT", 8000)),
         reload=False,
