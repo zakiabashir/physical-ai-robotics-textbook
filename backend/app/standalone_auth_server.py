@@ -3,7 +3,7 @@ Physical AI & Humanoid Robotics Textbook - Standalone Authentication Server
 No external dependencies, completely isolated from other routers
 """
 
-from fastapi import FastAPI, HTTPException, status, Depends, Body
+from fastapi import FastAPI, HTTPException, status, Depends, Body, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -12,6 +12,7 @@ from pydantic import BaseModel
 import uvicorn
 import os
 import logging
+import json
 from datetime import datetime, timedelta
 from jose import jwt
 import bcrypt
@@ -188,6 +189,29 @@ async def get_current_user(current_user: str = Depends(verify_token)):
         "email": user.get("email"),
         "created_at": user["created_at"]
     }
+
+
+@app.post("/api/v1/auth/debug-register")
+async def debug_register(request: Request):
+    """Debug endpoint to see what frontend is sending"""
+    body = await request.body()
+    logger.info(f"Received body: {body}")
+    logger.info(f"Content-Type: {request.headers.get('content-type')}")
+
+    try:
+        body_str = body.decode('utf-8')
+        logger.info(f"Body as string: {body_str}")
+
+        # Try to parse as JSON
+        if request.headers.get('content-type') == 'application/json':
+            json_data = json.loads(body_str)
+            logger.info(f"Parsed JSON: {json_data}")
+            return {"received": json_data, "content_type": request.headers.get('content-type')}
+        else:
+            return {"received": body_str, "content_type": request.headers.get('content-type')}
+    except Exception as e:
+        logger.error(f"Error parsing body: {e}")
+        return {"error": str(e), "raw_body": body.decode('utf-8') if body else "empty"}
 
 
 @app.post("/api/v1/auth/logout")
