@@ -61,7 +61,7 @@ export class ChatAPI {
         headers['Authorization'] = `Bearer ${token}`;
       }
 
-      const response = await fetch(`${this.baseUrl}/chat/`, {
+      const response = await fetch(`${this.baseUrl}/chat`, {
         method: 'POST',
         headers,
         body: JSON.stringify(request),
