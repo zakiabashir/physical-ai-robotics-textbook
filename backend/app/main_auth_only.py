@@ -11,7 +11,7 @@ import os
 import logging
 
 # Import only standalone auth router to avoid heavy dependencies
-from app.routers import auth_standalone as auth
+from app.routers.auth_standalone import router as auth_router
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -48,7 +48,7 @@ app.add_middleware(
 )
 
 # Include only auth router
-app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
+app.include_router(auth_router, prefix="/api/v1/auth", tags=["Authentication"])
 
 
 @app.get("/")
