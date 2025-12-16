@@ -24,5 +24,5 @@ USER app
 ENV HOST=0.0.0.0
 ENV PORT=8000
 
-# Force main.py with auth
-CMD ["sh", "-c", "uvicorn app.main:app --host $HOST --port $PORT"]
+# Force main_auth.py with auth
+CMD ["sh", "-c", "uvicorn app.main_auth:app --host $HOST --port $PORT"]

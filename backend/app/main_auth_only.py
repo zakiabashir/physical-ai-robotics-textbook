@@ -1,6 +1,6 @@
 """
 Physical AI & Humanoid Robotics Textbook - FastAPI Backend
-Main application entry point - Authentication Focus
+Main application entry point - Authentication Only
 """
 
 from fastapi import FastAPI, HTTPException
@@ -10,8 +10,8 @@ import uvicorn
 import os
 import logging
 
-# Import routers
-from app.routers import auth, chat
+# Import only auth router to avoid heavy dependencies
+from app.routers import auth
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     """Application lifespan events"""
     # Startup
-    logger.info("Starting up Physical AI Textbook API with auth...")
+    logger.info("Starting up Physical AI Textbook API with auth only...")
     yield
     # Shutdown
     logger.info("Shutting down Physical AI Textbook API...")
@@ -30,7 +30,7 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI application
 app = FastAPI(
-    title="Physical AI Textbook API - Auth",
+    title="Physical AI Textbook API - Auth Only",
     description="Backend API for the Physical AI & Humanoid Robotics interactive textbook",
     version="0.1.0",
     lifespan=lifespan,
@@ -47,16 +47,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include API routers
+# Include only auth router
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
-app.include_router(chat.router, prefix="/api/v1/chat", tags=["Chat"])
 
 
 @app.get("/")
 async def root():
     """Root endpoint"""
     return {
-        "message": "Physical AI & Humanoid Robotics Textbook API - Auth",
+        "message": "Physical AI & Humanoid Robotics Textbook API - Auth Only",
         "version": "0.1.0",
         "docs": "/docs",
         "health": "/health"
@@ -65,7 +64,7 @@ async def root():
 
 @app.get("/health")
 async def health_check():
-    """Health check endpoint"""
+    """Health check endpoint - optimized for Railway"""
     from fastapi import Response
     return Response(
         content='{"status": "healthy", "version": "0.1.0"}',
@@ -78,12 +77,11 @@ async def health_check():
 async def api_info():
     """API information endpoint"""
     return {
-        "name": "Physical AI Textbook API - Auth",
+        "name": "Physical AI Textbook API - Auth Only",
         "version": "0.1.0",
         "description": "Backend API for interactive Physical AI textbook",
         "features": [
             "User authentication",
-            "AI-powered chat assistant",
         ]
     }
 
@@ -96,7 +94,7 @@ async def test_auth():
 
 if __name__ == "__main__":
     uvicorn.run(
-        "app.main_auth:app",
+        "app.main_auth_only:app",
         host="0.0.0.0",
         port=int(os.getenv("PORT", 8000)),
         reload=False,
