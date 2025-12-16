@@ -1,0 +1,23 @@
+{
+  "build": {
+    "env": {
+      "REACT_APP_API_URL": "https://physical-ai-robotics-textbook-production.up.railway.app"
+    }
+  },
+  "functions": {
+    "src/**/*": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    }
+  ]
+}
