@@ -27,6 +27,6 @@ ENV PORT=8000
 # Railway injects its own PORT anyway
 # EXPOSE optional
 
-# Deploy flexible standalone authentication server V3
-# Handles both JSON and form-encoded data with chat and Google OAuth
-CMD ["uvicorn", "app.standalone_full_v3:app", "--host", "0.0.0.0", "--port", "8080"]
+# Deploy standalone RAG server V4
+# Handles both JSON and form-encoded data with RAG-powered chat
+CMD ["uvicorn", "app.standalone_rag_v4:app", "--host", "0.0.0.0", "--port", "8080"]

@@ -1,1 +1,1 @@
-Deploy chat V3 with improved responses - Tue, Dec 16, 2025  7:39:00 PM
+Deploy RAG V4 with embedded knowledge base - Tue, Dec 16, 2025  8:58:38 PM
