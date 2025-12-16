@@ -36,14 +36,24 @@ const ChatWidget = ({ isOpen: externalIsOpen, onToggle, onSignInRequired }) => {
   // Initialize welcome message when opened first time
   useEffect(() => {
     if (isWidgetOpen && messages.length === 0) {
-      setMessages([{
-        id: 'welcome',
-        role: 'assistant',
-        content: "Hello! I'm your Physical AI & Humanoid Robotics textbook assistant. What would you like to learn about today?",
-        timestamp: new Date(),
-      }]);
+      if (isAuthenticated) {
+        setMessages([{
+          id: 'welcome',
+          role: 'assistant',
+          content: `Hello ${user?.username || 'there'}! I'm your Physical AI & Humanoid Robotics textbook assistant. I can help you with:\n\n📚 Chapter topics\n🤖 ROS2 and Gazebo\n🦾 Humanoid robots\n🧠 AI concepts\n💻 Programming examples\n\nWhat would you like to learn about?`,
+          timestamp: new Date(),
+        }]);
+      } else {
+        setMessages([{
+          id: 'welcome',
+          role: 'assistant',
+          content: "👋 Welcome to the Physical AI & Humanoid Robotics textbook!\n\nPlease **sign in** to ask questions about:\n\n📖 Physical AI concepts\n🤖 ROS2 programming\n🦾 Humanoid robotics\n🎯 Learning paths\n\nClick the chat button below to sign in and start learning!",
+          action: 'signin',
+          timestamp: new Date(),
+        }]);
+      }
     }
-  }, [isWidgetOpen]);
+  }, [isWidgetOpen, isAuthenticated, user?.username]);
 
   const toggleChat = () => {
     if (externalIsOpen !== undefined) {
