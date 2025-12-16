@@ -1,1 +1,1 @@
-Railway deployment trigger - V2 with flexible auth parsing - Tue, Dec 16, 2025 11:11:11 AM
+Fix deploy V3 - syntax error fixed - Tue, Dec 16, 2025  3:37:41 PM

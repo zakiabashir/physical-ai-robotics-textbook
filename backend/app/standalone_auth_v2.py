@@ -33,7 +33,7 @@ user_sessions = {}
 security = HTTPBearer()
 
 
-def parse_request_data(request: Request) -> Dict[str, Any]:
+async def parse_request_data(request: Request) -> Dict[str, Any]:
     """Parse request data from JSON or form-encoded format"""
     content_type = request.headers.get('content-type', '').lower()
 
