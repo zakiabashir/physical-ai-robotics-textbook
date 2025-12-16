@@ -354,11 +354,26 @@ async def chat_message(request: Request, current_user: str = Depends(verify_toke
             detail="Message is required"
         )
 
-    # Simple echo response for now
-    response = f"You said: {message}"
+    # Generate contextual response based on message
+    message_lower = message.lower()
+
+    if "hello" in message_lower or "hi" in message_lower:
+        response = f"Hello {current_user}! Welcome to the Physical AI & Humanoid Robotics textbook. How can I help you today? You can ask me about:\n\n📚 Chapter topics\n🤖 ROS2 and Gazebo\n🦾 Humanoid robots\n🧠 AI concepts\n💻 Programming examples\n\nWhat would you like to learn about?"
+    elif "chapter" in message_lower or "topic" in message_lower:
+        response = "The Physical AI textbook covers several exciting chapters:\n\n**Chapter 1: Introduction to Physical AI**\nUnderstanding the intersection of physical robots and AI\n\n**Chapter 2: ROS2 Fundamentals**\nLearn Robot Operating System 2 basics\n\n**Chapter 3: Simulation with Gazebo**\nCreate realistic robot simulations\n\n**Chapter 4: Humanoid Robotics**\nDesign and control humanoid robots\n\n**Chapter 5: AI in Robotics**\nMachine learning for physical systems\n\nWhich chapter interests you most?"
+    elif "ros2" in message_lower:
+        response = "ROS2 (Robot Operating System 2) is a powerful framework for developing robot applications. Key topics include:\n\n- **Nodes**: Independent processes that perform computation\n- **Topics**: Named buses for exchanging messages\n- **Services**: Request/response communication\n- **Actions**: Asynchronous goal-oriented tasks\n- **Parameters**: Configuration values\n\nWould you like to see code examples or learn about specific ROS2 concepts?"
+    elif "gazebo" in message_lower:
+        response = "Gazebo is a 3D simulation environment for robotics. It allows you to:\n\n- Create realistic robot models\n- Simulate physics and sensors\n- Test algorithms safely\n- Visualize robot behavior\n\nPopular features include URDF support, ROS integration, and various plugins for sensors like cameras, lidars, and IMUs.\n\nNeed help setting up a simulation?"
+    elif "humanoid" in message_lower or "bipedal" in message_lower:
+        response = "Humanoid robotics focuses on robots with human-like body structures. Key areas include:\n\n- **Locomotion**: Walking, running, and balancing\n- **Manipulation**: Arm and hand control\n- **Perception**: Vision and sensing systems\n- **AI Integration**: Learning from demonstration\n\nExamples include Atlas, Honda ASIMO, and Tesla Optimus. What aspect interests you?"
+    elif "code" in message_lower or "example" in message_lower:
+        response = "Here's a simple ROS2 Python publisher example:\n\n```python\n#!/usr/bin/env python3\nimport rclpy\nfrom rclpy.node import Node\nfrom std_msgs.msg import String\n\nclass Talker(Node):\n    def __init__(self):\n        super().__init__('talker')\n        self.publisher_ = self.create_publisher(String, 'chatter', 10)\n        timer_period = 1.0  # seconds\n        self.timer = self.create_timer(timer_period, self.timer_callback)\n        self.i = 0\n\n    def timer_callback(self):\n        msg = String()\n        msg.data = f'Hello World: {self.i}'\n        self.publisher_.publish(msg)\n        self.get_logger().info(f'Publishing: {msg.data}')\n        self.i += 1\n\ndef main(args=None):\n    rclpy.init(args=args)\n    talker = Talker()\n    rclpy.spin(talker)\n    talker.destroy_node()\n    rclpy.shutdown()\n\nif __name__ == '__main__':\n    main()\n```\n\nWould you like explanations or examples for specific topics?"
+    else:
+        response = f"Hi {current_user}! I'm your Physical AI & Humanoid Robotics textbook assistant. I can help you with:\n\n📖 **Textbook Content**: Chapters on ROS2, Gazebo, Humanoid Robots\n🤖 **Technical Help**: Code examples and troubleshooting\n🎯 **Learning Paths**: Suggested study routes\n💡 **Concept Explanations**: Clear, simple answers\n\nTry asking me about specific topics like 'ROS2 nodes', 'Gazebo simulation', or 'humanoid robot control'!"
 
     return {
-        "message": response,
+        "response": response,
         "timestamp": datetime.utcnow().isoformat(),
         "user": current_user
     }
