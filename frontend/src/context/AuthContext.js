@@ -19,6 +19,12 @@ export const AuthProvider = ({ children }) => {
 
   // Check for existing token on mount
   useEffect(() => {
+    // Only access localStorage on client side
+    if (typeof window === 'undefined') {
+      setLoading(false);
+      return;
+    }
+
     const storedToken = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('authUser');
 
@@ -71,8 +77,10 @@ export const AuthProvider = ({ children }) => {
       const userData = await userResponse.json();
 
       // Store token and user
-      localStorage.setItem('authToken', data.access_token);
-      localStorage.setItem('authUser', JSON.stringify(userData));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('authToken', data.access_token);
+        localStorage.setItem('authUser', JSON.stringify(userData));
+      }
 
       setToken(data.access_token);
       setUser(userData);
@@ -126,8 +134,10 @@ export const AuthProvider = ({ children }) => {
       console.error('Logout error:', error);
     } finally {
       // Clear local storage regardless of API call success
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('authUser');
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('authUser');
+      }
       setToken(null);
       setUser(null);
     }
@@ -168,8 +178,10 @@ export const AuthProvider = ({ children }) => {
       const userData = await userResponse.json();
 
       // Store token and user
-      localStorage.setItem('authToken', data.access_token);
-      localStorage.setItem('authUser', JSON.stringify(userData));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('authToken', data.access_token);
+        localStorage.setItem('authUser', JSON.stringify(userData));
+      }
 
       setToken(data.access_token);
       setUser(userData);
