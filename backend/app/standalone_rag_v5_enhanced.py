@@ -938,9 +938,20 @@ async def root():
     }
 
 
-@app.get("/api/v1/health")
+@app.get("/health")
 async def health_check():
-    """Health check endpoint"""
+    """Health check endpoint for Railway"""
+    return {
+        "status": "healthy",
+        "timestamp": datetime.utcnow().isoformat(),
+        "knowledge_base_size": len(KNOWLEDGE_BASE),
+        "version": "5.0.0-enhanced"
+    }
+
+
+@app.get("/api/v1/health")
+async def health_check_v1():
+    """Health check endpoint with version prefix"""
     return {
         "status": "healthy",
         "timestamp": datetime.utcnow().isoformat(),
