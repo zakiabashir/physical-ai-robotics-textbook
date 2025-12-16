@@ -4,7 +4,7 @@ import FeedbackComponent from './FeedbackComponent';
 import { useAuth } from '../../context/AuthContext';
 import './styles.css';
 
-const ChatWidget = ({ isOpen: externalIsOpen, onToggle }) => {
+const ChatWidget = ({ isOpen: externalIsOpen, onToggle, onSignInRequired }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, user, token } = useAuth();
 
@@ -111,13 +111,15 @@ const ChatWidget = ({ isOpen: externalIsOpen, onToggle }) => {
       setSuggestions(response.suggestions || []);
     } catch (error) {
       console.error('Chat error:', error);
+      const isExpired = error.message.includes('expired');
       const errorMessage = {
         id: Date.now() + 1,
         role: 'assistant',
-        content: error.message.includes('expired')
-          ? "⏰ Your session has expired!\n\nPlease sign out and sign back in to continue chatting with the AI assistant.\n\nClick the X button in the chat corner, then click the chat button again to sign in."
-          : "❌ Connection Error\n\nI'm having trouble connecting right now. Please try again in a moment.\n\nIf the problem persists, please refresh the page.",
-        timestamp: new Date()
+        content: isExpired
+          ? "⏰ Your session has expired!\n\nPlease sign in again to continue chatting with the AI assistant."
+          : "❌ Connection Error\n\nI'm having trouble connecting right now. Please try again in a moment.",
+        timestamp: new Date(),
+        action: isExpired ? 'signin' : null
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
@@ -250,6 +252,18 @@ const ChatWidget = ({ isOpen: externalIsOpen, onToggle }) => {
                             {suggestion}
                           </button>
                         ))}
+                      </div>
+                    )}
+                    {message.action === 'signin' && (
+                      <div className="signin-button-container">
+                        <button
+                          className="signin-chat-button"
+                          onClick={() => {
+                            onSignInRequired && onSignInRequired();
+                          }}
+                        >
+                          🔐 Sign In to Continue
+                        </button>
                       </div>
                     )}
                     {message.role === 'assistant' && !message.feedbackGiven && (

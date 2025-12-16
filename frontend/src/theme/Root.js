@@ -131,6 +131,13 @@ function RootContent({ children }) {
           <ChatWidget
             isOpen={showChat}
             onToggle={toggleChat}
+            onSignInRequired={() => {
+              setShowChat(false);
+              setTimeout(() => {
+                setAuthMode('login');
+                setShowAuthModal(true);
+              }, 300);
+            }}
           />
         </div>
       )}
