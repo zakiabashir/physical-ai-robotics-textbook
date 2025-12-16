@@ -64,13 +64,8 @@ async def root():
 
 @app.get("/health")
 async def health_check():
-    """Health check endpoint - optimized for Railway"""
-    from fastapi import Response
-    return Response(
-        content='{"status": "healthy", "version": "0.1.0"}',
-        status_code=200,
-        media_type="application/json"
-    )
+    """Health check endpoint - optimized for speed"""
+    return {"status": "healthy", "version": "0.1.0"}
 
 
 @app.get("/api/v1/info")
