@@ -142,6 +142,11 @@ async def register(request: Request):
     # Get the raw body
     body = await request.body()
 
+    # Log what we received
+    logger.info(f"Register endpoint - Content-Type: {request.headers.get('content-type')}")
+    logger.info(f"Register endpoint - Raw body: {body}")
+    logger.info(f"Register endpoint - Body as string: {body.decode('utf-8')}")
+
     # Parse the data based on content type
     content_type = request.headers.get('content-type', '')
 
@@ -151,11 +156,13 @@ async def register(request: Request):
         else:
             # Try to parse as JSON even if content-type is not set
             data = json.loads(body.decode('utf-8'))
-    except:
+        logger.info(f"Register endpoint - Parsed data: {data}")
+    except Exception as e:
         # If JSON parsing fails, assume it's malformed
+        logger.error(f"Register endpoint - JSON parse error: {e}")
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Invalid request format. Expected JSON."
+            detail=f"Invalid request format. Expected JSON. Error: {str(e)}"
         )
 
     # Extract data
@@ -206,13 +213,20 @@ async def login(request: Request):
     # Get the raw body
     body = await request.body()
 
+    # Log what we received
+    logger.info(f"Login endpoint - Content-Type: {request.headers.get('content-type')}")
+    logger.info(f"Login endpoint - Raw body: {body}")
+    logger.info(f"Login endpoint - Body as string: {body.decode('utf-8')}")
+
     # Parse the data
     try:
         data = json.loads(body.decode('utf-8'))
-    except:
+        logger.info(f"Login endpoint - Parsed data: {data}")
+    except Exception as e:
+        logger.error(f"Login endpoint - JSON parse error: {e}")
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Invalid request format. Expected JSON."
+            detail=f"Invalid request format. Expected JSON. Error: {str(e)}"
         )
 
     # Extract data
