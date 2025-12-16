@@ -3,11 +3,12 @@ Physical AI & Humanoid Robotics Textbook - Standalone Authentication Server
 No external dependencies, completely isolated from other routers
 """
 
-from fastapi import FastAPI, HTTPException, status, Depends
+from fastapi import FastAPI, HTTPException, status, Depends, Body
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from typing import Dict, Any, Optional
+from pydantic import BaseModel
 import uvicorn
 import os
 import logging
@@ -29,6 +30,16 @@ user_sessions = {}
 
 # Security
 security = HTTPBearer()
+
+# Request models
+class RegisterRequest(BaseModel):
+    username: str
+    password: str
+    email: Optional[str] = None
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
 
 
 @asynccontextmanager
@@ -96,45 +107,45 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 
 @app.post("/api/v1/auth/register", status_code=status.HTTP_201_CREATED)
-async def register(username: str, password: str, email: Optional[str] = None):
+async def register(request: RegisterRequest):
     """Register a new user"""
     # Check if user already exists
-    if username in users:
+    if request.username in users:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username already registered"
         )
 
     # Hash password using bcrypt directly (truncate to 72 bytes max for bcrypt)
-    password_bytes = password.encode('utf-8')[:72]
+    password_bytes = request.password.encode('utf-8')[:72]
     salt = bcrypt.gensalt()
     hashed_password = bcrypt.hashpw(password_bytes, salt).decode('utf-8')
 
     # Store user
-    users[username] = {
-        "username": username,
-        "email": email,
+    users[request.username] = {
+        "username": request.username,
+        "email": request.email,
         "password": hashed_password,
         "created_at": datetime.utcnow().isoformat()
     }
 
-    logger.info(f"User {username} registered successfully")
+    logger.info(f"User {request.username} registered successfully")
     return {"message": "User created successfully"}
 
 
 @app.post("/api/v1/auth/login")
-async def login(username: str, password: str):
+async def login(request: LoginRequest):
     """Login user and return access token"""
     # Verify user exists
-    if username not in users:
+    if request.username not in users:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid username or password"
         )
 
     # Verify password
-    stored_password = users[username]["password"]
-    password_bytes = password.encode('utf-8')[:72]
+    stored_password = users[request.username]["password"]
+    password_bytes = request.password.encode('utf-8')[:72]
 
     if not bcrypt.checkpw(password_bytes, stored_password.encode('utf-8')):
         raise HTTPException(
@@ -145,16 +156,16 @@ async def login(username: str, password: str):
     # Create access token
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": username}, expires_delta=access_token_expires
+        data={"sub": request.username}, expires_delta=access_token_expires
     )
 
     # Store session
-    user_sessions[username] = {
+    user_sessions[request.username] = {
         "token": access_token,
         "expires_at": (datetime.utcnow() + access_token_expires).isoformat()
     }
 
-    logger.info(f"User {username} logged in successfully")
+    logger.info(f"User {request.username} logged in successfully")
     return {
         "access_token": access_token,
         "token_type": "bearer",
