@@ -10,8 +10,8 @@ import uvicorn
 import os
 import logging
 
-# Import only auth router to avoid heavy dependencies
-from app.routers import auth
+# Import only standalone auth router to avoid heavy dependencies
+from app.routers import auth_standalone as auth
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
