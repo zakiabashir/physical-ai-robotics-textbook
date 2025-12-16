@@ -27,5 +27,5 @@ ENV PORT=8000
 # Railway injects its own PORT anyway
 # EXPOSE optional
 
-# Switch to main_auth_only.py with authentication
-CMD ["sh", "-c", "uvicorn app.main_auth_only:app --host $HOST --port $PORT"]
+# Deploy authentication server
+CMD ["uvicorn", "app.main_auth_only:app", "--host", "0.0.0.0", "--port", "8080"]
