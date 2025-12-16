@@ -27,5 +27,6 @@ ENV PORT=8000
 # Railway injects its own PORT anyway
 # EXPOSE optional
 
-# Deploy authentication server
+# Force Railway rebuild - Deploy authentication server with fix
+# Fixed auth import issue - auth_standalone imported directly
 CMD ["uvicorn", "app.main_auth_only:app", "--host", "0.0.0.0", "--port", "8080"]
