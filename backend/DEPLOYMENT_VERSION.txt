@@ -1,1 +1,2 @@
-# Railway deployment update - Tue, Dec 16, 2025 10:19:56 AM
+# Railway deployment trigger - Tue, Dec 16, 2025 10:35:12 AM
+# Fix for auth import issue applied
