@@ -174,7 +174,7 @@ const OnboardingSurvey = ({ onComplete, initialData = {} }) => {
 
       // Send to backend for authenticated users
       await axios.post(
-        `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/v1/auth/survey`,
+        `${process.env.REACT_APP_API_URL || 'https://localhost:8000'}/api/v1/auth/survey`,
         surveyData,
         {
           headers: {
