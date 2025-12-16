@@ -1,0 +1,412 @@
+"""
+Physical AI & Humanoid Robotics Textbook - Standalone Authentication Server V3
+Handles both JSON and form-encoded data with chat support and Google OAuth
+"""
+
+from fastapi import FastAPI, HTTPException, status, Depends, Request, Form
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
+from typing import Dict, Any, Optional
+import uvicorn
+import os
+import logging
+import json
+from urllib.parse import parse_qs
+from datetime import datetime, timedelta
+from jose import jwt
+import bcrypt
+import httpx
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Simple configuration
+SECRET_KEY = os.getenv("SECRET_KEY", "test_secret_key_123")
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET", "")
+
+# In-memory user store for demo (replace with database in production)
+users = {}
+user_sessions = {}
+
+# Security
+security = HTTPBearer()
+
+
+async def parse_request_data(request: Request) -> Dict[str, Any]:
+    """Parse request data from JSON or form-encoded format"""
+    content_type = request.headers.get('content-type', '').lower()
+
+    # Get raw body
+    body = await request.body()
+
+    # Log what we received
+    logger.info(f"Content-Type: {content_type}")
+    logger.info(f"Raw body length: {len(body)}")
+
+    # Try to parse as JSON first
+    if 'application/json' in content_type:
+        try:
+            data = json.loads(body.decode('utf-8'))
+            logger.info(f"Parsed as JSON: {data}")
+            return data
+        except Exception as e:
+            logger.error(f"Failed to parse JSON: {e}")
+
+    # Try to parse as form data
+    if 'application/x-www-form-urlencoded' in content_type:
+        try:
+            # Parse URL-encoded form data
+            form_data = body.decode('utf-8')
+            parsed = parse_qs(form_data)
+            # Convert from {key: [value]} to {key: value}
+            data = {k: v[0] if v else '' for k, v in parsed.items()}
+            logger.info(f"Parsed as form data: {data}")
+            return data
+        except Exception as e:
+            logger.error(f"Failed to parse form data: {e}")
+
+    # If content-type is not set or unrecognized, try both
+    if not content_type:
+        # Try JSON first
+        try:
+            data = json.loads(body.decode('utf-8'))
+            logger.info(f"Parsed as JSON (no content-type): {data}")
+            return data
+        except:
+            pass
+
+        # Then try form data
+        try:
+            form_data = body.decode('utf-8')
+            if '=' in form_data and '&' in form_data:
+                parsed = parse_qs(form_data)
+                data = {k: v[0] if v else '' for k, v in parsed.items()}
+                logger.info(f"Parsed as form data (no content-type): {data}")
+                return data
+        except:
+            pass
+
+    raise HTTPException(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        detail=f"Unable to parse request. Content-Type: {content_type}"
+    )
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Application lifespan events"""
+    # Startup
+    logger.info("Starting up Physical AI Textbook Standalone Server V3...")
+    yield
+    # Shutdown
+    logger.info("Shutting down Physical AI Textbook Standalone Server V3...")
+
+
+# Create FastAPI application
+app = FastAPI(
+    title="Physical AI Textbook API - Standalone V3",
+    description="Backend API for the Physical AI & Humanoid Robotics interactive textbook",
+    version="0.1.0",
+    lifespan=lifespan,
+    docs_url="/docs",
+    redoc_url="/redoc",
+)
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    """Verify JWT token"""
+    try:
+        payload = jwt.decode(
+            credentials.credentials,
+            SECRET_KEY,
+            algorithms=["HS256"]
+        )
+        username = payload.get("sub")
+        if username is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid token"
+            )
+        return username
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token"
+        )
+
+
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+    """Create JWT access token"""
+    to_encode = data.copy()
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=15)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm="HS256")
+    return encoded_jwt
+
+
+@app.post("/api/v1/auth/register", status_code=status.HTTP_201_CREATED)
+async def register(request: Request):
+    """Register a new user - accepts JSON or form data"""
+    # Parse the request data
+    data = await parse_request_data(request)
+
+    # Extract fields
+    username = data.get('username')
+    password = data.get('password')
+    email = data.get('email')
+
+    # Validate required fields
+    if not username or not password:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Username and password are required"
+        )
+
+    # Check if user already exists
+    if username in users:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Username already registered"
+        )
+
+    # Hash password using bcrypt directly (truncate to 72 bytes max for bcrypt)
+    password_bytes = password.encode('utf-8')[:72]
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password_bytes, salt).decode('utf-8')
+
+    # Store user
+    users[username] = {
+        "username": username,
+        "email": email,
+        "password": hashed_password,
+        "created_at": datetime.utcnow().isoformat()
+    }
+
+    logger.info(f"User {username} registered successfully")
+    return {"message": "User created successfully"}
+
+
+@app.post("/api/v1/auth/login")
+async def login(request: Request):
+    """Login user and return access token - accepts JSON or form data"""
+    # Parse the request data
+    data = await parse_request_data(request)
+
+    # Extract fields
+    username = data.get('username')
+    password = data.get('password')
+
+    # Validate required fields
+    if not username or not password:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Username and password are required"
+        )
+
+    # Verify user exists
+    if username not in users:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid username or password"
+        )
+
+    # Verify password
+    stored_password = users[username]["password"]
+    password_bytes = password.encode('utf-8')[:72]
+
+    if not bcrypt.checkpw(password_bytes, stored_password.encode('utf-8')):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid username or password"
+        )
+
+    # Create access token
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": username}, expires_delta=access_token_expires
+    )
+
+    # Store session
+    user_sessions[username] = {
+        "token": access_token,
+        "expires_at": (datetime.utcnow() + access_token_expires).isoformat()
+    }
+
+    logger.info(f"User {username} logged in successfully")
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "expires_in": ACCESS_TOKEN_EXPIRE_MINUTES * 60
+    }
+
+
+@app.post("/api/v1/auth/google")
+async def google_login(request: Request):
+    """Login with Google OAuth"""
+    data = await parse_request_data(request)
+    token = data.get('token')
+
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Google token is required"
+        )
+
+    try:
+        # Verify Google token
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                f"https://www.googleapis.com/oauth2/v2/userinfo?access_token={token}"
+            )
+            if response.status_code != 200:
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Invalid Google token"
+                )
+
+            user_info = response.json()
+            email = user_info.get('email')
+            username = email.split('@')[0] if email else f"google_user_{datetime.utcnow().timestamp()}"
+
+            # Create or update user
+            if username not in users:
+                users[username] = {
+                    "username": username,
+                    "email": email,
+                    "password": "",  # Google users don't have passwords
+                    "created_at": datetime.utcnow().isoformat(),
+                    "auth_method": "google"
+                }
+
+            # Create access token
+            access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+            access_token = create_access_token(
+                data={"sub": username}, expires_delta=access_token_expires
+            )
+
+            logger.info(f"Google user {username} logged in successfully")
+            return {
+                "access_token": access_token,
+                "token_type": "bearer",
+                "expires_in": ACCESS_TOKEN_EXPIRE_MINUTES * 60
+            }
+
+    except Exception as e:
+        logger.error(f"Google login error: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Failed to authenticate with Google"
+        )
+
+
+@app.get("/api/v1/auth/me")
+async def get_current_user(current_user: str = Depends(verify_token)):
+    """Get current user information"""
+    user = users.get(current_user)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+
+    return {
+        "username": user["username"],
+        "email": user.get("email"),
+        "created_at": user["created_at"]
+    }
+
+
+@app.post("/api/v1/auth/logout")
+async def logout(current_user: str = Depends(verify_token)):
+    """Logout user"""
+    if current_user in user_sessions:
+        del user_sessions[current_user]
+
+    logger.info(f"User {current_user} logged out successfully")
+    return {"message": "Successfully logged out"}
+
+
+@app.post("/api/v1/chat")
+async def chat_message(request: Request, current_user: str = Depends(verify_token)):
+    """Handle chat messages"""
+    data = await parse_request_data(request)
+    message = data.get('message', '')
+
+    if not message:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Message is required"
+        )
+
+    # Simple echo response for now
+    response = f"You said: {message}"
+
+    return {
+        "message": response,
+        "timestamp": datetime.utcnow().isoformat(),
+        "user": current_user
+    }
+
+
+@app.get("/")
+async def root():
+    """Root endpoint"""
+    return {
+        "message": "Physical AI & Humanoid Robotics Textbook API - Standalone V3",
+        "version": "0.1.0",
+        "docs": "/docs",
+        "health": "/health",
+        "features": ["Authentication", "Chat", "Google OAuth"]
+    }
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint - optimized for speed"""
+    return {"status": "healthy", "version": "0.1.0"}
+
+
+@app.get("/api/v1/info")
+async def api_info():
+    """API information endpoint"""
+    return {
+        "name": "Physical AI Textbook API - Standalone V3",
+        "version": "0.1.0",
+        "description": "Backend API for interactive Physical AI textbook",
+        "features": [
+            "User authentication with flexible request parsing",
+            "Chat functionality",
+            "Google OAuth integration",
+        ]
+    }
+
+
+@app.post("/api/v1/auth/test")
+async def test_auth():
+    """Test endpoint to verify auth is working"""
+    return {"message": "Auth endpoints are working!"}
+
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "app.standalone_full_v3:app",
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", 8000)),
+        reload=False,
+    )
