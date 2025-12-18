@@ -59,11 +59,6 @@ export default {
           "position": "left"
         },
         {
-          "to": "/rag-monitor",
-          "label": "RAG Monitor",
-          "position": "left"
-        },
-        {
           "href": "https://github.com/physical-ai/physical-ai-robotics-textbook",
           "label": "GitHub",
           "position": "right"

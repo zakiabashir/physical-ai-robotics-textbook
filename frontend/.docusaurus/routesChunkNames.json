@@ -253,13 +253,6 @@
     "sidebar": "sidebar---blog-814-8ac",
     "content": "content---blog-welcome-to-physical-aie-01-87e"
   },
-  "/rag-monitor-bf2": {
-    "__comp": "__comp---site-src-pages-rag-monitor-jse-9-a-82c",
-    "__context": {
-      "plugin": "plugin---rag-monitora-74-1e4"
-    },
-    "config": "config---rag-monitor-5-e-9-274"
-  },
   "/docs-d19": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
@@ -333,11 +326,7 @@
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---docs-introductiona-09-6b4"
   },
-  "/-2e1": {
-    "__comp": "__comp---site-src-pages-index-jsc-4-f-f99",
-    "__context": {
-      "plugin": "plugin---rag-monitora-74-1e4"
-    },
-    "config": "config---rag-monitor-5-e-9-274"
+  "/": {
+    "__comp": "__comp---site-src-pages-index-jsc-4-f-f99"
   }
 }

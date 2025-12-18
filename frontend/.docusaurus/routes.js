@@ -123,11 +123,6 @@ export default [
     exact: true
   },
   {
-    path: '/rag-monitor',
-    component: ComponentCreator('/rag-monitor', 'bf2'),
-    exact: true
-  },
-  {
     path: '/docs',
     component: ComponentCreator('/docs', 'd19'),
     routes: [
